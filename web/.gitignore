@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env*.local
+.env
+# Local inquiry store used until the database is connected
+.data/
+# Uploaded images (their URLs are in the database; back this folder up with it)
+image-uploads/

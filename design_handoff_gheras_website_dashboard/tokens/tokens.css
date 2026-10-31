@@ -1,0 +1,50 @@
+/* GHERAS design tokens — from the approved brand book. Do not add values. */
+:root {
+  --color-deep-olive: #1F2A1C;
+  --color-grove-green: #3F5A2A;
+  --color-olive-leaf: #8A9A4B;
+  --color-harvest-gold: #C99A3B;
+  --color-gold-ink: #86621E;
+  --color-wheat: #E8D3A0;
+  --color-libyan-soil: #9A5B3A;
+  --color-aquifer: #2F6F73;
+  --color-sand: #EFE7D6;
+  --color-linen: #FAF8F2;
+  --color-stone: #6B675C;
+  --color-surface: #FFFFFF;
+  --color-field-border: #CFC6AF;
+  --color-success: #3F5A2A;
+  --color-success-bg: #E6EBDA;
+  --color-warning: #86621E;
+  --color-warning-bg: #F6EBD2;
+  --color-error: #8E3B24;
+  --color-error-bg: #F3E2D9;
+  --color-info: #2F6F73;
+  --color-info-bg: #DDEAEA;
+  --font-display-en: 'Fraunces', serif;
+  --font-body-en: 'Manrope', sans-serif;
+  --font-display-ar: 'Noto Naskh Arabic', serif;
+  --font-body-ar: 'IBM Plex Sans Arabic', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+  --space-128: 128px;
+  --radius-sm: 4px; --radius-md: 12px; --radius-lg: 24px; --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px rgba(31,42,28,.08), 0 2px 8px rgba(31,42,28,.06);
+  --shadow-md: 0 2px 4px rgba(31,42,28,.06), 0 12px 32px rgba(31,42,28,.12);
+  --grid-max: 1280px; --grid-gutter: 24px;
+  --ease: cubic-bezier(.22,.61,.36,1);
+  --dur-fast: 300ms; --dur-base: 560ms; --dur-slow: 800ms; --dur-line: 1200ms; --stagger: 70ms;
+  --section-y: clamp(64px, 9vw, 128px); --page-x: clamp(20px, 5.5vw, 80px);
+}
+:lang(ar) { --font-display: var(--font-display-ar); --font-body: var(--font-body-ar); }
+:lang(en) { --font-display: var(--font-display-en); --font-body: var(--font-body-en); }
+:focus-visible { outline: 2px solid var(--color-grove-green); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

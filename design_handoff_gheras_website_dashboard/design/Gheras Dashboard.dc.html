@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>GHERAS — Content dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&amp;family=Manrope:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@600&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;background:#FAF8F2;color:#1F2A1C;font-family:Manrope,sans-serif;-webkit-font-smoothing:antialiased}a{color:#3F5A2A;text-underline-offset:3px}a:hover{color:#1F2A1C}:focus-visible{outline:2px solid #3F5A2A;outline-offset:2px}input,textarea,select,button{font:inherit;color:inherit}</style>
+</helmet>
+
+<div dir="{{ dir }}" lang="{{ lang }}" style="min-height:100vh;font-family:{{ fB }};background:#FAF8F2">
+
+<sc-if value="{{ isLogin }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Login" style="min-height:100vh;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(420px,1fr)">
+    <div style="background:#1F2A1C;color:#FAF8F2;position:relative;overflow:hidden;padding:48px 56px;display:flex;flex-direction:column;justify-content:space-between">
+      <div aria-hidden="true" style="position:absolute;width:760px;inset-inline-end:-220px;bottom:-240px;opacity:.5"><dc-import name="Gheras Logo" variant="lineart" scheme="gold" stroke="0.45" style="width:760px" hint-size="760px,760px"></dc-import></div>
+      <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" rtl="{{ rtl }}" style="width:220px;position:relative" hint-size="220px,62px"></dc-import>
+      <div style="position:relative;max-width:440px">
+        <div style="font-family:{{ fH }};font-weight:{{ wH }};font-size:44px;line-height:1.25;margin-bottom:16px">{{ t.loginTitle }}</div>
+        <div style="font-size:16px;line-height:1.7;color:#E8D3A0">{{ t.loginSub }}</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:center;padding:48px clamp(32px,6vw,96px);gap:24px">
+      <div style="display:flex;justify-content:flex-end"><button type="button" onClick="{{ toggleLang }}" style="display:flex;align-items:center;gap:8px;height:40px;padding:0 14px;border:1px solid #CFC6AF;border-radius:999px;background:transparent;cursor:pointer;font-weight:600;font-size:14px;font-family:{{ fOther }}"><dc-import name="Gheras Icon" glyph="globe" size="16" style="display:flex;width:16px;height:16px" hint-size="16px,16px"></dc-import>{{ t.otherLang }}</button></div>
+      <h1 style="font-family:{{ fH }};font-weight:{{ wH }};font-size:34px;line-height:1.3;margin:0">{{ t.signIn }}</h1>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600">{{ t.email }}<input dir="ltr" value="admin@gheras.ly" style="height:48px;border:1px solid #CFC6AF;border-radius:4px;background:#FFFFFF;padding:0 14px;font-size:16px;text-align:start" style-focus="outline:none;border-color:#3F5A2A;box-shadow:0 0 0 3px rgba(201,154,59,.35)"></label>
+      <label style="display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600"><span style="display:flex;justify-content:space-between"><span>{{ t.password }}</span><a href="#" style="font-weight:600;font-size:13px">{{ t.forgot }}</a></span><input type="password" value="••••••••••" style="height:48px;border:1px solid #CFC6AF;border-radius:4px;background:#FFFFFF;padding:0 14px;font-size:16px" style-focus="outline:none;border-color:#3F5A2A;box-shadow:0 0 0 3px rgba(201,154,59,.35)"></label>
+      <button type="button" onClick="{{ goOverview }}" style="height:52px;border:0;border-radius:4px;background:#3F5A2A;color:#FAF8F2;font-weight:700;font-size:16px;cursor:pointer" style-hover="background:#1F2A1C">{{ t.signIn }}</button>
+      <div style="font-size:13px;color:#6B675C;line-height:1.6">{{ t.loginNote }}</div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ inApp }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh">
+  <aside style="background:#1F2A1C;color:#FAF8F2;display:flex;flex-direction:column;padding:24px 16px;position:sticky;top:0;height:100vh">
+    <div style="padding:0 8px 28px"><dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" rtl="{{ rtl }}" style="width:168px" hint-size="168px,47px"></dc-import></div>
+    <nav style="display:flex;flex-direction:column;gap:2px">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+        <button type="button" onClick="{{ n.go }}" style="display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border:0;border-radius:4px;background:{{ n.bg }};color:{{ n.ink }};cursor:pointer;font-weight:600;font-size:14px;text-align:start" style-hover="background:rgba(250,248,242,.08)"><dc-import name="Gheras Icon" glyph="{{ n.icon }}" color="{{ n.ink }}" accent="#C99A3B" size="20" style="display:flex;width:20px;height:20px" hint-size="20px,20px"></dc-import><span style="flex:1">{{ n.label }}</span><sc-if value="{{ n.badge }}" hint-placeholder-val="{{ false }}"><span style="min-width:22px;height:20px;padding:0 6px;border-radius:999px;background:#C99A3B;color:#1F2A1C;font-size:11px;font-weight:700;display:grid;place-items:center">{{ n.badge }}</span></sc-if></button>
+      </sc-for>
+    </nav>
+    <div style="flex:1"></div>
+    <div style="border-top:1px solid rgba(201,154,59,.35);padding:16px 8px 0;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:50%;background:#3F5A2A;display:grid;place-items:center;font-weight:700;font-size:13px">MG</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">Mohamed Ganaway</span><span style="font-size:12px;color:#E8D3A0">{{ t.admin }}</span></span></div>
+      <div style="display:flex;gap:8px">
+        <button type="button" onClick="{{ toggleLang }}" style="flex:1;height:36px;border:1px solid rgba(250,248,242,.35);border-radius:4px;background:transparent;color:#FAF8F2;cursor:pointer;font-size:13px;font-weight:600;font-family:{{ fOther }}">{{ t.otherLang }}</button>
+        <button type="button" onClick="{{ goLogin }}" style="flex:1;height:36px;border:1px solid rgba(250,248,242,.35);border-radius:4px;background:transparent;color:#FAF8F2;cursor:pointer;font-size:13px;font-weight:600">{{ t.signOut }}</button>
+      </div>
+    </div>
+  </aside>
+
+  <div style="display:flex;flex-direction:column;min-width:0">
+    <header style="height:72px;display:flex;align-items:center;gap:16px;padding:0 32px;border-bottom:1px solid rgba(31,42,28,.1);background:#FAF8F2;position:sticky;top:0;z-index:5">
+      <h1 style="font-family:{{ fH }};font-weight:{{ wH }};font-size:26px;line-height:1.3;margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ title }}</h1>
+      <span style="display:{{ chipD }};align-items:center;gap:8px;height:32px;padding:0 12px;white-space:nowrap;border-radius:999px;background:#F6EBD2;color:#86621E;font-size:13px;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#C99A3B"></span>{{ t.draftChip }}</span>
+      <a href="Gheras%20Website.dc.html" target="_blank" style="display:flex;align-items:center;height:40px;padding:0 16px;white-space:nowrap;border:1.5px solid #3F5A2A;border-radius:4px;color:#3F5A2A;font-weight:700;font-size:14px;text-decoration:none" style-hover="background:#E6EBDA">{{ t.previewSite }}</a>
+      <button type="button" onClick="{{ openPublish }}" style="height:40px;padding:0 18px;white-space:nowrap;border:0;border-radius:4px;background:#3F5A2A;color:#FAF8F2;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#1F2A1C">{{ t.publish }}</button>
+    </header>
+
+    <main style="padding:32px;flex:1;min-width:0">
+
+    <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="Overview" style="display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><div><div style="font-family:{{ fH }};font-weight:{{ wH }};font-size:32px;line-height:1.3">{{ t.greet }}</div><div style="font-size:15px;color:#6B675C;margin-top:4px">{{ t.greetSub }}</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;border:1px dashed #6B675C;border-radius:4px;padding:4px 8px;white-space:nowrap">{{ t.sample }}</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:24px">
+          <div style="background:#1F2A1C;color:#FAF8F2;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden">
+            <div aria-hidden="true" style="position:absolute;width:280px;height:280px;border-radius:50%;border:1px solid rgba(201,154,59,.35);inset-inline-end:-80px;top:-100px"></div>
+            <span style="font-weight:700;font-size:12px;letter-spacing:{{ ls }};text-transform:{{ tt }};color:#C99A3B">{{ t.draftStatus }}</span>
+            <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:Fraunces,serif;font-weight:300;font-size:64px;line-height:1;color:#C99A3B">6</span><span style="font-size:17px;color:#E8D3A0">{{ t.unpub }}</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{ pending }}" as="p" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:10px 0;border-top:1px solid rgba(201,154,59,.25)"><span>{{ p.what }}</span><span style="color:#E8D3A0">{{ p.when }}</span></div></sc-for>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" onClick="{{ openPublish }}" style="height:44px;padding:0 18px;border:0;border-radius:4px;background:#C99A3B;color:#1F2A1C;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#E8D3A0">{{ t.reviewPublish }}</button><button type="button" onClick="{{ goHistory }}" style="height:44px;padding:0 18px;border:1.5px solid rgba(250,248,242,.5);border-radius:4px;background:transparent;color:#FAF8F2;font-weight:700;font-size:14px;cursor:pointer">{{ t.seeHistory }}</button></div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:700;font-size:15px">{{ t.health }}</span></div>
+            <sc-for list="{{ health }}" as="hl" hint-placeholder-count="4">
+              <button type="button" onClick="{{ hl.go }}" style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;border:0;background:{{ hl.bg }};cursor:pointer;text-align:start"><span style="width:28px;height:28px;border-radius:50%;background:{{ hl.dot }};color:#FAF8F2;font-size:13px;font-weight:700;display:grid;place-items:center;flex-shrink:0">{{ hl.n }}</span><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px;color:#1F2A1C">{{ hl.t }}</span><span style="font-size:12px;color:#6B675C">{{ hl.d }}</span></span><dc-import name="Gheras Icon" glyph="arrow" size="16" rtl="{{ rtl }}" hint-size="16px,16px"></dc-import></button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:24px">
+          <div style="background:#FFFFFF;border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-weight:700;font-size:15px">{{ t.newInq }}</span><button type="button" onClick="{{ goInbox }}" style="border:0;background:none;color:#3F5A2A;font-weight:700;font-size:14px;cursor:pointer">{{ t.openInbox }}</button></div>
+            <sc-for list="{{ inqTop }}" as="q" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid rgba(31,42,28,.08)"><span style="width:36px;height:36px;border-radius:50%;background:#EFE7D6;display:grid;place-items:center;font-weight:700;font-size:13px">{{ q.ini }}</span><span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">{{ q.name }} · <span style="font-weight:500;color:#6B675C">{{ q.org }}</span></span><span style="font-size:13px;color:#6B675C;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ q.msg }}</span></span><span style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:{{ q.tbg }};color:{{ q.tink }}">{{ q.typeL }}</span></div>
+            </sc-for>
+          </div>
+          <div style="background:#FFFFFF;border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06)">
+            <div style="font-weight:700;font-size:15px;margin-bottom:12px">{{ t.recent }}</div>
+            <sc-for list="{{ historyTop }}" as="hv" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:14px 1fr auto;gap:12px;padding:10px 0;border-top:1px solid rgba(31,42,28,.08);align-items:start"><span style="width:10px;height:10px;border-radius:50%;margin-top:5px;background:{{ hv.dot }}"></span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:600">{{ hv.what }}</span><span style="font-size:12px;color:#6B675C">{{ hv.who }}</span></span><span style="font-size:12px;color:#6B675C">{{ hv.when }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isEditor }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Page editor" style="display:grid;grid-template-columns:{{ edCols }};gap:24px;align-items:start">
+        <div style="background:#FFFFFF;border-radius:12px;padding:12px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);position:sticky;top:104px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px 12px"><span style="font-weight:700;font-size:13px">{{ t.sections }}</span><span style="font-size:11px;color:#6B675C">{{ t.dragHint }}</span></div>
+          <sc-for list="{{ sections }}" as="sc" hint-placeholder-count="12">
+            <div style="display:flex;align-items:center;gap:6px;border-radius:6px;background:{{ sc.bg }};padding:0 6px" style-hover="background:#F3EFE6">
+              <span aria-hidden="true" style="color:#CFC6AF;font-size:14px;letter-spacing:-2px;cursor:grab;width:12px">⋮⋮</span>
+              <button type="button" onClick="{{ sc.pick }}" style="flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:40px;border:0;background:transparent;cursor:pointer;text-align:start;font-size:14px;font-weight:{{ sc.fw }};color:{{ sc.ink }}"><span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sc.name }}</span><sc-if value="{{ sc.locked }}" hint-placeholder-val="{{ false }}"><span title="Locked" style="font-size:12px">🔒</span></sc-if><sc-if value="{{ sc.warn }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:8px;border-radius:50%;background:#C99A3B"></span></sc-if></button>
+              <button type="button" onClick="{{ sc.toggle }}" aria-label="Show or hide section" style="width:34px;height:20px;border-radius:999px;border:0;background:{{ sc.swBg }};position:relative;cursor:pointer;flex-shrink:0"><span style="position:absolute;top:2px;inset-inline-start:{{ sc.swX }};width:16px;height:16px;border-radius:50%;background:#FFFFFF;transition:inset-inline-start .2s"></span></button>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+            <div style="min-width:0"><div style="font-family:{{ fH }};font-weight:{{ wH }};font-size:28px;line-height:1.3">{{ sec.name }}</div><div style="font-size:14px;color:#6B675C;margin-top:4px">{{ sec.desc }}</div></div>
+            <div style="display:flex;gap:8px;font-size:12px;font-weight:700"><span style="padding:6px 10px;border-radius:999px;background:#E6EBDA;color:#3F5A2A">EN · {{ t.left }}</span><span style="padding:6px 10px;border-radius:999px;background:#E6EBDA;color:#3F5A2A;font-family:'IBM Plex Sans Arabic',sans-serif">العربية · {{ t.right }}</span></div>
+          </div>
+          <sc-if value="{{ sec.locked }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:14px;align-items:center;background:#F6EBD2;border-radius:12px;padding:16px 18px"><span style="font-size:20px">🔒</span><span style="flex:1;font-size:14px;line-height:1.6"><strong>{{ t.lockedTitle }}</strong> {{ t.lockedBody }}</span><button type="button" onClick="{{ unlock }}" style="height:40px;padding:0 16px;border:1.5px solid #86621E;border-radius:4px;background:transparent;color:#86621E;font-weight:700;font-size:14px;cursor:pointer">{{ t.unlock }}</button></div>
+          </sc-if>
+          <sc-for list="{{ fields }}" as="fd" hint-placeholder-count="4">
+            <div style="background:#FFFFFF;border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:flex;flex-direction:column;gap:12px;opacity:{{ fd.op }}">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="font-weight:700;font-size:14px">{{ fd.label }}</span><span style="font-size:12px;color:#6B675C">{{ fd.hint }}</span></div>
+              <sc-if value="{{ fd.isText }}" hint-placeholder-val="{{ true }}">
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px">
+                  <div dir="ltr" style="display:flex;flex-direction:column;gap:6px"><textarea rows="{{ fd.rows }}" value="{{ fd.en }}" onChange="{{ fd.onEn }}" readOnly="{{ fd.ro }}" style="width:100%;border:1px solid {{ fd.enBorder }};border-radius:4px;background:#FFFFFF;padding:10px 12px;font-family:Manrope,sans-serif;font-size:15px;line-height:1.5;resize:vertical" style-focus="outline:none;border-color:#3F5A2A;box-shadow:0 0 0 3px rgba(201,154,59,.35)"></textarea><span style="display:flex;justify-content:space-between;font-size:12px;font-family:Manrope,sans-serif"><span style="color:{{ fd.enMsgC }}">{{ fd.enMsg }}</span><span style="font-family:'IBM Plex Mono',monospace;color:{{ fd.enCountC }}">{{ fd.enCount }}</span></span></div>
+                  <div dir="rtl" style="display:flex;flex-direction:column;gap:6px"><textarea rows="{{ fd.rows }}" value="{{ fd.ar }}" onChange="{{ fd.onAr }}" readOnly="{{ fd.ro }}" placeholder="أضف النص العربي" style="width:100%;border:1px solid {{ fd.arBorder }};border-radius:4px;background:{{ fd.arBg }};padding:10px 12px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:16px;line-height:1.7;resize:vertical" style-focus="outline:none;border-color:#3F5A2A;box-shadow:0 0 0 3px rgba(201,154,59,.35)"></textarea><span style="display:flex;justify-content:space-between;font-size:12px;font-family:'IBM Plex Sans Arabic',sans-serif"><span style="color:{{ fd.arMsgC }}">{{ fd.arMsg }}</span><span style="font-family:'IBM Plex Mono',monospace;color:{{ fd.arCountC }}">{{ fd.arCount }}</span></span></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ fd.isImage }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:start">
+                  <div style="aspect-ratio:{{ fd.ratioCss }};border-radius:{{ fd.radius }};background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:grid;place-items:center;padding:12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B675C;border:1px dashed #6B675C">{{ fd.slot }}</div>
+                  <div style="display:flex;flex-direction:column;gap:10px">
+                    <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" onClick="{{ goMedia }}" style="height:36px;padding:0 14px;border:1.5px solid #3F5A2A;border-radius:4px;background:transparent;color:#3F5A2A;font-weight:700;font-size:13px;cursor:pointer">{{ t.replace }}</button><span style="height:36px;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:999px;background:#F6EBD2;color:#86621E;font-size:12px;font-weight:700">{{ fd.ratioMsg }}</span></div>
+                    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px">
+                      <input dir="ltr" value="{{ fd.en }}" placeholder="Alt text (English)" style="height:40px;border:1px solid #CFC6AF;border-radius:4px;padding:0 10px;font-family:Manrope,sans-serif;font-size:14px;width:100%">
+                      <input dir="rtl" value="{{ fd.ar }}" placeholder="النص البديل (عربي)" style="height:40px;border:1px solid {{ fd.arBorder }};border-radius:4px;padding:0 10px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;width:100%;background:{{ fd.arBg }}">
+                    </div>
+                    <span style="font-size:12px;color:#6B675C">{{ fd.imgNote }}</span>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ fd.isFigure }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:140px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center">
+                  <input dir="ltr" value="{{ fd.num }}" placeholder="e.g. 12,500" style="height:44px;border:1px dashed #86621E;border-radius:4px;padding:0 12px;font-family:Fraunces,serif;font-size:22px;width:100%;color:#86621E">
+                  <input dir="ltr" value="{{ fd.en }}" style="height:44px;border:1px solid #CFC6AF;border-radius:4px;padding:0 12px;font-family:Manrope,sans-serif;font-size:14px;width:100%">
+                  <input dir="rtl" value="{{ fd.ar }}" style="height:44px;border:1px solid #CFC6AF;border-radius:4px;padding:0 12px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px;width:100%">
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="position:{{ pvPos }};top:104px;display:flex;flex-direction:column;gap:12px;grid-column:{{ pvCol }};align-items:{{ pvAlign }}">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;width:452px;max-width:100%">
+            <span style="font-weight:700;font-size:13px">{{ t.livePreview }}</span>
+            <div style="display:flex;gap:6px">
+              <sc-for list="{{ pvOpts }}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{ o.go }}" style="height:30px;padding:0 10px;border-radius:4px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.ink }};font-size:12px;font-weight:700;cursor:pointer;font-family:{{ o.font }}">{{ o.label }}</button></sc-for>
+            </div>
+          </div>
+          <div style="width:452px;height:{{ pvH }};border-radius:12px;overflow:hidden;background:#FFFFFF;box-shadow:0 2px 4px rgba(31,42,28,.06),0 12px 32px rgba(31,42,28,.12);display:flex;justify-content:center">
+            <div style="width:{{ pvBoxW }};height:100%;overflow:hidden"><iframe src="{{ pvSrc }}" title="Live preview" style="width:{{ pvW }};height:{{ pvIH }};border:0;transform:scale({{ pvS }});transform-origin:0 0;display:block"></iframe></div>
+          </div>
+          <span style="font-size:12px;color:#6B675C;line-height:1.5;max-width:452px">{{ t.pvNote }}</span>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isMedia }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Media library" style="display:grid;grid-template-columns:{{ mediaCols }};gap:24px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <input placeholder="{{ t.searchMedia }}" style="flex:1;min-width:220px;height:44px;border:1px solid #CFC6AF;border-radius:4px;background:#FFFFFF;padding:0 14px;font-size:14px">
+            <sc-for list="{{ mediaTabs }}" as="mt" hint-placeholder-count="3"><span style="height:36px;display:flex;align-items:center;padding:0 14px;border-radius:999px;background:{{ mt.bg }};color:{{ mt.ink }};font-size:13px;font-weight:700">{{ mt.label }}</span></sc-for>
+            <button type="button" style="height:44px;padding:0 18px;border:0;border-radius:4px;background:#3F5A2A;color:#FAF8F2;font-weight:700;font-size:14px;cursor:pointer">{{ t.upload }}</button>
+          </div>
+          <div style="border:2px dashed #CFC6AF;border-radius:12px;padding:20px;text-align:center;font-size:14px;color:#6B675C">{{ t.dropHint }}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+            <sc-for list="{{ media }}" as="md" hint-placeholder-count="6">
+              <button type="button" onClick="{{ md.pick }}" style="display:flex;flex-direction:column;gap:10px;padding:10px;border-radius:12px;border:2px solid {{ md.bd }};background:#FFFFFF;cursor:pointer;text-align:start">
+                <div style="aspect-ratio:4/3;border-radius:8px;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:grid;place-items:center;padding:10px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B675C">{{ md.slot }}</div>
+                <span style="font-size:13px;font-weight:600">{{ md.name }}</span>
+                <span style="display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:#F6EBD2;color:#86621E">{{ md.status }}</span><span style="font-size:11px;color:#6B675C;padding:3px 0">{{ md.used }}</span></span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:flex;flex-direction:column;gap:16px;position:sticky;top:104px">
+          <span style="font-weight:700;font-size:15px">{{ mSel.name }}</span>
+          <div style="position:relative;aspect-ratio:1;border-radius:8px;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);overflow:hidden">
+            <div style="position:absolute;inset:8%;border-radius:{{ cropR }};border:2px solid #C99A3B;box-shadow:0 0 0 999px rgba(31,42,28,.45)"></div>
+            <div style="position:absolute;left:58%;top:42%;width:18px;height:18px;margin:-9px;border-radius:50%;border:2px solid #FAF8F2;background:rgba(201,154,59,.8)"></div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ crops }}" as="cr" hint-placeholder-count="3"><button type="button" onClick="{{ cr.go }}" style="height:32px;padding:0 12px;border-radius:4px;border:1px solid {{ cr.bd }};background:{{ cr.bg }};color:{{ cr.ink }};font-size:12px;font-weight:700;cursor:pointer">{{ cr.label }}</button></sc-for></div>
+          <span style="font-size:12px;color:#6B675C;line-height:1.5">{{ t.focal }}</span>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">{{ t.altEn }}<input dir="ltr" value="{{ mSel.altEn }}" style="height:40px;border:1px solid #CFC6AF;border-radius:4px;padding:0 10px;font-family:Manrope,sans-serif;font-size:14px"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">{{ t.altAr }}<input dir="rtl" value="{{ mSel.altAr }}" style="height:40px;border:1px solid #CFC6AF;border-radius:4px;padding:0 10px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px"></label>
+          <div style="background:#EFE7D6;border-radius:8px;padding:12px;font-size:12px;line-height:1.6">{{ t.imgRules }}</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isInbox }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Inquiries" style="display:grid;grid-template-columns:{{ listCols }};gap:24px;align-items:start">
+        <div style="background:#FFFFFF;border-radius:12px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);overflow:hidden">
+          <div style="padding:14px;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid rgba(31,42,28,.08)"><sc-for list="{{ inqFilters }}" as="fl" hint-placeholder-count="6"><button type="button" onClick="{{ fl.go }}" style="height:32px;padding:0 12px;border-radius:999px;border:1px solid {{ fl.bd }};background:{{ fl.bg }};color:{{ fl.ink }};font-size:12px;font-weight:700;cursor:pointer">{{ fl.label }}</button></sc-for></div>
+          <sc-for list="{{ inq }}" as="q" hint-placeholder-count="6">
+            <button type="button" onClick="{{ q.pick }}" style="width:100%;display:flex;gap:12px;padding:14px;border:0;border-bottom:1px solid rgba(31,42,28,.08);background:{{ q.bg }};cursor:pointer;text-align:start;align-items:flex-start">
+              <span style="width:8px;height:8px;border-radius:50%;margin-top:8px;flex-shrink:0;background:{{ q.dot }}"></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><span style="display:flex;justify-content:space-between;gap:8px"><span style="font-weight:{{ q.fw }};font-size:14px">{{ q.name }}</span><span style="font-size:12px;color:#6B675C">{{ q.when }}</span></span><span style="font-size:13px;color:#6B675C">{{ q.org }}</span><span style="font-size:13px;color:#1F2A1C;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" dir="{{ q.dir }}">{{ q.msg }}</span><span style="align-self:flex-start;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:{{ q.tbg }};color:{{ q.tink }}">{{ q.typeL }}</span></span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="background:#FFFFFF;border-radius:12px;padding:28px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap">
+            <div style="display:flex;gap:14px;align-items:center"><span style="width:48px;height:48px;border-radius:50%;background:#EFE7D6;display:grid;place-items:center;font-weight:700">{{ qSel.ini }}</span><div><div style="font-family:{{ fH }};font-weight:{{ wH }};font-size:24px;line-height:1.3">{{ qSel.name }}</div><div style="font-size:14px;color:#6B675C">{{ qSel.org }} · {{ qSel.when }}</div></div></div>
+            <span style="font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;background:{{ qSel.tbg }};color:{{ qSel.tink }}">{{ qSel.typeL }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;font-size:13px">
+            <div style="background:#FAF8F2;border-radius:8px;padding:12px"><div style="color:#6B675C;margin-bottom:4px">{{ t.email }}</div><div dir="ltr" style="font-weight:600;text-align:start">{{ qSel.email }}</div></div>
+            <div style="background:#FAF8F2;border-radius:8px;padding:12px"><div style="color:#6B675C;margin-bottom:4px">{{ t.phone }}</div><div dir="ltr" style="font-weight:600;text-align:start">{{ qSel.phone }}</div></div>
+            <div style="background:#FAF8F2;border-radius:8px;padding:12px"><div style="color:#6B675C;margin-bottom:4px">{{ t.sentFrom }}</div><div style="font-weight:600">{{ qSel.page }}</div></div>
+          </div>
+          <div dir="{{ qSel.dir }}" style="font-size:16px;line-height:1.75;border-inline-start:2px solid #C99A3B;padding-inline-start:16px;font-family:{{ qSel.font }}">{{ qSel.msg }}</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a href="#" style="display:flex;align-items:center;height:44px;padding:0 18px;border-radius:4px;background:#3F5A2A;color:#FAF8F2;font-weight:700;font-size:14px;text-decoration:none" style-hover="background:#1F2A1C;color:#FAF8F2">{{ t.replyEmail }}</a>
+            <button type="button" style="height:44px;padding:0 18px;border:1.5px solid #3F5A2A;border-radius:4px;background:transparent;color:#3F5A2A;font-weight:700;font-size:14px;cursor:pointer">{{ t.markReplied }}</button>
+            <button type="button" style="height:44px;padding:0 18px;border:0;background:transparent;color:#6B675C;font-weight:700;font-size:14px;cursor:pointer">{{ t.archive }}</button>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:600">{{ t.notes }}<textarea rows="3" placeholder="{{ t.notesPh }}" style="border:1px solid #CFC6AF;border-radius:4px;padding:10px 12px;font-size:14px;resize:vertical"></textarea></label>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">{{ t.sample }}</span>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isHistory }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Change history" style="display:grid;grid-template-columns:{{ listCols }};gap:24px;align-items:start">
+        <div style="background:#FFFFFF;border-radius:12px;padding:8px 20px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06)">
+          <sc-for list="{{ history }}" as="hv" hint-placeholder-count="8">
+            <button type="button" onClick="{{ hv.pick }}" style="width:100%;display:grid;grid-template-columns:16px 1fr auto;gap:12px;padding:14px 8px;border:0;border-bottom:1px solid rgba(31,42,28,.08);background:{{ hv.bg }};cursor:pointer;text-align:start;align-items:start;border-radius:6px">
+              <span style="width:12px;height:12px;border-radius:50%;margin-top:4px;background:{{ hv.dot }};box-shadow:0 0 0 3px {{ hv.ring }}"></span>
+              <span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:14px;font-weight:600">{{ hv.what }}</span><span style="font-size:12px;color:#6B675C">{{ hv.who }} · {{ hv.when }}</span></span>
+              <span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:{{ hv.tagBg }};color:{{ hv.tagInk }}">{{ hv.tag }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="background:#FFFFFF;border-radius:12px;padding:28px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start"><div><div style="font-family:{{ fH }};font-weight:{{ wH }};font-size:24px;line-height:1.3">{{ hSel.what }}</div><div style="font-size:14px;color:#6B675C">{{ hSel.who }} · {{ hSel.when }}</div></div><button type="button" style="height:44px;padding:0 18px;border:1.5px solid #3F5A2A;border-radius:4px;background:transparent;color:#3F5A2A;font-weight:700;font-size:14px;cursor:pointer">{{ t.restore }}</button></div>
+          <sc-for list="{{ diffs }}" as="df" hint-placeholder-count="2">
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-weight:700;font-size:13px">{{ df.field }}</span>
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+                <div dir="{{ df.dir }}" style="background:#F3E2D9;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.6;font-family:{{ df.font }}"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8E3B24;margin-bottom:6px">{{ t.before }}</div><span style="text-decoration:line-through;text-decoration-color:rgba(142,59,36,.5)">{{ df.before }}</span></div>
+                <div dir="{{ df.dir }}" style="background:#E6EBDA;border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.6;font-family:{{ df.font }}"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#3F5A2A;margin-bottom:6px">{{ t.after }}</div>{{ df.after }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Site settings" style="display:flex;flex-direction:column;gap:24px;max-width:1100px">
+        <sc-for list="{{ settings }}" as="g" hint-placeholder-count="4">
+          <div style="background:#FFFFFF;border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="font-family:{{ fH }};font-weight:{{ wH }};font-size:22px;line-height:1.3">{{ g.title }}</span><span style="font-size:12px;color:#6B675C">{{ g.hint }}</span></div>
+            <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+              <div style="display:grid;grid-template-columns:{{ setCols }};gap:12px;align-items:center">
+                <span style="font-size:14px;font-weight:600">{{ r.label }}</span>
+                <input dir="ltr" value="{{ r.en }}" placeholder="{{ r.ph }}" style="height:44px;border:1px {{ r.style }} {{ r.bd }};border-radius:4px;padding:0 12px;font-family:Manrope,sans-serif;font-size:14px;width:100%;grid-column:{{ r.enSpan }}">
+                <sc-if value="{{ r.hasAr }}" hint-placeholder-val="{{ true }}"><input dir="rtl" value="{{ r.ar }}" placeholder="{{ r.phAr }}" style="height:44px;border:1px {{ r.style }} {{ r.bd }};border-radius:4px;padding:0 12px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px;width:100%"></sc-if>
+              </div>
+            </sc-for>
+            <sc-if value="{{ g.snippet }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);gap:12px">
+                <span style="font-size:12px;color:#6B675C;padding-top:12px">{{ t.searchPreview }}</span>
+                <div dir="ltr" style="border:1px solid rgba(31,42,28,.12);border-radius:8px;padding:14px;font-family:Arial,sans-serif;text-align:left"><div style="font-size:12px;color:#4D5156">gheras.ly › en</div><div style="font-size:18px;color:#1A0DAB;margin:4px 0">GHERAS — Agricultural Investment, Libya</div><div style="font-size:13px;color:#4D5156;line-height:1.5">GHERAS is the agricultural investment company of Investment Portfolio Holding in Libya: land reclamation, sustainable crop…</div></div>
+                <div dir="rtl" style="border:1px solid rgba(31,42,28,.12);border-radius:8px;padding:14px;font-family:Arial,sans-serif;text-align:right"><div style="font-size:12px;color:#4D5156">gheras.ly › ar</div><div style="font-size:18px;color:#1A0DAB;margin:4px 0">غراس — للاستثمار الزراعي، ليبيا</div><div style="font-size:13px;color:#4D5156;line-height:1.6">غراس شركة الاستثمار الزراعي التابعة لمحفظة الاستثمار القابضة في ليبيا: استصلاح الأراضي، والإنتاج…</div></div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isUsers }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Users" style="display:flex;flex-direction:column;gap:24px;max-width:1100px">
+        <div style="background:#FFFFFF;border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <span style="width:52px;height:52px;border-radius:50%;background:#3F5A2A;color:#FAF8F2;display:grid;place-items:center;font-weight:700">MG</span>
+          <div style="flex:1;min-width:200px"><div style="font-weight:700;font-size:16px">Mohamed Ganaway</div><div dir="ltr" style="font-size:14px;color:#6B675C;text-align:start">admin@gheras.ly</div></div>
+          <span style="font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;background:#1F2A1C;color:#C99A3B">{{ t.admin }}</span>
+          <span style="font-size:13px;color:#6B675C">{{ t.allPerms }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><span style="font-family:{{ fH }};font-weight:{{ wH }};font-size:22px;line-height:1.3">{{ t.futureRoles }}</span><button type="button" disabled="disabled" style="height:44px;padding:0 18px;border:0;border-radius:4px;background:#CFC6AF;color:#6B675C;font-weight:700;font-size:14px;cursor:not-allowed">{{ t.invite }}</button></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+          <sc-for list="{{ roles }}" as="rl" hint-placeholder-count="3">
+            <div style="border:1px dashed #CFC6AF;border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:700;font-size:16px">{{ rl.name }}</span><span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:#EFE7D6;color:#6B675C">{{ t.later }}</span></div>
+              <span style="font-size:14px;line-height:1.6;color:#6B675C">{{ rl.d }}</span>
+              <div style="display:flex;flex-direction:column;gap:6px;font-size:13px"><sc-for list="{{ rl.perms }}" as="pm" hint-placeholder-count="3"><span style="display:flex;gap:8px"><span style="color:{{ pm.c }};font-weight:700">{{ pm.i }}</span>{{ pm.t }}</span></sc-for></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    </main>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ publishOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;background:rgba(31,42,28,.55);z-index:20;display:grid;place-items:center;padding:24px">
+    <div role="dialog" aria-modal="true" style="width:min(560px,100%);background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:18px;box-shadow:0 24px 64px rgba(31,42,28,.3)">
+      <div style="font-family:{{ fH }};font-weight:{{ wH }};font-size:28px;line-height:1.3">{{ t.pubTitle }}</div>
+      <div style="font-size:15px;line-height:1.6;color:#1F2A1C">{{ t.pubBody }}</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4"><div style="display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:8px;background:{{ c.bg }};font-size:14px"><span style="font-weight:700;color:{{ c.ink }}">{{ c.i }}</span><span style="flex:1">{{ c.t }}</span></div></sc-for>
+      </div>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">{{ t.pubNote }}<input placeholder="{{ t.pubNotePh }}" style="height:44px;border:1px solid #CFC6AF;border-radius:4px;padding:0 12px;font-size:14px;background:#FFFFFF"></label>
+      <div style="display:flex;justify-content:flex-end;gap:10px"><button type="button" onClick="{{ closePublish }}" style="height:44px;padding:0 18px;border:1.5px solid #3F5A2A;border-radius:4px;background:transparent;color:#3F5A2A;font-weight:700;font-size:14px;cursor:pointer">{{ t.cancel }}</button><button type="button" onClick="{{ closePublish }}" style="height:44px;padding:0 18px;border:0;border-radius:4px;background:#3F5A2A;color:#FAF8F2;font-weight:700;font-size:14px;cursor:pointer">{{ t.publishNow }}</button></div>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:960},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;login&quot;,&quot;overview&quot;,&quot;editor&quot;,&quot;media&quot;,&quot;inbox&quot;,&quot;history&quot;,&quot;settings&quot;,&quot;users&quot;],&quot;default&quot;:&quot;overview&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() { this._r = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this._r); this._r(); }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); }
+  state = { screen: this.props.startScreen || 'overview', lang: 'en', sec: 'hero', vis: {}, unlocked: {}, edits: {}, pvLang: 'en', pvDev: 'desktop', media: 0, crop: 'circle', inq: 0, inqF: 'all', hist: 0, publishOpen: false };
+  renderVals() {
+    const st = this.state, ar = st.lang === 'ar', L = (en, a) => ar ? a : en, go = s => () => this.setState({ screen: s });
+    const T = this.dict(ar);
+    const TYPES = { Investment: ['#E6EBDA','#3F5A2A','Investment','استثمار'], Partnership: ['#DDEAEA','#2F6F73','Partnership','شراكة'], Supply: ['#F6EBD2','#86621E','Supply','توريد'], Careers: ['#EFE7D6','#1F2A1C','Careers','وظائف'], Other: ['#F3EFE6','#6B675C','Other','أخرى'] };
+    const tp = k => ({ tbg: TYPES[k][0], tink: TYPES[k][1], typeL: ar ? TYPES[k][3] : TYPES[k][2] });
+    const navDef = [['overview','pivot',T.overview],['editor','crop',T.editor],['media','land',T.media],['inbox','mail',T.inbox,'3'],['history','commitment',T.history],['settings','excellence',T.settings],['users','partner',T.users]];
+    const nav = navDef.map(([id,icon,label,badge]) => ({ label, icon, badge: badge || false, go: go(id), bg: st.screen === id ? 'rgba(201,154,59,.18)' : 'transparent', ink: st.screen === id ? '#FAF8F2' : '#E8D3A0' }));
+    const titles = { overview: T.overview, editor: T.editor, media: T.media, inbox: T.inbox, history: T.history, settings: T.settings, users: T.users };
+    // editor
+    const S = this.sectionsData();
+    const sections = S.map(s => { const on = st.vis[s.id] ?? s.on; return { name: L(s.en, s.ar), locked: s.locked && !st.unlocked[s.id], warn: !!s.warn, pick: () => this.setState({ sec: s.id }), toggle: () => this.setState(x => ({ vis: { ...x.vis, [s.id]: !on } })), swBg: on ? '#3F5A2A' : '#CFC6AF', swX: on ? '16px' : '2px', bg: st.sec === s.id ? '#EFE7D6' : 'transparent', fw: st.sec === s.id ? 700 : 500, ink: on ? '#1F2A1C' : '#6B675C' }; });
+    const cur = S.find(s => s.id === st.sec) || S[0], locked = cur.locked && !st.unlocked[cur.id];
+    const val = (k, lg, d) => st.edits[cur.id + '.' + k + '.' + lg] ?? d;
+    const setV = (k, lg) => ev => { const v = ev.target.value; this.setState(x => ({ edits: { ...x.edits, [cur.id + '.' + k + '.' + lg]: v } })); };
+    const fields = cur.fields.map(f => {
+      const en = val(f.k, 'en', f.en || ''), a = val(f.k, 'ar', f.ar || ''), lim = f.limit || 0;
+      const over = s => lim && s.length > lim, near = s => lim && s.length > lim * .9;
+      const isText = !f.type || f.type === 'text' || f.type === 'area';
+      return { label: L(f.l, f.la), hint: lim ? L('Max ' + lim + ' characters', 'الحد الأقصى ' + lim + ' حرفاً') : (f.hint ? L(f.hint, f.hintAr) : ''),
+        isText, isImage: f.type === 'image', isFigure: f.type === 'figure', rows: f.type === 'area' ? 4 : 2, en, ar: a, num: f.num || '', ro: locked, op: locked ? .7 : 1,
+        onEn: setV(f.k,'en'), onAr: setV(f.k,'ar'),
+        enCount: lim ? en.length + ' / ' + lim : '', arCount: lim ? a.length + ' / ' + lim : '',
+        enCountC: over(en) ? '#8E3B24' : near(en) ? '#86621E' : '#6B675C', arCountC: over(a) ? '#8E3B24' : near(a) ? '#86621E' : '#6B675C',
+        enBorder: over(en) ? '#8E3B24' : '#CFC6AF', arBorder: !a.trim() ? '#C99A3B' : over(a) ? '#8E3B24' : '#CFC6AF', arBg: !a.trim() ? '#FDF7EA' : '#FFFFFF',
+        enMsg: over(en) ? '✕ Too long for the layout' : '', enMsgC: '#8E3B24',
+        arMsg: !a.trim() ? '⚠ النص العربي مفقود — لن يُنشر هذا الحقل' : over(a) ? '✕ النص أطول من المساحة' : '', arMsgC: !a.trim() ? '#86621E' : '#8E3B24',
+        slot: f.slot || '', ratioCss: f.ratio || '1', radius: f.circle ? '50%' : '8px', ratioMsg: f.ratioMsg ? L(f.ratioMsg, f.ratioMsgAr) : '', imgNote: L(f.note || '', f.noteAr || '') };
+    });
+    const anchors = { hero: '', belief: '#about', figures: '#about', services: '#what-we-do', horizons: '#what-we-do', mission: '#values', values: '#values', why: '#why', who: '#why', contact: '#contact', footer: '#contact' };
+    const desk = st.pvDev === 'desktop', pvW = desk ? 1440 : 390, pvS = desk ? 452 / 1440 : 360 / 390, pvIH = desk ? 2300 : 780;
+    const pvFile = st.pvLang === 'ar' ? 'Gheras%20Website%20AR.dc.html' : 'Gheras%20Website.dc.html';
+    const opt = (label, on, fn, font) => ({ label, go: fn, bd: on ? '#3F5A2A' : '#CFC6AF', bg: on ? '#3F5A2A' : '#FFFFFF', ink: on ? '#FAF8F2' : '#1F2A1C', font: font || 'inherit' });
+    const pvOpts = [opt('EN', st.pvLang === 'en', () => this.setState({ pvLang: 'en' }), 'Manrope,sans-serif'), opt('عربي', st.pvLang === 'ar', () => this.setState({ pvLang: 'ar' }), "'IBM Plex Sans Arabic',sans-serif"), opt(T.desktop, desk, () => this.setState({ pvDev: 'desktop' })), opt(T.mobile, !desk, () => this.setState({ pvDev: 'mobile' }))];
+    // media
+    const M = [['PHOTO 01 — aerial, centre-pivot fields at sunset','hero-pivot.jpg','Hero','16:9 ✓','Aerial view of centre-pivot fields in the Libyan desert at sunset','منظر جوي لحقول الري المحوري في الصحراء الليبية عند الغروب'],['PHOTO 02 — olive grove, low sun','olive-grove.jpg','Why 01','1:1 ✓','Olive grove in low evening sun','بستان زيتون في ضوء المساء'],['PHOTO 05 — drip lines in rows','drip-lines.jpg','Why 02','1:1 ✓','Drip irrigation lines running in rows','خطوط ري بالتنقيط ممتدة في صفوف'],['PHOTO 07 — engineer with tablet','engineer.jpg','Why 03','Needs crop','Agricultural engineer checking data in the field',''],['PHOTO 09 — hands sorting harvest','harvest.jpg','Why 04','1:1 ✓','Hands sorting freshly harvested produce','أيدٍ تفرز محصولاً طازجاً'],['PHOTO 04 — soil held in hands','soil.jpg','Why 05','1:1 ✓','Soil held in two hands','تربة بين يدين']];
+    const media = M.map((m,i) => ({ slot: m[0], name: m[1], used: L('Used in: ', 'مستخدمة في: ') + m[2], status: m[3] === 'Needs crop' ? L('Needs crop', 'تحتاج قصاً') : m[3], pick: () => this.setState({ media: i }), bd: st.media === i ? '#3F5A2A' : 'transparent' }));
+    const ms = M[st.media];
+    const crops = [['circle', T.cropCircle], ['wide', T.cropWide], ['square', T.cropSquare]].map(([k,label]) => ({ label, go: () => this.setState({ crop: k }), bd: st.crop === k ? '#3F5A2A' : '#CFC6AF', bg: st.crop === k ? '#3F5A2A' : '#FFFFFF', ink: st.crop === k ? '#FAF8F2' : '#1F2A1C' }));
+    const mediaTabs = [[T.all, true], [T.missingAlt, false], [T.unused, false]].map(([label, on]) => ({ label, bg: on ? '#1F2A1C' : '#EFE7D6', ink: on ? '#FAF8F2' : '#1F2A1C' }));
+    // inbox
+    const Q = this.inquiries();
+    const fk = st.inqF;
+    const inqFilters = [['all', T.all], ['Investment', TYPES.Investment[ar?3:2]], ['Partnership', TYPES.Partnership[ar?3:2]], ['Supply', TYPES.Supply[ar?3:2]], ['Careers', TYPES.Careers[ar?3:2]], ['Other', TYPES.Other[ar?3:2]]].map(([k,label]) => ({ label, go: () => this.setState({ inqF: k }), bd: fk === k ? '#3F5A2A' : '#CFC6AF', bg: fk === k ? '#3F5A2A' : '#FFFFFF', ink: fk === k ? '#FAF8F2' : '#1F2A1C' }));
+    const inqAll = Q.map((q,i) => ({ ...q, ...tp(q.type), i, ini: q.name.split(' ').map(w => w[0]).join('').slice(0,2), dir: q.ar ? 'rtl' : 'ltr', font: q.ar ? "'IBM Plex Sans Arabic',sans-serif" : 'Manrope,sans-serif', when: L(q.when, q.whenAr), page: q.ar ? L('Arabic page','الصفحة العربية') : L('English page','الصفحة الإنجليزية') }));
+    const inq = inqAll.filter(q => fk === 'all' || q.type === fk).map(q => ({ ...q, pick: () => this.setState({ inq: q.i }), bg: st.inq === q.i ? '#EFE7D6' : '#FFFFFF', dot: q.isNew ? '#C99A3B' : 'transparent', fw: q.isNew ? 700 : 500 }));
+    const qSel = inqAll[st.inq] || inqAll[0];
+    // history
+    const H = this.historyData(ar);
+    const history = H.map((h,i) => ({ ...h, pick: () => this.setState({ hist: i }), bg: st.hist === i ? '#EFE7D6' : 'transparent', dot: h.pub ? '#3F5A2A' : '#C99A3B', ring: h.pub ? '#E6EBDA' : '#F6EBD2', tag: h.pub ? L('Published','منشور') : L('Draft','مسودة'), tagBg: h.pub ? '#E6EBDA' : '#F6EBD2', tagInk: h.pub ? '#3F5A2A' : '#86621E' }));
+    const hSel = H[st.hist] || H[0];
+    const diffs = (hSel.diffs || []).map(d => ({ ...d, dir: d.ar ? 'rtl' : 'ltr', font: d.ar ? "'IBM Plex Sans Arabic',sans-serif" : 'Manrope,sans-serif' }));
+    const W = st.w || 1440, mainW = W - 248 - 64, wide = mainW >= 1180;
+    return {
+      edCols: wide ? '232px minmax(0,1fr) 452px' : (mainW >= 640 ? '220px minmax(0,1fr)' : 'minmax(0,1fr)'), pvPos: wide ? 'sticky' : 'static', pvCol: wide ? 'auto' : '1 / -1', pvAlign: wide ? 'stretch' : 'center',
+      listCols: mainW >= 900 ? 'minmax(300px,380px) minmax(0,1fr)' : (mainW >= 620 ? 'minmax(260px,300px) minmax(0,1fr)' : 'minmax(0,1fr)'), mediaCols: mainW >= 860 ? 'minmax(0,1fr) 340px' : 'minmax(0,1fr)', chipD: mainW >= 820 ? 'flex' : 'none',
+      setCols: mainW >= 760 ? '180px minmax(0,1fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      t: T, lang: st.lang, dir: ar ? 'rtl' : 'ltr', rtl: ar,
+      fB: ar ? "'IBM Plex Sans Arabic',sans-serif" : 'Manrope,sans-serif', fH: ar ? "'Noto Naskh Arabic',serif" : 'Fraunces,serif', wH: ar ? 600 : 400, fOther: ar ? 'Manrope,sans-serif' : "'IBM Plex Sans Arabic',sans-serif",
+      ls: ar ? '0' : '.2em', tt: ar ? 'none' : 'uppercase',
+      isLogin: st.screen === 'login', inApp: st.screen !== 'login',
+      isOverview: st.screen === 'overview', isEditor: st.screen === 'editor', isMedia: st.screen === 'media', isInbox: st.screen === 'inbox', isHistory: st.screen === 'history', isSettings: st.screen === 'settings', isUsers: st.screen === 'users',
+      title: titles[st.screen] || '', nav,
+      toggleLang: () => this.setState({ lang: ar ? 'en' : 'ar' }), goOverview: go('overview'), goLogin: go('login'), goHistory: go('history'), goInbox: go('inbox'), goMedia: go('media'),
+      openPublish: () => this.setState({ publishOpen: true }), closePublish: () => this.setState({ publishOpen: false }), publishOpen: st.publishOpen,
+      pending: [[L('Hero — supporting line (EN, AR)','الواجهة — السطر الداعم (إنجليزي، عربي)'), L('12 min ago','قبل 12 دقيقة')], [L('Figures — 2 numbers added','الأرقام — إضافة رقمين'), L('1 h ago','قبل ساعة')], [L('Contact — phone number','التواصل — رقم الهاتف'), L('Yesterday','أمس')]].map(([what,when]) => ({ what, when })),
+      health: [[2, T.hMissingAr, T.hMissingArD, '#C99A3B', '#FDF7EA', 'editor'], [14, T.hPlaceholders, T.hPlaceholdersD, '#86621E', '#F6EBD2', 'editor'], [1, T.hAlt, T.hAltD, '#8E3B24', '#F3E2D9', 'media'], [3, T.hInq, T.hInqD, '#3F5A2A', '#E6EBDA', 'inbox']].map(([n,t,d,dot,bg,s]) => ({ n, t, d, dot, bg, go: go(s) })),
+      inqTop: inqAll.slice(0,3), historyTop: H.slice(0,4).map(h => ({ ...h, dot: h.pub ? '#3F5A2A' : '#C99A3B' })),
+      sections, sec: { name: L(cur.en, cur.ar), desc: L(cur.desc, cur.descAr), locked }, fields, unlock: () => { if (window.confirm(T.unlockConfirm)) this.setState(x => ({ unlocked: { ...x.unlocked, [cur.id]: true } })); },
+      pvOpts, pvSrc: pvFile + (anchors[cur.id] || ''), pvW: pvW + 'px', pvIH: pvIH + 'px', pvS, pvBoxW: desk ? '452px' : '360px', pvH: desk ? '722px' : '722px',
+      media, mSel: { name: ms[1], altEn: ms[4], altAr: ms[5] }, crops, cropR: st.crop === 'circle' ? '50%' : '4px', mediaTabs,
+      inqFilters, inq, qSel, history, hSel, diffs,
+      settings: this.settingsData(ar), roles: this.rolesData(ar),
+      checks: [['✓', T.c1, '#E6EBDA', '#3F5A2A'], ['✓', T.c2, '#E6EBDA', '#3F5A2A'], ['⚠', T.c3, '#F6EBD2', '#86621E'], ['⚠', T.c4, '#F6EBD2', '#86621E']].map(([i,t,bg,ink]) => ({ i, t, bg, ink }))
+    };
+  }
+  dict(ar) {
+    const en = { overview:'Overview', editor:'Page editor', media:'Media library', inbox:'Inquiries', history:'Change history', settings:'Site settings', users:'Users & roles', admin:'Administrator', signOut:'Sign out', otherLang:'العربية',
+      draftChip:'Draft · 6 unpublished changes', previewSite:'Preview site', publish:'Publish', greet:'Good morning, Mohamed', greetSub:'Here is what changed on gheras.ly since the last publish.', sample:'SAMPLE DATA — for layout only',
+      draftStatus:'Draft status', unpub:'changes waiting to be published', reviewPublish:'Review & publish', seeHistory:'See history', health:'Content health', newInq:'New inquiries', openInbox:'Open inbox', recent:'Recent changes',
+      hMissingAr:'Arabic missing', hMissingArD:'Fields will not publish until both languages are filled', hPlaceholders:'Placeholders left', hPlaceholdersD:'Photos, figures and contact details still to supply', hAlt:'Image without Arabic alt text', hAltD:'PHOTO 07 — engineer with tablet', hInq:'Unread inquiries', hInqD:'2 investment, 1 partnership',
+      sections:'Sections', dragHint:'Drag to reorder', left:'left', right:'right', lockedTitle:'Locked wording.', lockedBody:'This text comes word for word from the company profile. Changes need approval from management.', unlock:'Unlock to edit', unlockConfirm:'Unlock this section? Mission, vision and ICARE values are approved wording.',
+      livePreview:'Live preview — draft', desktop:'Desktop', mobile:'Mobile', pvNote:'The preview jumps to the section you are editing. Draft changes show here before they are published.', replace:'Replace image',
+      searchMedia:'Search images', upload:'Upload', dropHint:'Drop JPG or WebP here · min. 2400 px wide for the hero, 1200 px for circles', all:'All', missingAlt:'Missing alt text', unused:'Unused', cropCircle:'Pivot circle 1:1', cropWide:'Hero 16:9', cropSquare:'Card 4:3',
+      focal:'Drag the gold dot to set the focal point. It stays centred in every crop.', altEn:'Alt text — English', altAr:'Alt text — Arabic', imgRules:'Golden-hour light, real Libyan landscapes and people. No stock smiles, European farms or neon green. Text never sits on a photo without the olive overlay.',
+      email:'Email', phone:'Phone', sentFrom:'Sent from', replyEmail:'Reply by email', markReplied:'Mark as replied', archive:'Archive', notes:'Internal notes', notesPh:'Only visible to the GHERAS team', password:'Password', forgot:'Forgot password?', signIn:'Sign in',
+      loginTitle:'Content dashboard', loginSub:'Manage the text, images, figures and contact details on gheras.ly — in English and Arabic.', loginNote:'Access is limited to GHERAS administrators. Two-step verification is required on first sign-in.',
+      restore:'Restore this version', before:'BEFORE', after:'AFTER', searchPreview:'Search result preview', futureRoles:'Roles — coming later', invite:'Invite user', later:'Later', allPerms:'Full access: edit, publish, settings, inquiries',
+      pubTitle:'Publish changes to gheras.ly?', pubBody:'6 changes go live on both language pages. You can restore the previous version from Change history at any time.', pubNote:'Note for history (optional)', pubNotePh:'e.g. Added figures from Q3 report', cancel:'Cancel', publishNow:'Publish now',
+      c1:'All text fits its layout limits', c2:'Images meet ratio and size checks', c3:'2 Arabic fields are empty — they will keep the published text', c4:'14 placeholders are still visible on the site' };
+    const a = { overview:'نظرة عامة', editor:'محرّر الصفحة', media:'مكتبة الصور', inbox:'الاستفسارات', history:'سجل التغييرات', settings:'إعدادات الموقع', users:'المستخدمون والأدوار', admin:'مسؤول النظام', signOut:'تسجيل الخروج', otherLang:'English',
+      draftChip:'مسودة · 6 تغييرات غير منشورة', previewSite:'معاينة الموقع', publish:'نشر', greet:'صباح الخير يا محمد', greetSub:'هذه التغييرات على gheras.ly منذ آخر نشر.', sample:'بيانات تجريبية — للتصميم فقط',
+      draftStatus:'حالة المسودة', unpub:'تغييرات بانتظار النشر', reviewPublish:'مراجعة ونشر', seeHistory:'عرض السجل', health:'سلامة المحتوى', newInq:'استفسارات جديدة', openInbox:'فتح الصندوق', recent:'آخر التغييرات',
+      hMissingAr:'نص عربي مفقود', hMissingArD:'لن تُنشر الحقول حتى تكتمل اللغتان', hPlaceholders:'عناصر مؤقتة متبقية', hPlaceholdersD:'صور وأرقام وبيانات تواصل لم تُزوَّد بعد', hAlt:'صورة بلا نص بديل عربي', hAltD:'PHOTO 07 — مهندس مع جهاز لوحي', hInq:'استفسارات غير مقروءة', hInqD:'2 استثمار، 1 شراكة',
+      sections:'الأقسام', dragHint:'اسحب لإعادة الترتيب', left:'يسار', right:'يمين', lockedTitle:'نص معتمد ومقفل.', lockedBody:'هذا النص منقول حرفياً من الملف التعريفي للشركة، وتعديله يحتاج موافقة الإدارة.', unlock:'فتح للتعديل', unlockConfirm:'هل تريد فتح هذا القسم؟ الرسالة والرؤية والقيم نصوص معتمدة.',
+      livePreview:'معاينة مباشرة — مسودة', desktop:'حاسوب', mobile:'جوال', pvNote:'تنتقل المعاينة إلى القسم الذي تحرّره، وتظهر تغييرات المسودة هنا قبل نشرها.', replace:'استبدال الصورة',
+      searchMedia:'ابحث في الصور', upload:'رفع', dropHint:'أفلت صور JPG أو WebP هنا · 2400 بكسل عرضاً على الأقل للواجهة، و1200 للدوائر', all:'الكل', missingAlt:'بلا نص بديل', unused:'غير مستخدمة', cropCircle:'دائرة 1:1', cropWide:'واجهة 16:9', cropSquare:'بطاقة 4:3',
+      focal:'اسحب النقطة الذهبية لتحديد مركز الصورة؛ يبقى في المنتصف في كل قصّ.', altEn:'النص البديل — إنجليزي', altAr:'النص البديل — عربي', imgRules:'ضوء ساعة الغروب، ومشاهد وأشخاص حقيقيون من ليبيا. لا صور مخزنية ولا مزارع أوروبية ولا أخضر فاقع. لا يوضع نص على صورة دون الطبقة الزيتونية.',
+      email:'البريد الإلكتروني', phone:'الهاتف', sentFrom:'أُرسل من', replyEmail:'الرد بالبريد', markReplied:'تمّ الرد', archive:'أرشفة', notes:'ملاحظات داخلية', notesPh:'تظهر لفريق غراس فقط', password:'كلمة المرور', forgot:'نسيت كلمة المرور؟', signIn:'تسجيل الدخول',
+      loginTitle:'لوحة إدارة المحتوى', loginSub:'أدِر النصوص والصور والأرقام وبيانات التواصل على gheras.ly — بالعربية والإنجليزية.', loginNote:'الدخول مقصور على مسؤولي غراس، ويُطلب التحقق بخطوتين عند أول دخول.',
+      restore:'استعادة هذه النسخة', before:'قبل', after:'بعد', searchPreview:'معاينة نتيجة البحث', futureRoles:'الأدوار — لاحقاً', invite:'دعوة مستخدم', later:'لاحقاً', allPerms:'صلاحيات كاملة: التحرير والنشر والإعدادات والاستفسارات',
+      pubTitle:'نشر التغييرات على gheras.ly؟', pubBody:'ستظهر 6 تغييرات على الصفحتين العربية والإنجليزية. يمكنك استعادة النسخة السابقة من سجل التغييرات في أي وقت.', pubNote:'ملاحظة للسجل (اختياري)', pubNotePh:'مثال: إضافة أرقام تقرير الربع الثالث', cancel:'إلغاء', publishNow:'انشر الآن',
+      c1:'كل النصوص ضمن حدود التصميم', c2:'الصور تستوفي شروط النسبة والحجم', c3:'حقلان عربيان فارغان — سيبقى النص المنشور', c4:'14 عنصراً مؤقتاً ما زال ظاهراً على الموقع' };
+    return ar ? a : en;
+  }
+  sectionsData() {
+    return [
+      { id:'hero', en:'Hero', ar:'الواجهة', on:true, warn:true, desc:'First screen. One message, one action.', descAr:'الشاشة الأولى: رسالة واحدة وإجراء واحد.', fields:[
+        { k:'eyebrow', l:'Eyebrow', la:'العنوان التمهيدي', limit:40, en:'Agricultural Investment · Libya', ar:'الاستثمار الزراعي · ليبيا' },
+        { k:'h1', l:'Headline (H1)', la:'العنوان الرئيسي', limit:40, en:'Planting Today. Building Tomorrow.', ar:'نغرس اليوم... لنبني الغد' },
+        { k:'sub', l:'Supporting line', la:'السطر الداعم', type:'area', limit:160, en:'Agricultural investment that joins natural authenticity, sustainability and modern technology — for economic growth and food security.', ar:'' },
+        { k:'img', l:'Background photo', la:'صورة الخلفية', type:'image', slot:'PHOTO 01 — aerial, centre-pivot fields at sunset', ratio:'16/9', ratioMsg:'16:9 required · min 2400 px', ratioMsgAr:'نسبة 16:9 · 2400 بكسل على الأقل', en:'Aerial view of centre-pivot fields in the Libyan desert at sunset', ar:'منظر جوي لحقول الري المحوري في الصحراء الليبية عند الغروب', note:'The olive overlay is applied automatically to keep text readable.', noteAr:'تُضاف الطبقة الزيتونية تلقائياً لتبقى النصوص مقروءة.' },
+        { k:'cta2', l:'Secondary button', la:'الزر الثانوي', limit:24, en:'See what we do', ar:'اكتشف ما نفعله' } ] },
+      { id:'belief', en:'Belief statement', ar:'بيان الإيمان', on:true, desc:'One large line and two short paragraphs.', descAr:'سطر كبير وفقرتان قصيرتان.', fields:[
+        { k:'line', l:'Statement', la:'البيان', type:'area', limit:90, en:'Agriculture is not just production — it is a trust and a responsibility.', ar:'الزراعة ليست إنتاجاً فحسب، بل أمانةٌ ومسؤولية.' },
+        { k:'p1', l:'Paragraph 1', la:'الفقرة 1', type:'area', limit:280, en:'Rooted in the land and in the enduring spirit of Libya, GHERAS invests in and develops agriculture with dedication, precision and a long view.', ar:'متجذّرةً في الأرض وفي روح ليبيا الأصيلة، تستثمر غراس في الزراعة وتطوّرها بتفانٍ ودقة ونظرة بعيدة.' } ] },
+      { id:'figures', en:'Figures strip', ar:'شريط الأرقام', on:true, warn:true, desc:'Shown only when every figure is real. Hide the section until then.', descAr:'يظهر فقط عندما تكون كل الأرقام حقيقية، ويُخفى حتى ذلك الحين.', fields:[
+        { k:'f1', l:'Figure 1', la:'الرقم 1', type:'figure', num:'', en:'hectares under management', ar:'هكتار تحت الإدارة', hint:'Number · label EN · label AR', hintAr:'الرقم · التسمية بالإنجليزية · بالعربية' },
+        { k:'f2', l:'Figure 2', la:'الرقم 2', type:'figure', num:'', en:'active projects', ar:'مشروع نشط' },
+        { k:'f3', l:'Figure 3', la:'الرقم 3', type:'figure', num:'', en:'tonnes of annual production', ar:'طن من الإنتاج السنوي' },
+        { k:'f4', l:'Figure 4', la:'الرقم 4', type:'figure', num:'', en:'agricultural engineers and specialists', ar:'مهندس ومتخصص زراعي' } ] },
+      { id:'services', en:'What we do', ar:'ماذا نفعل', on:true, desc:'Six service cards. Icons come from the brand set.', descAr:'ست بطاقات خدمات، والأيقونات من مجموعة العلامة.', fields:[
+        { k:'h2', l:'Heading', la:'العنوان', limit:70, en:'We develop, manage and modernise agricultural assets.', ar:'نطوّر الأصول الزراعية، ونديرها، ونحدّثها.' },
+        { k:'s1', l:'Card 1 — title', la:'البطاقة 1 — العنوان', limit:48, en:'Land reclamation & project development', ar:'استصلاح الأراضي وتطوير المشاريع' },
+        { k:'s1d', l:'Card 1 — line', la:'البطاقة 1 — السطر', type:'area', limit:110, en:'Reclaiming land and developing large-scale agricultural projects.', ar:'استصلاح الأراضي وتطوير المشاريع الزراعية الكبرى.' } ] },
+      { id:'horizons', en:'Two horizons', ar:'أفقان', on:true, desc:'Eight strategic objectives, four under each side.', descAr:'ثمانية أهداف استراتيجية، أربعة لكل جانب.', fields:[
+        { k:'o1', l:'Today 01 — Delivery', la:'اليوم 01 — التسليم', type:'area', limit:110, en:'Deliver high-calibre, consistent produce across all development sites.', ar:'إنتاج زراعي عالي الجودة وثابت في جميع مواقع التطوير.' } ] },
+      { id:'mission', en:'Mission & vision', ar:'الرسالة والرؤية', on:true, locked:true, desc:'Word for word from the company profile.', descAr:'منقولة حرفياً من الملف التعريفي.', fields:[
+        { k:'mission', l:'Mission', la:'الرسالة', type:'area', en:'“To provide world-class agricultural investments through a seamless blend of natural authenticity, environmental sustainability, and modern technology to drive economic growth and food security.”', ar:'«تقديم استثمارات زراعية بمستوى عالمي، تمزج بسلاسة بين الأصالة الطبيعية والاستدامة البيئية والتقنية الحديثة، لدفع النمو الاقتصادي وتحقيق الأمن الغذائي.»' },
+        { k:'vision', l:'Vision', la:'الرؤية', type:'area', en:'“To be the region’s most admired and pioneering agricultural investment group, recognized for innovation, quality, and sustainable legacy.”', ar:'«أن نكون مجموعة الاستثمار الزراعي الأكثر ريادة وتقديراً في المنطقة، المعروفة بالابتكار والجودة والإرث المستدام.»' } ] },
+      { id:'values', en:'ICARE values', ar:'القيم', on:true, locked:true, desc:'Five values, word for word from the profile.', descAr:'خمس قيم منقولة حرفياً من الملف التعريفي.', fields:[
+        { k:'i', l:'I — Integrity', la:'النزاهة', type:'area', en:'We act with honesty and transparency toward the land, our partners, and the community.', ar:'نتعامل بصدق وشفافية مع الأرض وشركائنا والمجتمع.' } ] },
+      { id:'why', en:'Why GHERAS', ar:'لماذا غراس', on:true, desc:'Five differentiators, each with a circle photo.', descAr:'خمسة عناصر تميّز، لكل منها صورة دائرية.', fields:[
+        { k:'w1', l:'01 — Title', la:'01 — العنوان', limit:50, en:'A philosophy of sustainable growth', ar:'فلسفة نموّ مستدام' },
+        { k:'w1i', l:'01 — Photo', la:'01 — الصورة', type:'image', circle:true, slot:'PHOTO 02 — olive grove', ratio:'1', ratioMsg:'1:1 · min 1200 px', ratioMsgAr:'نسبة 1:1 · 1200 بكسل', en:'Olive grove in low evening sun', ar:'بستان زيتون في ضوء المساء', note:'Shown inside the Pivot Circle.', noteAr:'تُعرض داخل الدائرة.' } ] },
+      { id:'who', en:'Who we work with', ar:'مع من نعمل', on:true, desc:'Four audience panels. Each link pre-selects the inquiry type.', descAr:'أربع لوحات للجمهور؛ كل رابط يختار نوع الاستفسار مسبقاً.', fields:[
+        { k:'p1', l:'Investors — sentence', la:'المستثمرون — الجملة', type:'area', limit:130, en:'Investments built for resilience and long-term value, not quick returns — managed with operational transparency.', ar:'استثمارات مبنية للمرونة والقيمة طويلة الأمد، لا للعوائد السريعة، وتُدار بشفافية تشغيلية.' } ] },
+      { id:'contact', en:'Contact', ar:'التواصل', on:true, warn:true, desc:'Headline and form. Contact details live in Site settings.', descAr:'العنوان والنموذج. بيانات التواصل في إعدادات الموقع.', fields:[
+        { k:'h2', l:'Headline', la:'العنوان', limit:50, en:'Let’s grow something lasting together.', ar:'لنزرع معاً ما يدوم.' },
+        { k:'thanks', l:'Thank-you message', la:'رسالة الشكر', type:'area', limit:160, en:'Your message has reached the GHERAS team. We will reply within [X] working days.', ar:'وصلت رسالتك إلى فريق غراس. سنردّ خلال [X] أيام عمل.' } ] },
+      { id:'footer', en:'Footer', ar:'التذييل', on:true, desc:'Endorsement and social links live in Site settings.', descAr:'سطر الانتماء وروابط التواصل في إعدادات الموقع.', fields:[
+        { k:'copy', l:'Copyright', la:'حقوق النشر', limit:60, en:'© 2026 GHERAS. All rights reserved.', ar:'© 2026 غراس. جميع الحقوق محفوظة.' } ] }
+    ];
+  }
+  inquiries() {
+    return [
+      { name:'Layla Ben Ali', org:'[Fund name]', type:'Investment', isNew:true, when:'Today, 09:40', whenAr:'اليوم، 09:40', email:'l.benali@fund.example', phone:'+218 00 000 0000', msg:'We are reviewing long-term agricultural positions in North Africa and would like to understand GHERAS’s project pipeline and governance.' },
+      { name:'عمر الفيتوري', org:'[اسم المؤسسة]', type:'Partnership', isNew:true, ar:true, when:'Today, 08:15', whenAr:'اليوم، 08:15', email:'o.alfituri@example.ly', phone:'+218 00 000 0000', msg:'نودّ مناقشة شراكة في مشروع للأمن الغذائي في الجنوب، ونرغب في ترتيب اجتماع تمهيدي.' },
+      { name:'Daniel Hart', org:'[Irrigation supplier]', type:'Supply', isNew:true, when:'Yesterday', whenAr:'أمس', email:'d.hart@supplier.example', phone:'—', msg:'Introducing our pivot irrigation retrofit service; happy to share specifications for desert conditions.' },
+      { name:'Salma Ahmed', org:'—', type:'Careers', when:'Mon', whenAr:'الإثنين', email:'salma.a@example.com', phone:'+218 00 000 0000', msg:'Agricultural engineer, soil science, 4 years’ field experience. Are you hiring for upcoming projects?' },
+      { name:'Karim Mansour', org:'[Investment firm]', type:'Investment', when:'Oct 24', whenAr:'24 أكتوبر', email:'k.mansour@firm.example', phone:'—', msg:'Following up on the regional food-security forum. Could we receive an overview of GHERAS?' },
+      { name:'Nadia Saleh', org:'[Press]', type:'Other', when:'Oct 22', whenAr:'22 أكتوبر', email:'n.saleh@press.example', phone:'—', msg:'Request for an interview about modern irrigation in Libya.' }
+    ];
+  }
+  historyData(ar) {
+    const L = (e, a) => ar ? a : e;
+    return [
+      { what:L('Hero — supporting line edited','الواجهة — تعديل السطر الداعم'), who:'Mohamed Ganaway', when:L('12 min ago','قبل 12 دقيقة'), pub:false, diffs:[{ field:L('Supporting line — English','السطر الداعم — إنجليزي'), before:'Agricultural investment that joins natural authenticity, sustainability and modern technology.', after:'Agricultural investment that joins natural authenticity, sustainability and modern technology — for economic growth and food security.' },{ field:L('Supporting line — Arabic','السطر الداعم — عربي'), ar:true, before:'استثمار زراعي يجمع أصالة الأرض والاستدامة والتقنية الحديثة.', after:'— (فارغ)' }] },
+      { what:L('Figures — 2 numbers added','الأرقام — إضافة رقمين'), who:'Mohamed Ganaway', when:L('1 h ago','قبل ساعة'), pub:false, diffs:[{ field:L('Figure 1','الرقم 1'), before:'[000]', after:'[000] → draft value' }] },
+      { what:L('Contact — phone number','التواصل — رقم الهاتف'), who:'Mohamed Ganaway', when:L('Yesterday','أمس'), pub:false, diffs:[{ field:L('Phone','الهاتف'), before:'[phone]', after:'+218 00 000 0000' }] },
+      { what:L('Published · v12','نُشر · الإصدار 12'), who:'Mohamed Ganaway', when:L('Oct 28','28 أكتوبر'), pub:true, diffs:[{ field:L('Why GHERAS — photo 03','لماذا غراس — الصورة 03'), before:'PHOTO 07 (placeholder)', after:'engineer.jpg' }] },
+      { what:L('Published · v11','نُشر · الإصدار 11'), who:'Mohamed Ganaway', when:L('Oct 21','21 أكتوبر'), pub:true, diffs:[{ field:L('Footer — endorsement','التذييل — سطر الانتماء'), before:L('Hidden','مخفي'), after:'An IPH Company' }] },
+      { what:L('Published · v10 — launch','نُشر · الإصدار 10 — الإطلاق'), who:'Mohamed Ganaway', when:L('Oct 14','14 أكتوبر'), pub:true, diffs:[] }
+    ];
+  }
+  settingsData(ar) {
+    const L = (e, a) => ar ? a : e;
+    const row = (label, en, a, o = {}) => ({ label, en, ar: a, hasAr: a !== null, ph: o.ph || '', phAr: o.phAr || '', style: o.dash ? 'dashed' : 'solid', bd: o.dash ? '#86621E' : '#CFC6AF', enSpan: a === null ? 'span 2' : 'auto' });
+    return [
+      { title:L('Contact details','بيانات التواصل'), hint:L('Shown in Contact and footer · English | Arabic','تظهر في التواصل والتذييل · إنجليزي | عربي'), rows:[
+        row(L('Email','البريد الإلكتروني'), '', null, { ph:'info@gheras.ly', dash:true }),
+        row(L('Phone','الهاتف'), '', null, { ph:'+218 …', dash:true }),
+        row(L('Address','العنوان'), '', '', { ph:'Street, Tripoli, Libya', phAr:'الشارع، طرابلس، ليبيا', dash:true }),
+        row(L('Reply time','مدة الرد'), '', '', { ph:'3 working days', phAr:'3 أيام عمل', dash:true }) ] },
+      { title:L('Social links','روابط التواصل الاجتماعي'), hint:L('Empty links are hidden on the site','الروابط الفارغة لا تظهر على الموقع'), rows:[
+        row('LinkedIn', '', null, { ph:'https://linkedin.com/company/…' }), row('Instagram', '', null, { ph:'https://instagram.com/…' }), row('X', '', null, { ph:'https://x.com/…' }), row('Facebook', '', null, { ph:'https://facebook.com/…' }), row('YouTube', '', null, { ph:'https://youtube.com/@…' }) ] },
+      { title:L('Search engines (SEO)','محركات البحث'), hint:L('Title ≤ 60 · description ≤ 155 characters','العنوان ≤ 60 · الوصف ≤ 155 حرفاً'), snippet:true, rows:[
+        row(L('Page title','عنوان الصفحة'), 'GHERAS — Agricultural Investment, Libya', 'غراس — للاستثمار الزراعي، ليبيا'),
+        row(L('Description','الوصف'), 'GHERAS is the agricultural investment company of Investment Portfolio Holding in Libya…', 'غراس شركة الاستثمار الزراعي التابعة لمحفظة الاستثمار القابضة في ليبيا…'),
+        row(L('Share image','صورة المشاركة'), 'og-gheras.jpg · 1200 × 630', null) ] },
+      { title:L('Endorsement line','سطر الانتماء'), hint:L('Pending approval — hidden until switched on','بانتظار الاعتماد — مخفي حتى التفعيل'), rows:[
+        row(L('Text','النص'), 'An IPH Company', '', { phAr:'[الصيغة العربية من IPH]', dash:true }),
+        row(L('Show on site','إظهار على الموقع'), L('Off','إيقاف'), null) ] }
+    ];
+  }
+  rolesData(ar) {
+    const L = (e, a) => ar ? a : e, y = t => ({ i:'✓', c:'#3F5A2A', t }), n = t => ({ i:'—', c:'#CFC6AF', t });
+    return [
+      { name:L('Editor','محرّر'), d:L('Drafts text and images. An administrator publishes.','يكتب مسودات النصوص والصور، ويتولى المسؤول النشر.'), perms:[y(L('Edit sections & media','تحرير الأقسام والصور')), n(L('Publish','النشر')), n(L('Locked wording','النصوص المقفلة'))] },
+      { name:L('Inquiries','الاستفسارات'), d:L('For the partnerships team: reads and answers form messages only.','لفريق الشراكات: قراءة رسائل النموذج والرد عليها فقط.'), perms:[y(L('Inbox','الصندوق')), n(L('Edit content','تحرير المحتوى')), n(L('Settings','الإعدادات'))] },
+      { name:L('Reviewer','مراجع'), d:L('Approves Arabic and English copy before publishing.','يعتمد النصوص العربية والإنجليزية قبل النشر.'), perms:[y(L('Comment & approve','التعليق والاعتماد')), n(L('Edit','التحرير')), n(L('Publish','النشر'))] }
+    ];
+  }
+}
+</script>
+</body>
+</html>

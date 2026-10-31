@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&amp;family=Manrope:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</helmet>
+<div style="width:100%;line-height:0">{{ art }}</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:320,&quot;height&quot;:400},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vertical&quot;,&quot;horizontal&quot;,&quot;emblem&quot;,&quot;small&quot;,&quot;wordmark-en&quot;,&quot;wordmark-ar&quot;,&quot;wordmark-bi&quot;,&quot;lineart&quot;,&quot;construction&quot;],&quot;default&quot;:&quot;vertical&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;scheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;full&quot;,&quot;reversed&quot;,&quot;olive&quot;,&quot;white&quot;,&quot;gold&quot;,&quot;stone&quot;],&quot;default&quot;:&quot;full&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;rtl&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;stroke&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:0.8,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const v = this.props.variant ?? 'vertical', s = this.props.scheme ?? 'full', rtl = !!this.props.rtl && this.props.rtl !== 'false';
+    if (v === 'vertical' || v === 'emblem' || v === 'small' || v === 'horizontal') return { art: this.raster(v, s, rtl) };
+    return { art: this.art(v === 'refined' ? 'vertical' : v === 'refined-emblem' ? 'emblem' : v, s, rtl) };
+  }
+  componentDidMount() {
+    if (!Component.P) { Component.Q = Component.Q || fetch('assets/gheras-logo-paths.json').then(r => r.json()).then(j => { Component.P = j; }); Component.Q.then(() => this.forceUpdate()); }
+  }
+  raster(v, s, rtl) {
+    const h = React.createElement, P = Component.P;
+    const monos = { olive:'#1F2A1C', white:'#FFFFFF', gold:'#C99A3B', stone:'#CFC6AF' };
+    this._id = this._id || 'gl' + Math.random().toString(36).slice(2, 8);
+    const id = this._id;
+    const emblemKids = () => {
+      if (!P) return [];
+      const txt = col => h('g',{key:'t',fill:col,transform:P.textT}, P.text2.map((d,i) => h('path',{key:i,d})));
+      if (monos[s]) return [h('g',{key:'m',fill:monos[s]}, P.mono.filter((d,i) => !P.text.includes(i)).map((d,i) => h('path',{key:i,d}))), txt(monos[s])];
+      return [h('defs',{key:'d'}, h('clipPath',{id}, P.clip.map((d,i) => h('path',{key:i,d})))),
+        h('image',{key:'i',href:'assets/gheras-logo-fill-hd.jpg',x:0,y:0,width:1294,height:1150,clipPath:`url(#${id})`,preserveAspectRatio:'none'}),
+        txt(s === 'reversed' ? '#FAF8F2' : '#2D3A2C')];
+    };
+    const svgEl = (vb, kids, w) => h('svg',{key:'e',viewBox:vb,role:'img','aria-label':'GHERAS logo',style:{display:'block',width:w,flexShrink:0,overflow:'visible',direction:'ltr'}}, kids);
+    const img = (kind, w) => svgEl('0 0 1294 1150', emblemKids(), w);
+    if (v === 'vertical') {
+      const dc = s === 'reversed' ? '#E8D3A0' : monos[s] || '#55554D', rc = monos[s] || '#C99A3B';
+      return svgEl('0 0 1294 1416', [...emblemKids(),
+        h('path',{key:'r',d:'M96 1240H232M1062 1240H1198',stroke:rc,strokeWidth:5,strokeLinecap:'round'}),
+        h('text',{key:'a',x:647,y:1270,textAnchor:'middle',fontFamily:"'IBM Plex Sans Arabic', sans-serif",fontWeight:500,fontSize:88,fill:dc},'للاستثمار الزراعي'),
+        h('text',{key:'en',x:647,y:1384,textAnchor:'middle',fontFamily:"'Manrope', sans-serif",fontWeight:500,fontSize:66,fill:dc},'Agricultural investment')], '100%');
+    }
+    if (v !== 'horizontal') return img('emblem','100%');
+    const word = s === 'reversed' ? '#FAF8F2' : monos[s] || '#1F2A1C', desc = s === 'reversed' ? '#E8D3A0' : monos[s] || '#6B675C', rule = monos[s] || '#C99A3B';
+    const t = (str,x,y,size,fam,fill,o={}) => h('text',{key:str,x,y,fontSize:size,fontFamily:fam,fill,textAnchor:o.anchor||'start',fontWeight:o.w||400,letterSpacing:o.ls||0},str);
+    const ax = rtl ? 260 : 0, an = rtl ? 'end' : 'start';
+    const text = h('svg',{key:'t',viewBox:'0 0 260 150',style:{display:'block',flex:1,minWidth:0,direction:'ltr'},direction:'ltr'},[
+      t('للاستثمار الزراعي',ax,62,30,"'IBM Plex Sans Arabic', sans-serif",word,{anchor:an,w:600}),
+      h('path',{key:'r',d:rtl?'M150 82H260':'M0 82H110',stroke:rule,strokeWidth:1.6}),
+      t('Agricultural Investment',ax,118,22,"'Manrope', sans-serif",desc,{anchor:an,w:600})]);
+    return h('div',{style:{display:'flex',alignItems:'center',gap:'4%',flexDirection:rtl?'row-reverse':'row',direction:'ltr',width:'100%'}},[img('emblem','42%'), text]);
+  }
+  art(v, s, rtl) {
+    const h = React.createElement;
+    const P = { olive:'#1F2A1C', grove:'#3F5A2A', leaf:'#8A9A4B', leafT:'#AEB874', gold:'#C99A3B', goldD:'#A47A26', wheat:'#E8D3A0', linen:'#FAF8F2', stone:'#6B675C' };
+    const mono = c => ({ grainA:c, grainB:c, stalk:c, leafA:c, leafB:c, stem:c, fruit:c, word:c, desc:c, rule:c });
+    const S = {
+      full: { grainA:P.gold, grainB:P.goldD, stalk:P.gold, leafA:P.grove, leafB:P.leaf, stem:P.grove, fruit:P.leaf, word:P.olive, desc:P.stone, rule:P.gold },
+      reversed: { grainA:P.gold, grainB:P.wheat, stalk:P.gold, leafA:P.leaf, leafB:P.leafT, stem:P.leaf, fruit:P.leafT, word:P.linen, desc:P.wheat, rule:P.gold },
+      olive: mono(P.olive), white: mono('#FFFFFF'), gold: mono(P.gold), stone: mono('#CFC6AF')
+    };
+    const c = S[s] || S.full;
+    const WH = [[152,216],[18,222],[-4,104],[78,14]];
+    const OL = [[88,216],[222,222],[246,104],[164,16]];
+    const pt = (B,t) => { const u=1-t; return [0,1].map(k => u*u*u*B[0][k]+3*u*u*t*B[1][k]+3*u*t*t*B[2][k]+t*t*t*B[3][k]); };
+    const dv = (B,t) => { const u=1-t; return [0,1].map(k => 3*u*u*(B[1][k]-B[0][k])+6*u*t*(B[2][k]-B[1][k])+3*t*t*(B[3][k]-B[2][k])); };
+    const ang = (B,t) => { const d=dv(B,t); return Math.atan2(d[1],d[0])*180/Math.PI; };
+    const f = n => Math.round(n*100)/100;
+    const ribbon = (B,w0,w1) => { const L=[],R=[]; for (let i=0;i<=56;i++){ const t=i/56, p=pt(B,t), d=dv(B,t), m=Math.hypot(d[0],d[1]), nx=-d[1]/m, ny=d[0]/m; const w=(t<.12 ? w0*(.2+.8*t/.12) : w0-(w0-w1)*(t-.12)/.88)/2; L.push(f(p[0]+nx*w)+' '+f(p[1]+ny*w)); R.push(f(p[0]-nx*w)+' '+f(p[1]-ny*w)); } return 'M'+L.join('L')+'L'+R.reverse().join('L')+'Z'; };
+    const bez = B => `M${B[0][0]} ${B[0][1]}C${B[1][0]} ${B[1][1]} ${B[2][0]} ${B[2][1]} ${B[3][0]} ${B[3][1]}`;
+    const lens = (L,w) => `M0 0Q${f(L/2)} ${f(-w)} ${f(L)} 0Q${f(L/2)} ${f(w)} 0 0Z`;
+    let key = 0;
+    const emblem = (o = {}) => {
+      const simple = o.simple, line = o.line, sw = o.sw || 1.3, els = [];
+      const shape = (L,w,fill,p,a) => {
+        const tr = `translate(${f(p[0])} ${f(p[1])}) rotate(${f(a)})`;
+        if (line) { els.push(h('path',{key:key++,d:lens(L,w),transform:tr,fill:'none',stroke:fill,strokeWidth:sw,strokeLinejoin:'round'})); els.push(h('path',{key:key++,d:`M${f(L*.12)} 0L${f(L*.8)} 0`,transform:tr,fill:'none',stroke:fill,strokeWidth:sw*.6,strokeLinecap:'round'})); }
+        else els.push(h('path',{key:key++,d:lens(L,w),transform:tr,fill}));
+      };
+      if (line) { els.push(h('path',{key:key++,d:bez(WH),fill:'none',stroke:c.stalk,strokeWidth:sw*1.5,strokeLinecap:'round'})); els.push(h('path',{key:key++,d:bez(OL),fill:'none',stroke:c.stem,strokeWidth:sw*1.5,strokeLinecap:'round'})); }
+      else { els.push(h('path',{key:key++,d:ribbon(WH,simple?11:7,simple?3.5:1.8),fill:c.stalk})); els.push(h('path',{key:key++,d:ribbon(OL,simple?11:7,simple?3.5:1.6),fill:c.stem})); }
+      const gn=simple?4:9, g0=simple?.6:.48, g1=simple?.9:.92;
+      for (let i=0;i<gn;i++){ const t=g0+(g1-g0)*i/(gn-1), p=pt(WH,t), a=ang(WH,t), k=1-.25*i/(gn-1); const L=(simple?34:31)*k, w=(simple?12:10.5)*k; shape(L,w,c.grainA,p,a-18); shape(L,w,c.grainB,p,a+18); }
+      shape(simple?28:23, simple?10:7.6, c.grainA, pt(WH,1), ang(WH,1));
+      const ln=simple?5:11, l0=simple?.42:.3, l1=simple?.9:.94;
+      for (let i=0;i<ln;i++){ const t=l0+(l1-l0)*i/(ln-1), p=pt(OL,t), a=ang(OL,t), sd=i%2?1:-1, k=1-.3*i/(ln-1); shape((simple?44:40)*k,(simple?11.5:8.4)*k, sd<0?c.leafA:c.leafB, p, a+sd*40); }
+      shape(simple?36:28, simple?9.5:6.6, c.leafA, pt(OL,1), ang(OL,1));
+      const fr = simple ? [[.8,15,10.5]] : [[.8,14,9],[.74,26,9]];
+      fr.forEach(([t,off,r]) => { const p=pt(OL,t), d=dv(OL,t), m=Math.hypot(d[0],d[1]); let nx=-d[1]/m, ny=d[0]/m; if ((120-p[0])*nx+(120-p[1])*ny<0){nx=-nx;ny=-ny;} const cx=p[0]+nx*off, cy=p[1]+ny*off; els.push(h('path',{key:key++,d:`M${f(p[0])} ${f(p[1])}L${f(cx)} ${f(cy)}`,stroke:c.stem,strokeWidth:line?sw:1.6,fill:'none'})); els.push(h('ellipse',{key:key++,cx:f(cx),cy:f(cy),rx:r*.8,ry:r,transform:`rotate(${f(ang(OL,t)+90)} ${f(cx)} ${f(cy)})`,fill:line?'none':c.fruit,stroke:line?c.fruit:'none',strokeWidth:sw})); });
+      return els;
+    };
+    const tx = (str,x,y,size,fam,fill,o={}) => h('text',{key:key++,x,y,fontSize:size,fontFamily:fam,fill,textAnchor:o.anchor||'middle',fontWeight:o.w||400,letterSpacing:o.ls||0},str);
+    const EN = "'Fraunces', serif", AR = "'Noto Naskh Arabic', serif", SANS = "'Manrope', sans-serif", ARS = "'IBM Plex Sans Arabic', sans-serif";
+    const svg = (vb, kids) => h('svg',{viewBox:vb,width:'100%',style:{display:'block',overflow:'visible',direction:'ltr'},direction:'ltr',xmlns:'http://www.w3.org/2000/svg'},kids);
+    const g = (tr, kids) => h('g',{key:key++,transform:tr},kids);
+    if (v === 'emblem') return svg('0 0 240 240', emblem());
+    if (v === 'small') return svg('0 0 240 240', emblem({simple:true}));
+    if (v === 'lineart') return svg('0 0 240 240', emblem({line:true, sw:this.props.stroke ? Number(this.props.stroke) : .8}));
+    if (v === 'construction') {
+      const gd = '#B4AC97', kids = [h('g',{key:key++,opacity:.32},emblem())];
+      kids.push(h('circle',{key:key++,cx:120,cy:120,r:104,fill:'none',stroke:gd,strokeDasharray:'3 3',strokeWidth:.7}));
+      kids.push(h('circle',{key:key++,cx:120,cy:120,r:62,fill:'none',stroke:gd,strokeDasharray:'3 3',strokeWidth:.7}));
+      kids.push(h('path',{key:key++,d:'M120 4V236M4 120H236',stroke:gd,strokeWidth:.5}));
+      [WH,OL].forEach((B,i) => { kids.push(h('path',{key:key++,d:bez(B),fill:'none',stroke:i?P.grove:P.goldD,strokeWidth:1,strokeDasharray:'5 3'})); kids.push(h('path',{key:key++,d:`M${B[0]}L${B[1]}M${B[2]}L${B[3]}`,stroke:'#8E8672',strokeWidth:.5})); B.forEach(q => kids.push(h('rect',{key:key++,x:q[0]-2.5,y:q[1]-2.5,width:5,height:5,fill:'#FAF8F2',stroke:'#6B675C',strokeWidth:.7}))); });
+      kids.push(tx('R',172,52,8,SANS,'#6B675C',{w:600})); kids.push(tx('r = 0.6R',120,66,7,SANS,'#6B675C',{w:500}));
+      kids.push(tx('wheat spine',36,216,7,SANS,P.goldD,{w:600})); kids.push(tx('olive spine',204,216,7,SANS,P.grove,{w:600}));
+      return svg('0 0 240 240', kids);
+    }
+    if (v === 'wordmark-en') return svg('0 0 300 64', [tx('GHERAS',150,54,64,EN,c.word,{w:600,ls:2})]);
+    if (v === 'wordmark-ar') return svg('0 0 220 110', [tx('غـراس',110,74,84,AR,c.word,{w:700,rtl:true})]);
+    if (v === 'wordmark-bi') return svg('0 0 300 160', [tx('GHERAS',150,56,58,EN,c.word,{w:600,ls:2}), tx('غـراس',150,138,74,AR,c.word,{w:700,rtl:true})]);
+    if (v === 'horizontal') {
+      const E = rtl ? 480 : 0, en = rtl ? 8 : 168, dx = rtl ? 268 : 432, ar = rtl ? 462 : 616;
+      return svg('0 0 620 150', [
+        g(`translate(${E} 5) scale(${140/240})`, emblem()),
+        tx('GHERAS', en, 80, 54, EN, c.word, {anchor:'start', w:600, ls:1.5}),
+        tx('AGRICULTURAL INVESTMENT', en+2, 112, 11, SANS, c.desc, {anchor:'start', w:600, ls:2.6}),
+        h('path',{key:key++,d:`M${dx} 36V120`,stroke:c.rule,strokeWidth:1.2}),
+        tx('غـراس', ar, 86, 62, AR, c.word, {anchor:'end', w:700}),
+        tx('للاستثمار الزراعي', ar, 118, 16, ARS, c.desc, {anchor:'end', w:500, rtl:true})
+      ]);
+    }
+    return svg('0 0 240 286', [
+      ...emblem(),
+      tx('GHERAS',120,128,28,EN,c.word,{w:600,ls:1}),
+      tx('غـراس',120,174,44,AR,c.word,{w:700,rtl:true}),
+      h('path',{key:key++,d:'M18 247H58M182 247H222',stroke:c.rule,strokeWidth:1.2}),
+      tx('للاستثمار الزراعي',120,253,17,ARS,c.desc,{w:500,rtl:true}),
+      tx('Agricultural Investment',120,278,13.5,SANS,c.desc,{w:500,ls:.3})
+    ]);
+  }
+}
+</script>
+</body>
+</html>

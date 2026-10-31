@@ -1,0 +1,724 @@
+{
+  "site": {
+    "seo": {
+      "title": {
+        "en": "GHERAS — Agricultural Investment, Libya",
+        "ar": "غراس — للاستثمار الزراعي، ليبيا"
+      },
+      "description": {
+        "en": "GHERAS is the agricultural investment company of Investment Portfolio Holding in Libya: land reclamation, sustainable crop production, modern irrigation and supply chains for food security.",
+        "ar": "غراس شركة الاستثمار الزراعي التابعة لمحفظة الاستثمار القابضة في ليبيا: استصلاح الأراضي، والإنتاج الزراعي المستدام، والري الحديث، وسلاسل الإمداد من أجل الأمن الغذائي."
+      },
+      "shareImage": null
+    },
+    "contact": {
+      "email": null,
+      "phone": null,
+      "address": {
+        "en": null,
+        "ar": null
+      },
+      "replyTimeDays": null
+    },
+    "social": {
+      "linkedin": null,
+      "instagram": null,
+      "x": null,
+      "facebook": null,
+      "youtube": null
+    },
+    "endorsement": {
+      "visible": false,
+      "text": {
+        "en": "An IPH Company",
+        "ar": null
+      }
+    }
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "order": 1,
+      "visible": true,
+      "fields": {
+        "eyebrow": {
+          "en": "Agricultural Investment · Libya",
+          "ar": "الاستثمار الزراعي · ليبيا"
+        },
+        "headline": {
+          "en": "Planting Today. Building Tomorrow.",
+          "ar": "نغرس اليوم... لنبني الغد"
+        },
+        "sub": {
+          "en": "Agricultural investment that joins natural authenticity, sustainability and modern technology — for economic growth and food security.",
+          "ar": "استثمار زراعي يجمع أصالة الأرض والاستدامة والتقنية الحديثة، من أجل النمو الاقتصادي والأمن الغذائي."
+        },
+        "primaryCta": {
+          "en": "Partner with us",
+          "ar": "كن شريكنا"
+        },
+        "secondaryCta": {
+          "en": "See what we do",
+          "ar": "اكتشف ما نفعله"
+        },
+        "image": {
+          "mediaId": "photo-01",
+          "alt": {
+            "en": "Aerial view of centre-pivot fields in the Libyan desert at sunset",
+            "ar": "منظر جوي لحقول الري المحوري في الصحراء الليبية عند الغروب"
+          }
+        }
+      }
+    },
+    {
+      "id": "about",
+      "order": 2,
+      "visible": true,
+      "fields": {
+        "eyebrow": {
+          "en": "About GHERAS",
+          "ar": "عن غراس"
+        },
+        "statement": {
+          "en": "Agriculture is not just production — it is a trust and a responsibility.",
+          "ar": "الزراعة ليست إنتاجاً فحسب، بل أمانةٌ ومسؤولية."
+        },
+        "p1": {
+          "en": "Rooted in the land and in the enduring spirit of Libya, GHERAS invests in and develops agriculture with dedication, precision and a long view. Every project is built to enrich natural resources and to deliver lasting value to the community and the economy.",
+          "ar": "متجذّرةً في الأرض وفي روح ليبيا الأصيلة، تستثمر غراس في الزراعة وتطوّرها بتفانٍ ودقة ونظرة بعيدة. كل مشروع يُبنى ليُثري الموارد الطبيعية، ويقدّم قيمة دائمة للمجتمع والاقتصاد."
+        },
+        "p2": {
+          "en": "GHERAS is not a collection of farms and projects. It is a system of values and a forward-looking vision — where every seed is planted with care, and every acre is managed with purpose.",
+          "ar": "غراس ليست مجموعة من المزارع والمشاريع، بل منظومة قيم ورؤية تتطلع إلى المستقبل؛ كل بذرة تُغرس بعناية، وكل أرض تُدار بهدف."
+        }
+      }
+    },
+    {
+      "id": "figures",
+      "order": 3,
+      "visible": false,
+      "note": "Show only when all four numbers are real.",
+      "items": [
+        {
+          "value": null,
+          "label": {
+            "en": "hectares under management",
+            "ar": "هكتار تحت الإدارة"
+          }
+        },
+        {
+          "value": null,
+          "label": {
+            "en": "active projects",
+            "ar": "مشروع نشط"
+          }
+        },
+        {
+          "value": null,
+          "label": {
+            "en": "tonnes of annual production",
+            "ar": "طن من الإنتاج السنوي"
+          }
+        },
+        {
+          "value": null,
+          "label": {
+            "en": "agricultural engineers and specialists",
+            "ar": "مهندس ومتخصص زراعي"
+          }
+        }
+      ]
+    },
+    {
+      "id": "what-we-do",
+      "order": 4,
+      "visible": true,
+      "fields": {
+        "eyebrow": {
+          "en": "What we do",
+          "ar": "ماذا نفعل"
+        },
+        "heading": {
+          "en": "We develop, manage and modernise agricultural assets.",
+          "ar": "نطوّر الأصول الزراعية، ونديرها، ونحدّثها."
+        },
+        "intro": {
+          "en": "True excellence lies in the details: seed selection, water management, soil health and strict quality control. Our agricultural engineers and industry experts work on all of them.",
+          "ar": "الجودة الحقيقية في التفاصيل: اختيار البذرة، وإدارة المياه، وصحة التربة، وضبط الجودة بصرامة. ويعمل مهندسونا الزراعيون وخبراؤنا على كل منها."
+        },
+        "closing": {
+          "en": "We create integrated agricultural investment environments where productivity and environmental stewardship coexist.",
+          "ar": "نبني بيئات استثمار زراعي متكاملة، تلتقي فيها الإنتاجية مع رعاية البيئة."
+        }
+      },
+      "items": [
+        {
+          "icon": "land",
+          "title": {
+            "en": "Land reclamation & project development",
+            "ar": "استصلاح الأراضي وتطوير المشاريع"
+          },
+          "text": {
+            "en": "Reclaiming land and developing large-scale agricultural projects.",
+            "ar": "استصلاح الأراضي وتطوير المشاريع الزراعية الكبرى."
+          }
+        },
+        {
+          "icon": "crop",
+          "title": {
+            "en": "Sustainable crop production",
+            "ar": "الإنتاج الزراعي المستدام"
+          },
+          "text": {
+            "en": "Sustainable crop management and agricultural production, from seed selection to harvest.",
+            "ar": "إدارة مستدامة للمحاصيل والإنتاج الزراعي، من اختيار البذرة حتى الحصاد."
+          }
+        },
+        {
+          "icon": "drip",
+          "title": {
+            "en": "Modern irrigation & smart farming",
+            "ar": "الري الحديث والزراعة الذكية"
+          },
+          "text": {
+            "en": "Modern irrigation technologies and smart farming systems that conserve soil and water.",
+            "ar": "تقنيات ري حديثة وأنظمة زراعة ذكية تحافظ على التربة والمياه."
+          }
+        },
+        {
+          "icon": "distribution",
+          "title": {
+            "en": "Supply chains, cold storage & distribution",
+            "ar": "سلاسل الإمداد والتخزين المبرّد والتوزيع"
+          },
+          "text": {
+            "en": "Investment that carries produce from the field to the market in top condition.",
+            "ar": "استثمار ينقل المحصول من الحقل إلى السوق بأفضل حال."
+          }
+        },
+        {
+          "icon": "partner",
+          "title": {
+            "en": "Strategic partnerships",
+            "ar": "الشراكات الاستراتيجية"
+          },
+          "text": {
+            "en": "Partnerships for food security and rural development.",
+            "ar": "شراكات من أجل الأمن الغذائي والتنمية الريفية."
+          }
+        },
+        {
+          "icon": "training",
+          "title": {
+            "en": "Training & innovation",
+            "ar": "التدريب والابتكار"
+          },
+          "text": {
+            "en": "Operational standards, training and innovation in agricultural science and technology.",
+            "ar": "معايير تشغيلية وتدريب وابتكار في العلوم والتقنيات الزراعية."
+          }
+        }
+      ]
+    },
+    {
+      "id": "two-horizons",
+      "order": 5,
+      "visible": true,
+      "fields": {
+        "eyebrow": {
+          "en": "Our strategy",
+          "ar": "استراتيجيتنا"
+        },
+        "heading": {
+          "en": "One season, many generations.",
+          "ar": "حصادُ موسم... وإرثُ أجيال"
+        },
+        "todayTitle": {
+          "en": "Today — the harvest",
+          "ar": "اليوم — الحصاد"
+        },
+        "todaySub": {
+          "en": "What we deliver this season.",
+          "ar": "ما نسلّمه هذا الموسم."
+        },
+        "tomorrowTitle": {
+          "en": "Tomorrow — the legacy",
+          "ar": "الغد — الإرث"
+        },
+        "tomorrowSub": {
+          "en": "What we build for the generations after.",
+          "ar": "ما نبنيه للأجيال القادمة."
+        },
+        "caption": {
+          "en": "Wheat is harvested in one season. An olive tree bears fruit for generations.",
+          "ar": "القمح يُحصد في موسم واحد، وشجرة الزيتون تثمر لأجيال."
+        }
+      },
+      "today": [
+        {
+          "title": {
+            "en": "Delivery",
+            "ar": "التسليم"
+          },
+          "text": {
+            "en": "Deliver high-calibre, consistent produce across all development sites.",
+            "ar": "إنتاج زراعي عالي الجودة وثابت في جميع مواقع التطوير."
+          }
+        },
+        {
+          "title": {
+            "en": "Quality",
+            "ar": "الجودة"
+          },
+          "text": {
+            "en": "Set a regional benchmark in agricultural investment and food security.",
+            "ar": "أن تكون غراس معياراً إقليمياً في الاستثمار الزراعي والأمن الغذائي."
+          }
+        },
+        {
+          "title": {
+            "en": "Productivity",
+            "ar": "الإنتاجية"
+          },
+          "text": {
+            "en": "Expand the portfolio while keeping elite productivity standards.",
+            "ar": "توسيع محفظة غراس الاستثمارية مع الحفاظ على أعلى معايير الإنتاجية."
+          }
+        },
+        {
+          "title": {
+            "en": "Supply-chain innovation",
+            "ar": "ابتكار سلاسل الإمداد"
+          },
+          "text": {
+            "en": "Drive innovation through agrifood technology, supply-chain integration and operational refinement.",
+            "ar": "الابتكار عبر تقنيات الأغذية الزراعية، وتكامل سلاسل الإمداد، وتحسين العمليات."
+          }
+        }
+      ],
+      "tomorrow": [
+        {
+          "title": {
+            "en": "Sustainability",
+            "ar": "الاستدامة"
+          },
+          "text": {
+            "en": "Preserve and advance smart-farming solutions that protect soil and water.",
+            "ar": "حماية التربة والمياه بحلول زراعية ذكية ومستدامة."
+          }
+        },
+        {
+          "title": {
+            "en": "Local talent",
+            "ar": "الكفاءات المحلية"
+          },
+          "text": {
+            "en": "Train and empower local agricultural talent to lead with pride and precision.",
+            "ar": "تدريب الكفاءات الزراعية المحلية وتمكينها لتقود القطاع بفخر ودقة."
+          }
+        },
+        {
+          "title": {
+            "en": "Partnerships",
+            "ar": "الشراكات"
+          },
+          "text": {
+            "en": "Build enduring partnerships with state institutions, investment funds and global industry leaders.",
+            "ar": "بناء شراكات دائمة مع مؤسسات الدولة وصناديق الاستثمار وروّاد القطاع عالمياً."
+          }
+        },
+        {
+          "title": {
+            "en": "Long-term resilience",
+            "ar": "المرونة طويلة الأمد"
+          },
+          "text": {
+            "en": "Achieve long-term operational sustainability and environmental resilience.",
+            "ar": "تحقيق استدامة تشغيلية ومرونة بيئية على المدى الطويل."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mission-vision",
+      "order": 6,
+      "visible": true,
+      "locked": true,
+      "fields": {
+        "mission": {
+          "en": "“To provide world-class agricultural investments through a seamless blend of natural authenticity, environmental sustainability, and modern technology to drive economic growth and food security.”",
+          "ar": "«تقديم استثمارات زراعية بمستوى عالمي، تمزج بسلاسة بين الأصالة الطبيعية والاستدامة البيئية والتقنية الحديثة، لدفع النمو الاقتصادي وتحقيق الأمن الغذائي.»"
+        },
+        "vision": {
+          "en": "“To be the region’s most admired and pioneering agricultural investment group, recognized for innovation, quality, and sustainable legacy.”",
+          "ar": "«أن نكون مجموعة الاستثمار الزراعي الأكثر ريادة وتقديراً في المنطقة، المعروفة بالابتكار والجودة والإرث المستدام.»"
+        }
+      }
+    },
+    {
+      "id": "values",
+      "order": 7,
+      "visible": true,
+      "locked": true,
+      "fields": {
+        "eyebrow": {
+          "en": "Our values",
+          "ar": "قيمنا"
+        },
+        "heading": {
+          "en": "The ICARE framework.",
+          "ar": "القيم التي نعمل بها."
+        },
+        "intro": {
+          "en": "The cornerstone of our culture, our operations and every investment decision.",
+          "ar": "حجر الأساس في ثقافتنا وعملياتنا، وفي كل قرار استثماري."
+        }
+      },
+      "items": [
+        {
+          "letter": "I",
+          "icon": "integrity",
+          "name": {
+            "en": "Integrity",
+            "ar": "النزاهة"
+          },
+          "text": {
+            "en": "We act with honesty and transparency toward the land, our partners, and the community.",
+            "ar": "نتعامل بصدق وشفافية مع الأرض وشركائنا والمجتمع."
+          }
+        },
+        {
+          "letter": "C",
+          "icon": "commitment",
+          "name": {
+            "en": "Commitment",
+            "ar": "الالتزام"
+          },
+          "text": {
+            "en": "We dedicate our utmost effort every day to nurture our projects and guarantee top-quality yield.",
+            "ar": "نبذل أقصى جهدنا كل يوم لرعاية مشاريعنا وضمان أعلى جودة للمحصول."
+          }
+        },
+        {
+          "letter": "A",
+          "icon": "accountability",
+          "name": {
+            "en": "Accountability",
+            "ar": "المسؤولية"
+          },
+          "text": {
+            "en": "We take ownership of our environmental and investment decisions, safeguarding natural resources.",
+            "ar": "نتحمّل مسؤولية قراراتنا البيئية والاستثمارية، ونصون الموارد الطبيعية."
+          }
+        },
+        {
+          "letter": "R",
+          "icon": "respect",
+          "name": {
+            "en": "Respect",
+            "ar": "الاحترام"
+          },
+          "text": {
+            "en": "We honor nature, local communities, and the workforce across all operational sites.",
+            "ar": "نُجلّ الطبيعة والمجتمعات المحلية والعاملين في جميع مواقعنا."
+          }
+        },
+        {
+          "letter": "E",
+          "icon": "excellence",
+          "name": {
+            "en": "Excellence",
+            "ar": "التميّز"
+          },
+          "text": {
+            "en": "We strive for mastery and precision through state-of-the-art agricultural practices and quality control.",
+            "ar": "نسعى إلى الإتقان والدقة عبر أحدث الممارسات الزراعية وضبط الجودة."
+          }
+        }
+      ]
+    },
+    {
+      "id": "why",
+      "order": 8,
+      "visible": true,
+      "fields": {
+        "eyebrow": {
+          "en": "Why GHERAS",
+          "ar": "لماذا غراس"
+        },
+        "heading": {
+          "en": "Built for the most meaningful and lasting impact.",
+          "ar": "صُنعت لأثرٍ أعمق وأبقى."
+        },
+        "intro": {
+          "en": "We are not here merely to invest in agriculture. Five things set GHERAS apart.",
+          "ar": "لسنا هنا لنستثمر في الزراعة فحسب. خمسة أمور تميّز غراس."
+        }
+      },
+      "items": [
+        {
+          "mediaId": "photo-02",
+          "title": {
+            "en": "A philosophy of sustainable growth",
+            "ar": "فلسفة نموّ مستدام"
+          },
+          "text": {
+            "en": "Our investments look beyond quick returns. They are built for resilience, environmental health and long-term value.",
+            "ar": "استثماراتنا تنظر أبعد من العوائد السريعة؛ تُبنى للمرونة وصحة البيئة والقيمة طويلة الأمد."
+          }
+        },
+        {
+          "mediaId": "photo-05",
+          "title": {
+            "en": "Technology that speaks to the future",
+            "ar": "تقنية تخاطب المستقبل"
+          },
+          "text": {
+            "en": "From smart irrigation to precision soil management, every GHERAS project is designed for efficiency and resource conservation.",
+            "ar": "من الري الذكي إلى الإدارة الدقيقة للتربة، كل مشروع من مشاريع غراس مصمَّم للكفاءة وصون الموارد."
+          }
+        },
+        {
+          "mediaId": "photo-07",
+          "title": {
+            "en": "Climate-ready, environmentally conscious management",
+            "ar": "إدارة واعية بيئياً ومستعدة للمناخ"
+          },
+          "text": {
+            "en": "Our experts are trained to anticipate climate challenges and to adapt thoughtfully and strategically.",
+            "ar": "خبراؤنا مدرَّبون على استباق تحديات المناخ، والتكيّف معها بحكمة واستراتيجية."
+          }
+        },
+        {
+          "mediaId": "photo-09",
+          "title": {
+            "en": "Authenticity and quality of yield",
+            "ar": "أصالة وجودة المحصول"
+          },
+          "text": {
+            "en": "Our projects reflect the rich quality of the land while meeting the highest global standards of food safety.",
+            "ar": "مشاريعنا تعكس جودة الأرض الغنية، مع الالتزام بأعلى المعايير العالمية لسلامة الغذاء."
+          }
+        },
+        {
+          "mediaId": "photo-04",
+          "title": {
+            "en": "Trust at the highest level",
+            "ar": "ثقة على أعلى مستوى"
+          },
+          "text": {
+            "en": "Reliability, strategic focus and operational transparency make us the partner of choice for institutions and forward-thinking investors.",
+            "ar": "موثوقيتنا وتركيزنا الاستراتيجي وشفافيتنا التشغيلية تجعلنا الشريك المفضّل للمؤسسات والمستثمرين أصحاب الرؤية."
+          }
+        }
+      ]
+    },
+    {
+      "id": "who",
+      "order": 9,
+      "visible": true,
+      "fields": {
+        "eyebrow": {
+          "en": "Who we work with",
+          "ar": "مع من نعمل"
+        },
+        "heading": {
+          "en": "Partners for the long season.",
+          "ar": "شركاء لموسم طويل."
+        }
+      },
+      "items": [
+        {
+          "icon": "excellence",
+          "inquiryType": "Investment",
+          "title": {
+            "en": "Investors and funds",
+            "ar": "المستثمرون والصناديق"
+          },
+          "text": {
+            "en": "Investments built for resilience and long-term value, not quick returns — managed with operational transparency.",
+            "ar": "استثمارات مبنية للمرونة والقيمة طويلة الأمد، لا للعوائد السريعة، وتُدار بشفافية تشغيلية."
+          },
+          "cta": {
+            "en": "Request an investment conversation",
+            "ar": "اطلب محادثة استثمارية"
+          }
+        },
+        {
+          "icon": "food",
+          "inquiryType": "Partnership",
+          "title": {
+            "en": "State institutions",
+            "ar": "مؤسسات الدولة"
+          },
+          "text": {
+            "en": "A reliable national partner committed to food security and rural development.",
+            "ar": "شريك وطني موثوق، ملتزم بالأمن الغذائي والتنمية الريفية."
+          },
+          "cta": {
+            "en": "Contact us about partnership",
+            "ar": "تواصل معنا بشأن الشراكة"
+          }
+        },
+        {
+          "icon": "supply",
+          "inquiryType": "Supply",
+          "title": {
+            "en": "Industry partners",
+            "ar": "شركاء القطاع"
+          },
+          "text": {
+            "en": "A technically capable local operator in irrigation, smart farming, cold storage and distribution.",
+            "ar": "مشغّل محلي قادر تقنياً في الري والزراعة الذكية والتخزين المبرّد والتوزيع."
+          },
+          "cta": {
+            "en": "Talk partnership or supply",
+            "ar": "تحدّث معنا عن الشراكة أو التوريد"
+          }
+        },
+        {
+          "icon": "training",
+          "inquiryType": "Careers",
+          "title": {
+            "en": "Agricultural talent",
+            "ar": "الكفاءات الزراعية"
+          },
+          "text": {
+            "en": "We train and empower local agricultural talent to lead the industry with pride and precision.",
+            "ar": "ندرّب الكفاءات الزراعية المحلية ونمكّنها لتقود القطاع بفخر ودقة."
+          },
+          "cta": {
+            "en": "Get in touch about careers",
+            "ar": "تواصل معنا بشأن الوظائف"
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "order": 10,
+      "visible": true,
+      "fields": {
+        "eyebrow": {
+          "en": "Partner with us",
+          "ar": "كن شريكنا"
+        },
+        "heading": {
+          "en": "Let’s grow something lasting together.",
+          "ar": "لنزرع معاً ما يدوم."
+        },
+        "intro": {
+          "en": "Tell us about your organisation and what you have in mind. A member of the GHERAS team will reply personally.",
+          "ar": "حدّثنا عن مؤسستك وما تفكر فيه، وسيردّ عليك أحد أعضاء فريق غراس شخصياً."
+        },
+        "slogan": {
+          "en": "Planting Today... Building Tomorrow",
+          "ar": "نغرس اليوم... لنبني الغد"
+        }
+      }
+    },
+    {
+      "id": "footer",
+      "order": 11,
+      "visible": true,
+      "fields": {
+        "copyright": {
+          "en": "© 2026 GHERAS. All rights reserved.",
+          "ar": "© 2026 غراس. جميع الحقوق محفوظة."
+        }
+      }
+    }
+  ],
+  "media": [
+    {
+      "id": "photo-01",
+      "brief": "PHOTO 01 — aerial, centre-pivot fields at sunset",
+      "ratio": "16:9",
+      "minWidth": 2400,
+      "url": null,
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "alt": {
+        "en": null,
+        "ar": null
+      }
+    },
+    {
+      "id": "photo-02",
+      "brief": "PHOTO 02 — olive grove, low warm sun, long shadows",
+      "ratio": "1:1",
+      "minWidth": 1200,
+      "url": null,
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "alt": {
+        "en": null,
+        "ar": null
+      }
+    },
+    {
+      "id": "photo-04",
+      "brief": "PHOTO 04 — soil held in hands",
+      "ratio": "1:1",
+      "minWidth": 1200,
+      "url": null,
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "alt": {
+        "en": null,
+        "ar": null
+      }
+    },
+    {
+      "id": "photo-05",
+      "brief": "PHOTO 05 — drip lines in rows",
+      "ratio": "1:1",
+      "minWidth": 1200,
+      "url": null,
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "alt": {
+        "en": null,
+        "ar": null
+      }
+    },
+    {
+      "id": "photo-07",
+      "brief": "PHOTO 07 — engineer with tablet in the field",
+      "ratio": "1:1",
+      "minWidth": 1200,
+      "url": null,
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "alt": {
+        "en": null,
+        "ar": null
+      }
+    },
+    {
+      "id": "photo-09",
+      "brief": "PHOTO 09 — hands sorting harvest at a crate",
+      "ratio": "1:1",
+      "minWidth": 1200,
+      "url": null,
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "alt": {
+        "en": null,
+        "ar": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&amp;family=Manrope:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;background:#FAF8F2;color:#1F2A1C;font-family:Manrope,sans-serif;-webkit-font-smoothing:antialiased}a{color:#3F5A2A;text-underline-offset:3px}a:hover{color:#1F2A1C}p,li{text-wrap:pretty}h1,h2,h3{text-wrap:balance}</style>
+<script src="./doc-page.js"></script>
+<style>doc-page:not(:defined){visibility:hidden}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}@media print{*{animation-delay:-99s!important;animation-duration:.001s!important;animation-iteration-count:1!important;animation-fill-mode:both!important;animation-play-state:running!important;transition-duration:0s!important}}doc-page section+section{break-before:page}</style>
+</helmet>
+<doc-page orientation="landscape" margin="0">
+
+<section id="cover" data-screen-label="00 Cover" style="background:#1F2A1C;color:#FAF8F2;min-height:816px;position:relative;overflow:hidden;padding:clamp(24px,4vw,56px) clamp(20px,5vw,80px);display:flex;flex-direction:column">
+  <div style="position:absolute;left:50%;top:50%;width:1224px;height:1224px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(201,154,59,.18)"></div>
+  <div style="position:absolute;left:50%;top:50%;width:900px;height:900px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(201,154,59,.14)"></div>
+  <div style="position:absolute;left:50%;top:50%;width:1630px;height:1630px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(201,154,59,.1)"></div>
+  <div style="position:relative;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap">
+    <span style="font-family:Manrope,sans-serif;font-weight:700;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#E8D3A0">Brand Identity System</span>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#E8D3A0">v1.0 — October 2026</span>
+    <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#C99A3B">دليل الهوية البصرية</span>
+  </div>
+  <div style="flex:1;display:grid;place-items:center;position:relative;padding:56px 0">
+    <dc-import name="Gheras Logo" variant="vertical" scheme="reversed" style="width:min(340px,68vw)" hint-size="340px,405px"></dc-import>
+  </div>
+  <div style="position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;border-top:1px solid rgba(201,154,59,.5);padding-top:24px">
+    <p style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(26px,3vw,40px);line-height:1.1;margin:0">One season, many generations.</p>
+    <p dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(28px,3.3vw,44px);line-height:1.35;margin:0">حصادُ موسم... وإرثُ أجيال</p>
+  </div>
+</section>
+
+<section id="contents" data-screen-label="Contents" style="background:#FAF8F2;padding:clamp(56px,7vw,96px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px">
+    <div>
+      <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin-bottom:12px">Contents</div>
+      <p style="font-family:Fraunces,serif;font-size:28px;line-height:1.2;margin:0 0 16px">A complete identity for GHERAS, built for Arabic and English together.</p>
+      <p style="font-size:15px;line-height:1.6;color:#6B675C;margin:0">All facts and wording come from the GHERAS Brand Profile. All Arabic copy is new writing, marked for client review and approval by a native Arabic copy editor before launch.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0 32px;align-content:start">
+      <sc-for list="{{ toc }}" as="t" hint-placeholder-count="18">
+        <a href="{{ t.href }}" style="display:flex;gap:16px;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(31,42,28,.12);text-decoration:none;color:#1F2A1C">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#86621E;width:20px">{{ t.n }}</span>
+          <span style="flex:1;font-size:15px;font-weight:500">{{ t.en }}</span>
+          <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;color:#6B675C">{{ t.ar }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="story" data-screen-label="01 Brand story" style="background:#EFE7D6;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">01</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Brand story &amp; big idea</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">قصة العلامة والفكرة الكبرى</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px 64px;align-items:end;margin-bottom:64px">
+      <h2 style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(44px,6vw,80px);line-height:1.02;letter-spacing:-.015em;margin:0">One season, many generations.</h2>
+      <h2 dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(44px,6vw,84px);line-height:1.3;margin:0">حصادُ موسم... وإرثُ أجيال</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px 64px;margin-bottom:72px">
+      <p style="font-size:18px;line-height:1.6;margin:0;max-width:56ch">Gheras means seedlings — things that have been planted. The whole brand is about planting with intent and waiting for value to grow. The logo already holds the story in two plants.</p>
+      <p dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:20px;line-height:1.8;margin:0;max-width:56ch">غراس هي الشتلات، وما غُرس في الأرض. العلامة كلها قائمة على الغرس بنيّة، وانتظار القيمة حتى تنمو. والشعار يحمل القصة في نبتتين.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2px;background:rgba(31,42,28,.12);border-radius:24px;overflow:hidden">
+      <div style="background:#FAF8F2;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden">
+        <div style="position:absolute;left:-60px;top:-40px;width:260px;opacity:.5"><dc-import name="Gheras Logo" variant="lineart" scheme="stone" style="width:260px" hint-size="260px,260px"></dc-import></div>
+        <div style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:120px"><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#86621E">Wheat · Today</span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">القمح · اليوم</span></div>
+        <h3 style="position:relative;font-family:Fraunces,serif;font-weight:400;font-size:32px;line-height:1.15;margin:0">The harvest of today.</h3>
+        <p style="position:relative;font-size:16px;line-height:1.55;margin:0;color:#1F2A1C">Wheat grows and is harvested within a single season. It is food security, now — what we deliver this year.</p>
+        <p dir="rtl" style="position:relative;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:18px;line-height:1.75;margin:0">القمح يُزرع ويُحصد في موسم واحد. هو الأمن الغذائي اليوم، وما نسلّمه هذا العام.</p>
+      </div>
+      <div style="background:#FAF8F2;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden">
+        <div style="position:absolute;right:-60px;top:-40px;width:260px;opacity:.5"><dc-import name="Gheras Logo" variant="lineart" scheme="stone" style="width:260px" hint-size="260px,260px"></dc-import></div>
+        <div style="position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:120px"><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Olive · Tomorrow</span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#3F5A2A">الزيتون · الغد</span></div>
+        <h3 style="position:relative;font-family:Fraunces,serif;font-weight:400;font-size:32px;line-height:1.15;margin:0">The legacy of tomorrow.</h3>
+        <p style="position:relative;font-size:16px;line-height:1.55;margin:0">An olive tree takes years to bear fruit and can live for centuries. It is patience, legacy and Libyan heritage.</p>
+        <p dir="rtl" style="position:relative;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:18px;line-height:1.75;margin:0">شجرة الزيتون تحتاج سنوات لتثمر، وتعيش قروناً. هي الصبر والإرث وتراث ليبيا.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px 72px;align-items:center;margin-top:96px">
+      <div style="position:relative;aspect-ratio:1;max-width:520px;width:100%;justify-self:center">
+        <div style="position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:grid;place-items:center;border:1px solid rgba(31,42,28,.15)"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C;text-align:center;max-width:24ch;line-height:1.5">PHOTO — aerial, centre-pivot fields in the desert, golden hour</span></div>
+        <div style="position:absolute;inset:-18px;border-radius:50%;border:1px solid #C99A3B"></div>
+        <div style="position:absolute;left:50%;top:-24px;width:1px;height:20px;background:#C99A3B"></div>
+        <div style="position:absolute;left:50%;bottom:-24px;width:1px;height:20px;background:#C99A3B"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">The second insight — the circle</span>
+        <h3 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(28px,3vw,40px);line-height:1.15;margin:0">Green circles in the sand.</h3>
+        <p style="font-size:17px;line-height:1.6;margin:0">Seen from the air, Libya’s irrigated desert farms — in Kufra, for example — are perfect green circles, drawn by centre-pivot irrigation. The logo is a circle too. The circle becomes the signature shape of GHERAS: modern irrigation, precision, and life made out of desert. It joins heritage and technology in one form.</p>
+        <p dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:19px;line-height:1.8;margin:0">من الجو، تبدو مزارع الصحراء الليبية المروية — في الكفرة مثلاً — دوائرَ خضراء كاملة، يرسمها الري المحوري. والشعار دائرة أيضاً. لذلك تصبح الدائرة الشكلَ المميِّز لغراس: ري حديث، ودقة، وحياة تخرج من الصحراء.</p>
+      </div>
+    </div>
+    <div style="margin-top:96px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center;text-align:center">
+      <span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span>
+      <span style="font-family:Fraunces,serif;font-size:clamp(22px,2.4vw,32px)">Planting Today... Building Tomorrow</span>
+      <span style="width:6px;height:6px;border-radius:50%;background:#C99A3B"></span>
+      <span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(24px,2.7vw,36px)">نغرس اليوم... لنبني الغد</span>
+      <span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span>
+    </div>
+    <p style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin:16px 0 0">Arabic slogan proposed — for client review</p>
+  </div>
+</section>
+
+<section id="positioning" data-screen-label="02 Positioning" style="background:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">02</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Positioning &amp; personality</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">التموضع والشخصية</span></div>
+    <p style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(26px,3.2vw,44px);line-height:1.22;margin:0 0 80px;max-width:28ch">For investors, institutions and partners who need a serious agricultural operator in Libya, GHERAS is the agricultural investment company that turns land into lasting national value — because it pairs respect for the land with engineering discipline and global standards.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:96px">
+      <div style="border:1px dashed rgba(31,42,28,.3);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8E3B24">TRAP 1</span>
+        <span style="font-family:Fraunces,serif;font-size:24px">Rustic &amp; handmade</span>
+        <span style="font-size:14px;line-height:1.5;color:#6B675C">Kraft paper, farm-shop, hand-drawn. Reads as small.</span>
+      </div>
+      <div style="background:#1F2A1C;color:#FAF8F2;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#C99A3B">GHERAS</span>
+        <span style="font-family:Fraunces,serif;font-size:24px;line-height:1.25">Rooted as the soil. Precise as an engineering firm. Confident as an investment house.</span>
+      </div>
+      <div style="border:1px dashed rgba(31,42,28,.3);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8E3B24">TRAP 2</span>
+        <span style="font-family:Fraunces,serif;font-size:24px">Generic corporate tech</span>
+        <span style="font-size:14px;line-height:1.5;color:#6B675C">Blue gradients, stock drones. Loses the land entirely.</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-top:1px solid #1F2A1C">
+      <div style="padding:14px 0;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;border-bottom:1px solid rgba(31,42,28,.15)">GHERAS is <span style="font-family:'IBM Plex Sans Arabic',sans-serif;letter-spacing:0;font-size:13px">· غراس</span></div>
+      <div style="padding:14px 0;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6B675C;border-bottom:1px solid rgba(31,42,28,.15)">Is not <span style="font-family:'IBM Plex Sans Arabic',sans-serif;letter-spacing:0;font-size:13px">· وليست</span></div>
+      <sc-for list="{{ personality }}" as="r" hint-placeholder-count="5">
+        <div style="padding:20px 16px 20px 0;border-bottom:1px solid rgba(31,42,28,.15);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline"><span style="font-family:Fraunces,serif;font-size:clamp(20px,2.2vw,28px)">{{ r.is }}</span><span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(20px,2.3vw,30px)">{{ r.isAr }}</span></div>
+        <div style="padding:20px 0;border-bottom:1px solid rgba(31,42,28,.15);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline;color:#6B675C"><span style="font-family:Fraunces,serif;font-size:clamp(20px,2.2vw,28px);text-decoration:line-through;text-decoration-color:rgba(154,91,58,.6);text-decoration-thickness:1px">{{ r.not }}</span><span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-size:clamp(20px,2.3vw,30px)">{{ r.notAr }}</span></div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="voice" data-screen-label="03 Voice" style="background:#EFE7D6;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">03</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Voice &amp; tone</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">الصوت والنبرة</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px 64px;margin-bottom:72px">
+      <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0">One personality, written natively in two languages.</h2>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <p style="font-size:18px;line-height:1.6;margin:0">Speak like a respected agricultural engineer who also understands investment: calm, specific, sure of the facts. Concrete words — soil, water, seed, season — beat abstract ones.</p>
+        <p style="font-size:15px;line-height:1.6;margin:0;color:#6B675C">Never translate word for word. Each language carries the same message in its own natural form.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:72px">
+      <sc-for list="{{ principles }}" as="p" hint-placeholder-count="5">
+        <div style="background:#FAF8F2;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#86621E;text-transform:uppercase">{{ p.k }}</span>
+          <span style="font-size:15px;line-height:1.5">{{ p.en }}</span>
+          <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:16px;line-height:1.7;color:#3F5A2A">{{ p.ar }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:72px">
+      <div style="background:#3F5A2A;color:#FAF8F2;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:18px">
+        <span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E8D3A0">Words we use</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ useEn }}" as="w" hint-placeholder-count="9"><span style="border:1px solid rgba(250,248,242,.4);border-radius:999px;padding:6px 14px;font-size:14px">{{ w }}</span></sc-for></div>
+        <div dir="rtl" style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ useAr }}" as="w" hint-placeholder-count="9"><span style="border:1px solid rgba(250,248,242,.4);border-radius:999px;padding:4px 14px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px">{{ w }}</span></sc-for></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:18px">
+        <span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8E3B24">Words we avoid</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ avoidEn }}" as="w" hint-placeholder-count="5"><span style="border:1px solid rgba(142,59,36,.35);border-radius:999px;padding:6px 14px;font-size:14px;color:#6B675C;text-decoration:line-through">{{ w }}</span></sc-for></div>
+        <div dir="rtl" style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ avoidAr }}" as="w" hint-placeholder-count="5"><span style="border:1px solid rgba(142,59,36,.35);border-radius:999px;padding:4px 14px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px;color:#6B675C;text-decoration:line-through">{{ w }}</span></sc-for></div>
+      </div>
+    </div>
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 8px">Key brand lines</h3>
+    <div style="border-top:1px solid #1F2A1C;margin-bottom:72px">
+      <sc-for list="{{ lines }}" as="l" hint-placeholder-count="5">
+        <div style="display:grid;grid-template-columns:minmax(110px,160px) minmax(0,1fr) minmax(0,1fr);gap:24px;padding:20px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:baseline">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;text-transform:uppercase">{{ l.k }}</span>
+          <span style="font-family:Fraunces,serif;font-size:clamp(18px,2vw,24px)">{{ l.en }}</span>
+          <span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(19px,2.2vw,26px)">{{ l.ar }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 20px">Rewrites — keep the meaning, cut the pattern</h3>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:72px">
+      <sc-for list="{{ rewrites }}" as="r" hint-placeholder-count="2">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;border-radius:12px;overflow:hidden;background:rgba(31,42,28,.12)">
+          <div style="background:#E8E0CC;padding:24px;display:flex;flex-direction:column;gap:12px;color:#6B675C">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px">BEFORE</span>
+            <span style="font-size:15px;line-height:1.55">{{ r.be }}</span>
+            <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:16px;line-height:1.7">{{ r.ba }}</span>
+          </div>
+          <div style="background:#FAF8F2;padding:24px;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3F5A2A">AFTER</span>
+            <span style="font-family:Fraunces,serif;font-size:22px;line-height:1.3">{{ r.ae }}</span>
+            <span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:23px;line-height:1.55">{{ r.aa }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 20px">Tone by audience — same voice, shifted emphasis</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+      <sc-for list="{{ audiences }}" as="a" hint-placeholder-count="5">
+        <div style="border-top:2px solid #3F5A2A;padding-top:16px;display:flex;flex-direction:column;gap:6px">
+          <span style="font-family:Fraunces,serif;font-size:20px">{{ a.en }}</span>
+          <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px;color:#3F5A2A;text-align:right">{{ a.ar }}</span>
+          <span style="font-size:14px;line-height:1.5;color:#6B675C">{{ a.tone }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:56px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#FAF8F2;border-radius:12px;padding:16px 20px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:#E8D3A0;color:#1F2A1C;padding:4px 8px;border-radius:4px">FOR CLIENT REVIEW</span>
+      <span style="font-size:14px;line-height:1.5;flex:1;min-width:240px">The profile exists only in English, so every Arabic line in this book is new writing. A native Arabic copy editor should approve it before launch.</span>
+    </div>
+  </div>
+</section>
+
+<section id="values" data-screen-label="04 ICARE values" style="background:#1F2A1C;color:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px);position:relative;overflow:hidden">
+  <div style="max-width:1280px;margin:0 auto;position:relative">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#E8D3A0">04</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E8D3A0">ICARE values</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#C99A3B">القيم</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px 64px;margin-bottom:64px;align-items:end">
+      <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0">Agriculture is a trust and a responsibility.</h2>
+      <p style="font-size:16px;line-height:1.6;margin:0;color:#E8D3A0">The client’s own ICARE framework. English words and acronym are kept exactly. Definitions are quoted from the Brand Profile.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:rgba(201,154,59,.35);border-radius:24px;overflow:hidden">
+      <sc-for list="{{ values }}" as="v" hint-placeholder-count="5">
+        <div style="background:#1F2A1C;padding:32px 28px;display:flex;flex-direction:column;gap:16px">
+          <span style="font-family:Fraunces,serif;font-weight:300;font-size:112px;line-height:.9;color:#C99A3B">{{ v.l }}</span>
+          <dc-import name="Gheras Icon" glyph="{{ v.k }}" color="#E8D3A0" accent="#C99A3B" size="36" hint-size="36px,36px"></dc-import>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap"><span style="font-family:Fraunces,serif;font-size:24px">{{ v.en }}</span><span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:24px">{{ v.ar }}</span></div>
+          <p style="font-size:14px;line-height:1.55;margin:0;color:#E8D3A0">{{ v.d }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:56px;display:flex;flex-direction:column;gap:16px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#E8D3A0">ARABIC LAYOUT — values by name with icons; I·C·A·R·E kept as a small secondary detail</span>
+      <div dir="rtl" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+        <sc-for list="{{ values }}" as="v" hint-placeholder-count="5">
+          <div style="border:1px solid rgba(201,154,59,.4);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+            <div style="display:flex;justify-content:space-between;width:100%;align-items:center"><dc-import name="Gheras Icon" glyph="{{ v.k }}" color="#E8D3A0" accent="#C99A3B" size="28" hint-size="28px,28px"></dc-import><span style="font-family:Manrope,sans-serif;font-weight:700;font-size:11px;color:#C99A3B">{{ v.l }}</span></div>
+            <span style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:26px;line-height:1.4">{{ v.ar }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="logo" data-screen-label="05 Logo" style="background:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">05</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Logo — master file</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">الشعار</span></div>
+    <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0 0 56px;max-width:22ch">The original logo, at production resolution.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:56px">
+      <div style="background:#FFFFFF;border:1px solid rgba(31,42,28,.12);border-radius:24px;padding:40px;display:flex;flex-direction:column;align-items:center;gap:24px">
+        <span style="align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">SOURCE FILE — 744 × 816 px</span>
+        <img src="assets/gheras-logo.png" alt="Original GHERAS logo" style="width:min(300px,100%);display:block">
+      </div>
+      <div style="background:#FFFFFF;border:1px solid rgba(31,42,28,.12);border-radius:24px;padding:40px;display:flex;flex-direction:column;align-items:center;gap:24px">
+        <span style="align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3F5A2A">ENHANCED — vector-traced edges, original colour · sharp at any size</span>
+        <dc-import name="Gheras Logo" variant="vertical" scheme="full" style="width:min(300px,100%)" hint-size="300px,357px"></dc-import>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px 64px;margin-bottom:96px">
+      <div>
+        <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Using the master now</h3>
+        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.55">
+          <li>The client’s logo is used exactly as drawn. Nothing about its shapes, colours or wordmarks has changed.</li>
+          <li>Every edge — plants, GHERAS and غراس — was traced to vector, so outlines stay sharp at any size. The gradients inside are the client’s original colour, cleaned and sharpened.</li>
+          <li>The descriptor line is reset as live type (IBM Plex Sans Arabic and Manrope), since the source text was too small to recover.</li>
+          <li>On Deep Olive, use the reversed version: the wordmarks switch to Linen, and the plants stay in colour.</li>
+          <li>One-colour versions are pure vector silhouettes, ready for foil, stamps, embroidery and laser cutting.</li>
+        </ol>
+      </div>
+      <div>
+        <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#86621E;margin:0 0 16px">Known limits of a raster logo</h3>
+        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.55">
+          <li>The fine wheat hairs in the source were too faint to recover and are omitted.</li>
+          <li>Interior shading is still raster. For very large formats (signage over about 2 m), export the one-colour vector or commission the full redraw.</li>
+          <li>Keep the master at or above the minimum sizes. Below 32 px, the emblem reads as a shape only.</li>
+        </ol>
+        <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6B675C;margin:32px 0 16px">Refinement — proposed, on hold</h3>
+        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.55">
+          <li>Both plants redrawn as flat vector shapes. No gradients.</li>
+          <li>Fewer grains and leaves, all drawn from one shared curve.</li>
+          <li>English and Arabic wordmarks balanced in weight.</li>
+          <li>An emblem that works without the words.</li>
+        </ol>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px 72px;align-items:center">
+      <div style="background:#FFFFFF;border:1px solid rgba(31,42,28,.12);border-radius:24px;padding:40px;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="construction" style="width:min(420px,100%)" hint-size="420px,420px"></dc-import></div>
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:#E8D3A0;padding:4px 8px;border-radius:4px;align-self:flex-start">PROPOSAL — NOT IN USE UNTIL APPROVED</span><h3 style="font-family:Fraunces,serif;font-weight:400;font-size:32px;line-height:1.15;margin:0">Vector refinement — construction</h3>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#86621E">SPINES</span><span style="font-size:15px;line-height:1.55">Two mirrored cubic curves inside circle R. They cross at the base — the sweep where today meets tomorrow.</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#86621E">ONE PRIMITIVE</span><span style="font-size:15px;line-height:1.55">Grains and leaves share one lens shape. Grains sit at ±18° to the stalk and taper 25% to the tip; leaves sit at ±40° and taper 30%.</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#86621E">WORDMARKS</span><span style="font-size:15px;line-height:1.55">GHERAS in Fraunces SemiBold, +4% tracking. غـراس keeps the logo’s kashida, set inside r = 0.6R.</span></div>
+        <div style="background:#EFE7D6;border-radius:12px;padding:16px 20px;font-size:14px;line-height:1.55"><strong>Production note.</strong> The Arabic wordmark here uses Noto Naskh Arabic as a stand-in. For the master artwork, a type designer should redraw the client’s original Arabic letterforms to this weight and alignment.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="lockups" data-screen-label="06 Lockups" style="background:#EFE7D6;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">06</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Lockups</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">صيغ الشعار</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+      <div style="grid-row:span 2;background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;display:grid;place-items:center;padding:24px 0"><dc-import name="Gheras Logo" variant="vertical" style="width:min(280px,100%)" hint-size="280px,334px"></dc-import></div>
+        <div><div style="font-weight:600;font-size:15px">Master vertical</div><div style="font-size:13px;color:#6B675C;margin-top:4px">Hero moments, documents, signage</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;display:grid;place-items:center;padding:16px 0"><dc-import name="Gheras Logo" variant="horizontal" style="width:100%;max-width:440px" hint-size="100%,106px"></dc-import></div>
+        <div><div style="font-weight:600;font-size:15px">Horizontal — English pages</div><div style="font-size:13px;color:#6B675C;margin-top:4px">Website header, letterhead, email signature</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;display:grid;place-items:center;padding:16px 0"><dc-import name="Gheras Logo" variant="horizontal" rtl="{{ true }}" style="width:100%;max-width:440px" hint-size="100%,106px"></dc-import></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><div style="font-weight:600;font-size:15px">Horizontal — Arabic pages</div><div style="font-size:13px;color:#6B675C;margin-top:4px">Mirrored: emblem leads from the right</div></div><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;color:#6B675C">للصفحات العربية</span></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="emblem" style="width:140px" hint-size="140px,140px"></dc-import></div>
+        <div><div style="font-weight:600;font-size:15px">Emblem</div><div style="font-size:13px;color:#6B675C;margin-top:4px">Avatars, stamps, embossing, merchandise</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="small" style="width:120px" hint-size="120px,120px"></dc-import></div>
+        <div><div style="font-weight:600;font-size:15px">Small-size mark</div><div style="font-size:13px;color:#6B675C;margin-top:4px">Emblem crop of the master. Favicon and app icon.</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+          <dc-import name="Gheras Logo" variant="wordmark-en" style="width:200px" hint-size="200px,43px"></dc-import>
+          <dc-import name="Gheras Logo" variant="wordmark-ar" style="width:130px" hint-size="130px,65px"></dc-import>
+        </div>
+        <div><div style="font-weight:600;font-size:15px">Wordmarks — English, Arabic</div><div style="font-size:13px;color:#6B675C;margin-top:4px">Narrow spaces, co-branding, footers</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="wordmark-bi" style="width:180px" hint-size="180px,96px"></dc-import></div>
+        <div><div style="font-weight:600;font-size:15px">Wordmark — bilingual</div><div style="font-size:13px;color:#6B675C;margin-top:4px">Matched stroke weight, shared centre axis</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-direction:column;gap:24px">
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
+          <dc-import name="Gheras Logo" variant="horizontal" style="width:240px" hint-size="240px,58px"></dc-import>
+          <span style="width:1px;height:48px;background:#C99A3B"></span>
+          <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;font-weight:600;letter-spacing:.04em">An IPH Company</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B675C">[Arabic wording — from IPH]</span></div>
+        </div>
+        <div><div style="font-weight:600;font-size:15px">Endorsement lockup</div><div style="font-size:13px;color:#6B675C;margin-top:4px">Footer, formal documents — optional, pending client approval</div></div>
+      </div>
+      <div style="grid-column:1/-1;background:#FAF8F2;border-radius:24px;padding:32px;display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end">
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:center"><div style="width:16px;height:16px;background:#1F2A1C;border-radius:3px;padding:1px"><dc-import name="Gheras Logo" variant="small" scheme="reversed" style="width:14px" hint-size="14px,14px"></dc-import></div><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">16</span></div>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:center"><div style="width:32px;height:32px;background:#1F2A1C;border-radius:6px;padding:2px"><dc-import name="Gheras Logo" variant="small" scheme="reversed" style="width:28px" hint-size="28px,28px"></dc-import></div><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">32</span></div>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:center"><div style="width:90px;height:90px;background:#1F2A1C;border-radius:20px;padding:10px"><dc-import name="Gheras Logo" variant="small" scheme="reversed" style="width:70px" hint-size="70px,70px"></dc-import></div><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">180 (shown 50%)</span></div>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:center"><div style="width:128px;height:128px;background:#1F2A1C;border-radius:28px;padding:16px"><dc-import name="Gheras Logo" variant="emblem" scheme="reversed" style="width:96px" hint-size="96px,96px"></dc-import></div><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">512 (shown 25%)</span></div>
+        <div style="flex:1;min-width:220px"><div style="font-weight:600;font-size:15px">Favicon &amp; app icon</div><div style="font-size:13px;line-height:1.5;color:#6B675C;margin-top:4px">Small mark reversed on Deep Olive at 16, 32 and 180 px. The full emblem returns at 512 px.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="versions" data-screen-label="07 Colour versions" style="background:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">07</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Colour versions</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">نسخ الألوان</span></div>
+    <p style="font-size:16px;line-height:1.6;max-width:60ch;margin:0 0 40px">Every lockup exists in these five versions. Shown here on the master vertical.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="background:#FFFFFF;border:1px solid rgba(31,42,28,.12);border-radius:12px;aspect-ratio:4/5;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="vertical" scheme="full" style="width:62%" hint-size="62%,74%"></dc-import></div><span style="font-size:14px;font-weight:600">Full colour on light</span></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="background:#1F2A1C;border-radius:12px;aspect-ratio:4/5;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="vertical" scheme="reversed" style="width:62%" hint-size="62%,74%"></dc-import></div><span style="font-size:14px;font-weight:600">Full colour reversed on Deep Olive</span></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:4/5;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="vertical" scheme="olive" style="width:62%" hint-size="62%,74%"></dc-import></div><span style="font-size:14px;font-weight:600">One colour — Deep Olive</span></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="background:#3F5A2A;border-radius:12px;aspect-ratio:4/5;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="vertical" scheme="white" style="width:62%" hint-size="62%,74%"></dc-import></div><span style="font-size:14px;font-weight:600">One colour — white</span></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="background:#1F2A1C;border-radius:12px;aspect-ratio:4/5;display:grid;place-items:center"><dc-import name="Gheras Logo" variant="vertical" scheme="gold" style="width:62%" hint-size="62%,74%"></dc-import></div><span style="font-size:14px;font-weight:600">One colour — gold (foil, embossing)</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="clearspace" data-screen-label="08 Clear space" style="background:#EFE7D6;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">08</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Clear space &amp; minimum size</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">المساحة الآمنة والحجم الأدنى</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+      <div style="background:#FAF8F2;border-radius:24px;padding:40px;display:flex;flex-direction:column;align-items:center;gap:24px">
+        <div style="position:relative;padding:20px;border:1px dashed #9A5B3A;background:repeating-linear-gradient(45deg,rgba(154,91,58,.08) 0 6px,transparent 6px 12px)">
+          <div style="background:#FAF8F2;outline:1px solid rgba(154,91,58,.5)"><dc-import name="Gheras Logo" variant="vertical" style="width:240px" hint-size="240px,286px"></dc-import></div>
+          <span style="position:absolute;top:2px;left:50%;transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9A5B3A">x</span>
+          <span style="position:absolute;left:6px;top:50%;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9A5B3A">x</span>
+        </div>
+        <p style="font-size:14px;line-height:1.55;margin:0;text-align:center;max-width:36ch">Keep clear space equal to <strong>x</strong> — the cap height of the “G” in GHERAS — on all sides.</p>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:32px;justify-content:center">
+        <div style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap"><dc-import name="Gheras Logo" variant="vertical" style="width:120px" hint-size="120px,143px"></dc-import><div><div style="font-family:Fraunces,serif;font-size:36px;color:#1F2A1C">25 mm · 120 px</div><div style="font-size:13px;color:#6B675C">Master lockup — minimum width</div></div></div>
+        <div style="height:1px;background:rgba(31,42,28,.15)"></div>
+        <div style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap"><dc-import name="Gheras Logo" variant="small" style="width:32px" hint-size="32px,32px"></dc-import><div><div style="font-family:Fraunces,serif;font-size:36px;color:#1F2A1C">10 mm · 32 px</div><div style="font-size:13px;color:#6B675C">Emblem alone — minimum width. Below 32 px, use the small-size mark.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="misuse" data-screen-label="09 Misuse" style="background:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">09</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Misuse</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">الاستخدام الخاطئ</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px">
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:1;display:grid;place-items:center;overflow:hidden"><div style="transform:scaleX(1.5)"><dc-import name="Gheras Logo" variant="emblem" style="width:110px" hint-size="110px,110px"></dc-import></div></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t stretch or squash</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:1;display:grid;place-items:center;overflow:hidden"><div style="filter:hue-rotate(150deg) saturate(1.6)"><dc-import name="Gheras Logo" variant="emblem" style="width:110px" hint-size="110px,110px"></dc-import></div></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t recolour</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:1;display:grid;place-items:center;overflow:hidden"><div style="filter:drop-shadow(5px 7px 4px rgba(0,0,0,.45))"><dc-import name="Gheras Logo" variant="emblem" style="width:110px" hint-size="110px,110px"></dc-import></div></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t add shadows</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:1;display:grid;place-items:center;overflow:hidden"><div style="filter:drop-shadow(2px 0 0 #1F2A1C) drop-shadow(-2px 0 0 #1F2A1C) drop-shadow(0 2px 0 #1F2A1C) drop-shadow(0 -2px 0 #1F2A1C)"><dc-import name="Gheras Logo" variant="emblem" style="width:110px" hint-size="110px,110px"></dc-import></div></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t add outlines</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:1;display:grid;place-items:center;overflow:hidden"><div style="transform:rotate(-24deg)"><dc-import name="Gheras Logo" variant="emblem" style="width:110px" hint-size="110px,110px"></dc-import></div></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t rotate</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;gap:28px;overflow:hidden"><div style="width:55px;overflow:hidden"><dc-import name="Gheras Logo" variant="emblem" style="width:110px" hint-size="110px,110px"></dc-import></div><div style="width:55px;overflow:hidden;direction:rtl"><div style="width:110px;direction:ltr"><dc-import name="Gheras Logo" variant="emblem" style="width:110px" hint-size="110px,110px"></dc-import></div></div></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t separate the two plants</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:1;display:grid;place-items:center;overflow:hidden"><img src="assets/gheras-logo.png" alt="Low-resolution logo file" style="width:24%;transform:scale(2.6);image-rendering:pixelated;filter:blur(.6px)"></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t use the low-resolution source file</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="border-radius:12px;aspect-ratio:1;display:grid;place-items:center;overflow:hidden;background:repeating-linear-gradient(60deg,#7C8A4A 0 9px,#C9B27A 9px 15px,#5B6B3A 15px 22px,#E2CF9C 22px 30px)"><dc-import name="Gheras Logo" variant="emblem" style="width:110px" hint-size="110px,110px"></dc-import></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t place on busy photos without an overlay</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="background:#EFE7D6;border-radius:12px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;gap:10px;overflow:hidden"><dc-import name="Gheras Logo" variant="emblem" style="width:64px" hint-size="64px,64px"></dc-import><span style="font-family:'Times New Roman',serif;font-style:italic;font-size:30px;color:#3F5A2A">Gheras</span></div><span style="font-size:14px"><span style="color:#8E3B24;font-weight:700">✕</span> Don’t set the wordmark in another font</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="palette" data-screen-label="10 Colour palette" style="background:#EFE7D6;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">10</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Colour palette</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">لوحة الألوان</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px 64px;margin-bottom:56px;align-items:end">
+      <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0">Olive and harvest gold, grounded in desert neutrals.</h2>
+      <p style="font-size:16px;line-height:1.6;margin:0">Taken straight from the logo, plus one Libyan red-earth accent and one water accent. The page should feel bright and airy, with green and gold carrying the brand.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-bottom:40px">
+      <sc-for list="{{ palette }}" as="c" hint-placeholder-count="10">
+        <div style="border-radius:12px;overflow:hidden;background:#FAF8F2;border:1px solid rgba(31,42,28,.1);display:flex;flex-direction:column">
+          <div style="background:{{ c.hex }};color:{{ c.ink }};height:150px;padding:16px;display:flex;flex-direction:column;justify-content:space-between">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-family:Fraunces,serif;font-size:22px">{{ c.name }}</span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px">{{ c.ar }}</span></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px">{{ c.hex }}</span>
+          </div>
+          <div style="padding:14px 16px;display:flex;flex-direction:column;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;line-height:1.5">
+            <span style="font-family:Manrope,sans-serif;font-size:13px;color:#1F2A1C;margin-bottom:4px">{{ c.role }}</span>
+            <span>RGB {{ c.rgb }}</span><span>CMYK {{ c.cmyk }}</span><span>{{ c.pms }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-bottom:72px">
+      <div style="display:flex;height:56px;border-radius:12px;overflow:hidden">
+        <div style="flex:36;background:#FAF8F2"></div><div style="flex:24;background:#EFE7D6;border-left:1px solid rgba(31,42,28,.1)"></div><div style="flex:12;background:#1F2A1C"></div><div style="flex:9;background:#3F5A2A"></div><div style="flex:4;background:#8A9A4B"></div><div style="flex:6;background:#E8D3A0"></div><div style="flex:4;background:#C99A3B"></div><div style="flex:3;background:#9A5B3A"></div><div style="flex:2;background:#2F6F73"></div>
+      </div>
+      <div style="display:flex;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-top:10px"><span style="flex:60">60% light neutrals</span><span style="flex:25">25% greens</span><span style="flex:10">10% gold</span><span style="flex:5">5%</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px 64px">
+      <div>
+        <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 8px">Text pairings — WCAG 2.x contrast</h3>
+        <p style="font-size:14px;line-height:1.55;color:#6B675C;margin:0 0 20px">Harvest Gold fails as text on light grounds. Use it on Deep Olive, or as decoration. For gold-coloured text on light (Arabic eyebrows), use <strong style="color:#86621E">Gold Ink #86621E</strong>, a darker tint of Harvest Gold.</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ pairings }}" as="p" hint-placeholder-count="15">
+            <div style="display:flex;align-items:center;gap:14px;background:#FAF8F2;border-radius:8px;padding:6px 12px 6px 6px">
+              <span style="background:{{ p.bg }};color:{{ p.fg }};width:52px;height:40px;border-radius:4px;display:grid;place-items:center;font-family:Fraunces,serif;font-size:20px;border:1px solid rgba(31,42,28,.1)">Aa</span>
+              <span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:600">{{ p.label }}</span><span style="font-size:12px;color:#6B675C">{{ p.use }}</span></span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px">{{ p.ratio }}</span>
+              <span style="font-size:11px;font-weight:700;color:{{ p.vc }};width:96px;text-align:right">{{ p.verdict }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 8px">Functional colours — website</h3>
+        <p style="font-size:14px;line-height:1.55;color:#6B675C;margin:0 0 20px">Derived from the palette, each darkened until it passes AA as text on Linen. Always paired with an icon or label, never colour alone.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border-radius:12px;background:#E6EBDA;padding:18px;display:flex;flex-direction:column;gap:8px"><span style="width:28px;height:28px;border-radius:50%;background:#3F5A2A"></span><span style="font-weight:700;color:#3F5A2A">Success</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1F2A1C">#3F5A2A on #E6EBDA</span></div>
+          <div style="border-radius:12px;background:#F6EBD2;padding:18px;display:flex;flex-direction:column;gap:8px"><span style="width:28px;height:28px;border-radius:50%;background:#86621E"></span><span style="font-weight:700;color:#86621E">Warning</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1F2A1C">#86621E on #F6EBD2</span></div>
+          <div style="border-radius:12px;background:#F3E2D9;padding:18px;display:flex;flex-direction:column;gap:8px"><span style="width:28px;height:28px;border-radius:50%;background:#8E3B24"></span><span style="font-weight:700;color:#8E3B24">Error</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1F2A1C">#8E3B24 on #F3E2D9</span></div>
+          <div style="border-radius:12px;background:#DDEAEA;padding:18px;display:flex;flex-direction:column;gap:8px"><span style="width:28px;height:28px;border-radius:50%;background:#2F6F73"></span><span style="font-weight:700;color:#2F6F73">Info</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1F2A1C">#2F6F73 on #DDEAEA</span></div>
+        </div>
+        <div style="margin-top:24px;font-size:13px;line-height:1.6;color:#6B675C">Logo-only artwork tones: <span style="font-family:'IBM Plex Mono',monospace">#A47A26</span> (shaded grain), <span style="font-family:'IBM Plex Mono',monospace">#AEB874</span> (light leaf, reversed logo). Not for UI.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="type" data-screen-label="11 Typography" style="background:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">11</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Typography</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">الخطوط</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:80px">
+      <div style="background:#EFE7D6;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">DISPLAY · ENGLISH</span><span style="font-family:Fraunces,serif;font-weight:300;font-size:96px;line-height:1">Aa</span><span style="font-family:Fraunces,serif;font-size:24px">Fraunces</span><span style="font-size:13px;color:#6B675C;line-height:1.5">Soft, organic serif echoing the logo’s classic capitals. Light 300 · Regular 400 · SemiBold 600</span></div>
+      <div style="background:#EFE7D6;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">DISPLAY · ARABIC</span><span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:88px;line-height:1.1">أ ب</span><span style="font-family:'Noto Naskh Arabic',serif;font-size:24px">Noto Naskh Arabic</span><span style="font-size:13px;color:#6B675C;line-height:1.5">Echoes the logo’s calligraphic Arabic. SemiBold 600 for headings.</span></div>
+      <div style="background:#EFE7D6;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">BODY · ENGLISH</span><span style="font-weight:500;font-size:96px;line-height:1">Aa</span><span style="font-size:24px;font-weight:600">Manrope</span><span style="font-size:13px;color:#6B675C;line-height:1.5">Clear, slightly technical sans. Regular 400 · Medium 500 · SemiBold 600 · Bold 700</span></div>
+      <div style="background:#EFE7D6;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">BODY · ARABIC</span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:500;font-size:88px;line-height:1.1">أ ب</span><span style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:24px;font-weight:600">IBM Plex Sans Arabic</span><span style="font-size:13px;color:#6B675C;line-height:1.5">Matches Manrope’s precision. Regular 400 · SemiBold 600 · Bold 700</span></div>
+    </div>
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 8px">Bilingual type scale — desktop</h3>
+    <p style="font-size:14px;line-height:1.55;color:#6B675C;margin:0 0 24px;max-width:70ch">Arabic runs 10–15% larger with more line height to match the English in apparent size and weight. Western numerals in both languages.</p>
+    <div style="border-top:1px solid #1F2A1C;margin-bottom:80px">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:28px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:center"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">DISPLAY · 72/1.05 Fraunces Light</div><div style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.05">Planting Today</div></div><div dir="rtl"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">80/1.3 Naskh SemiBold</div><div style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.3">نغرس اليوم</div></div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:24px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:center"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">H1 · 56/1.1 Fraunces Regular</div><div style="font-family:Fraunces,serif;font-size:clamp(34px,4vw,56px);line-height:1.1">Building Tomorrow</div></div><div dir="rtl"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">62/1.35 Naskh SemiBold</div><div style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(37px,4.4vw,62px);line-height:1.35">لنبني الغد</div></div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:24px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:center"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">H2 · 40/1.15 Fraunces Regular</div><div style="font-family:Fraunces,serif;font-size:clamp(28px,3vw,40px);line-height:1.15">Farms that last</div></div><div dir="rtl"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">44/1.4 Naskh SemiBold</div><div style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(31px,3.3vw,44px);line-height:1.4">مزارع تدوم</div></div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:24px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:center"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">H3 · 28/1.25 Manrope SemiBold</div><div style="font-weight:600;font-size:clamp(22px,2.2vw,28px);line-height:1.25">Modern irrigation</div></div><div dir="rtl"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">31/1.45 Plex Arabic SemiBold</div><div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:600;font-size:clamp(24px,2.4vw,31px);line-height:1.45">الري الحديث</div></div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:24px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:start"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">BODY LARGE · 18/1.6 Manrope</div><div style="font-size:18px;line-height:1.6">We build farms that last — where the knowledge of the land meets the precision of modern technology.</div></div><div dir="rtl"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">20/1.8 Plex Arabic</div><div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:20px;line-height:1.8">نبني مزارع تدوم، حيث تلتقي خبرة الأرض بدقة التقنية الحديثة.</div></div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:24px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:start"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">BODY · 16/1.55 · SMALL 14/1.5</div><div style="font-size:16px;line-height:1.55">From large projects to modern irrigation, we hold ourselves to one standard: precision.</div><div style="font-size:14px;line-height:1.5;color:#6B675C;margin-top:8px">Agriculture is a trust and a responsibility.</div></div><div dir="rtl"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">18/1.75 · 15/1.7</div><div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:18px;line-height:1.75">من المشاريع الكبرى إلى أنظمة الري الحديثة، نلتزم بمعيار واحد: الدقة.</div><div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px;line-height:1.7;color:#6B675C;margin-top:8px">الزراعة أمانةٌ ومسؤولية.</div></div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:24px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:center"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">EYEBROW · 12 Manrope Bold, +0.2em, uppercase</div><div style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">What we do</div></div><div dir="rtl"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C;margin-bottom:8px">14 Plex Arabic Bold, gold — no spacing</div><div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">ماذا نفعل</div></div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:24px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:center;background:#1F2A1C;margin:0 -24px;padding-left:24px;padding-right:24px"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#E8D3A0;margin-bottom:8px">FIGURE · Fraunces Light, Harvest Gold on dark</div><div style="font-family:Fraunces,serif;font-weight:300;font-size:72px;line-height:1;color:#C99A3B">[000]</div><div style="font-size:13px;color:#E8D3A0;margin-top:8px">hectares under management — client to supply</div></div><div dir="rtl"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#E8D3A0;margin-bottom:8px">Western numerals in Arabic too</div><div style="font-family:Fraunces,serif;font-weight:300;font-size:72px;line-height:1;color:#C99A3B">[000]</div><div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px;color:#E8D3A0;margin-top:8px">هكتار تحت الإدارة — يزوّدنا بها العميل</div></div></div>
+    </div>
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 24px">Rules for Arabic and English together</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:80px">
+      <div style="border-top:2px solid #C99A3B;padding-top:16px"><div style="font-weight:600;margin-bottom:6px">Mixed lines</div><div style="font-size:14px;line-height:1.55;color:#6B675C;margin-bottom:12px">Latin inside Arabic uses the Latin font of the same role, size-matched.</div><div dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:18px;line-height:1.7">تعمل <span style="font-family:Manrope,sans-serif;font-size:16px;font-weight:600">GHERAS</span> على [000] <span style="font-family:Manrope,sans-serif;font-size:16px">ha</span></div></div>
+      <div style="border-top:2px solid #C99A3B;padding-top:16px"><div style="font-weight:600;margin-bottom:6px">No letter-spacing on Arabic</div><div style="font-size:14px;line-height:1.55;color:#6B675C">Arabic letters connect. Wide tracking is for English capitals only.</div></div>
+      <div style="border-top:2px solid #C99A3B;padding-top:16px"><div style="font-weight:600;margin-bottom:6px">No fake styles</div><div style="font-size:14px;line-height:1.55;color:#6B675C">Real weights only. Arabic has no italics — emphasise with weight or colour, in both languages.</div></div>
+      <div style="border-top:2px solid #C99A3B;padding-top:16px"><div style="font-weight:600;margin-bottom:6px">Kashida is reserved</div><div style="font-size:14px;line-height:1.55;color:#6B675C">The long stroke in غـراس is for the logo and large display moments. Never to justify body text.</div></div>
+      <div style="border-top:2px solid #C99A3B;padding-top:16px"><div style="font-weight:600;margin-bottom:6px">Ragged, never justified</div><div style="font-size:14px;line-height:1.55;color:#6B675C">Arabic body right-aligned, English left-aligned.</div></div>
+      <div style="border-top:2px solid #C99A3B;padding-top:16px"><div style="font-weight:600;margin-bottom:6px">Side by side</div><div style="font-size:14px;line-height:1.55;color:#6B675C">Arabic sits on the right or on top. Both look equally important.</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px">
+      <div style="background:#EFE7D6;border-radius:24px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:20px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">SPECIMEN · ENGLISH</span>
+        <div style="font-family:Fraunces,serif;font-size:32px;line-height:1.3;word-break:break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz</div>
+        <div style="font-family:Fraunces,serif;font-weight:300;font-size:40px;color:#3F5A2A">0123456789</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;font-family:Fraunces,serif;font-size:22px"><span style="font-weight:300">Light</span><span style="font-weight:400">Regular</span><span style="font-weight:600">SemiBold</span></div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:18px"><span style="font-weight:400">Regular</span><span style="font-weight:500">Medium</span><span style="font-weight:600">SemiBold</span><span style="font-weight:700">Bold</span></div>
+        <p style="font-size:16px;line-height:1.55;margin:0;border-top:1px solid rgba(31,42,28,.15);padding-top:20px">Our team comprises dedicated agricultural engineers and industry experts who understand that true excellence lies in the details: seed selection, water management, soil health, and strict quality control.</p>
+      </div>
+      <div dir="rtl" style="background:#EFE7D6;border-radius:24px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:20px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">SPECIMEN · ARABIC</span>
+        <div style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:32px;line-height:1.6">ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي</div>
+        <div style="font-family:Fraunces,serif;font-weight:300;font-size:40px;color:#3F5A2A">0123456789</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;font-family:'Noto Naskh Arabic',serif;font-size:22px"><span style="font-weight:400">عادي</span><span style="font-weight:500">متوسط</span><span style="font-weight:600">شبه عريض</span><span style="font-weight:700">عريض</span></div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:18px"><span style="font-weight:400">عادي</span><span style="font-weight:600">شبه عريض</span><span style="font-weight:700">عريض</span></div>
+        <p style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:18px;line-height:1.75;margin:0;border-top:1px solid rgba(31,42,28,.15);padding-top:20px">يضمّ فريقنا مهندسين زراعيين وخبراء يعرفون أن الجودة في التفاصيل: اختيار البذرة، وإدارة المياه، وصحة التربة، وضبط الجودة بصرامة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="graphics" data-screen-label="12 Graphic language" style="background:#EFE7D6;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">12</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Graphic language</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">اللغة البصرية</span></div>
+    <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0 0 56px;max-width:24ch">Six elements, each tied to the story.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px">
+      <div style="background:#FAF8F2;border-radius:24px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="height:240px;position:relative;overflow:hidden;background:#FAF8F2">
+          <div style="position:absolute;width:420px;height:420px;border-radius:50%;border:1px solid rgba(63,90,42,.25);left:50%;top:50%;transform:translate(-50%,-50%)"></div>
+          <div style="position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(63,90,42,.35);left:50%;top:50%;transform:translate(-50%,-50%)"></div>
+          <div style="position:absolute;width:150px;height:150px;border-radius:50%;background:repeating-linear-gradient(135deg,#E3D8BF 0 8px,#EAE0CA 8px 16px);left:50%;top:50%;transform:translate(-50%,-50%)"></div>
+          <div style="position:absolute;width:190px;height:190px;border-radius:50%;border:3px solid transparent;border-top-color:#C99A3B;border-right-color:#C99A3B;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-20deg)"></div>
+        </div>
+        <div style="padding:24px"><div style="font-family:Fraunces,serif;font-size:22px;margin-bottom:6px">The Pivot Circle</div><div style="font-size:14px;line-height:1.55;color:#6B675C">From the logo and from irrigated desert fields. Circular photo crops, faint background arcs, progress and data rings.</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="height:240px;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(31,42,28,.08)"><div style="background:repeating-linear-gradient(0deg,#FAF8F2 0 11px,rgba(63,90,42,.35) 11px 12px)"></div><div style="background:repeating-radial-gradient(circle at 100% 100%,#FAF8F2 0 11px,rgba(201,154,59,.55) 11px 12px)"></div></div>
+        <div style="padding:24px"><div style="font-family:Fraunces,serif;font-size:22px;margin-bottom:6px">Furrow Lines</div><div style="font-size:14px;line-height:1.55;color:#6B675C">Fine parallel lines like planted rows — straight or gently curved. Textures and dividers at low opacity.</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="height:240px">{{ contour }}</div>
+        <div style="padding:24px"><div style="font-family:Fraunces,serif;font-size:22px;margin-bottom:6px">Contour Lines</div><div style="font-size:14px;line-height:1.55;color:#6B675C">Topographic lines for land and reclamation themes. Libyan Soil or Stone, never heavier than 1.2 px.</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="height:240px;display:flex;flex-direction:column;justify-content:center;gap:36px;padding:0 32px">
+          <div style="display:flex;align-items:center;gap:14px"><span style="flex:1;height:1px;background:#C99A3B"></span><span style="font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Our mission</span><span style="flex:1;height:1px;background:#C99A3B"></span></div>
+          <div style="display:flex;align-items:center;gap:14px"><span style="font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">What we do</span><span style="flex:1;height:1px;background:#C99A3B"></span></div>
+          <div dir="rtl" style="display:flex;align-items:center;gap:14px"><span style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">ماذا نفعل</span><span style="flex:1;height:1px;background:#C99A3B"></span></div>
+        </div>
+        <div style="padding:24px"><div style="font-family:Fraunces,serif;font-size:22px;margin-bottom:6px">The Gold Rule</div><div style="font-size:14px;line-height:1.55;color:#6B675C">The thin gold line from the logo’s descriptor, with a label centred or aligned. The standard way to open a section.</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:24px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="height:240px;display:grid;place-items:center;padding:0 24px">{{ ruler }}</div>
+        <div style="padding:24px"><div style="font-family:Fraunces,serif;font-size:22px;margin-bottom:6px">Precision marks</div><div style="font-size:14px;line-height:1.55;color:#6B675C">Tick marks, grid crosses and measurement lines for engineering and smart farming. Sparingly — and never with invented data.</div></div>
+      </div>
+      <div style="background:#1F2A1C;border-radius:24px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="height:240px;position:relative;overflow:hidden"><div style="position:absolute;width:520px;left:-80px;top:-150px"><dc-import name="Gheras Logo" variant="lineart" scheme="gold" stroke="0.6" style="width:520px" hint-size="520px,520px"></dc-import></div></div>
+        <div style="padding:24px;color:#FAF8F2"><div style="font-family:Fraunces,serif;font-size:22px;margin-bottom:6px">Botanical line art</div><div style="font-size:14px;line-height:1.55;color:#E8D3A0">Single-weight, engraving-style wheat and olive, drawn from the emblem’s own geometry. Used large and cropped.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pattern" data-screen-label="13 Pattern" style="background:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">13</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Brand pattern</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">النقش</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+      <div style="grid-column:1/-1;height:clamp(280px,36vw,460px);border-radius:24px;overflow:hidden;background:#1F2A1C">{{ patternDark }}</div>
+      <div style="height:260px;border-radius:24px;overflow:hidden;background:#EFE7D6;position:relative"><div style="position:absolute;inset:0;opacity:.55">{{ patternLight }}</div><span style="position:absolute;left:20px;bottom:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1F2A1C;background:#EFE7D6;padding:4px 8px;border-radius:4px">On Sand — 55% for backgrounds</span></div>
+      <div style="height:260px;border-radius:24px;overflow:hidden;background:#EFE7D6;position:relative">{{ patternMono }}<span style="position:absolute;left:20px;bottom:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1F2A1C;background:#EFE7D6;padding:4px 8px;border-radius:4px">Tone-on-tone — packaging, card backs</span></div>
+      <div style="display:flex;flex-direction:column;gap:12px;justify-content:center;padding:8px">
+        <div style="font-family:Fraunces,serif;font-size:24px">Grain and leaf on a circular grid.</div>
+        <div style="font-size:14px;line-height:1.55;color:#6B675C">Built from the logo’s lens primitive, placed on concentric pivot rings. Grains in gold alternate with leaves in olive. Centre the rings off-canvas so only arcs show.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="icons" data-screen-label="14 Iconography" style="background:#EFE7D6;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">14</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Iconography</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">الأيقونات</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px 64px;margin-bottom:48px;align-items:center">
+      <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0">Line icons, one hand.</h2>
+      <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+        <div style="width:120px;height:120px;background:#FAF8F2;border-radius:12px;position:relative;background-image:linear-gradient(rgba(154,91,58,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(154,91,58,.15) 1px,transparent 1px);background-size:5px 5px;display:grid;place-items:center"><div style="position:absolute;inset:10px;border:1px dashed rgba(154,91,58,.5)"></div><dc-import name="Gheras Icon" glyph="pivot" size="100" weight="1.5" hint-size="100px,100px"></dc-import></div>
+        <div style="font-size:14px;line-height:1.7;color:#1F2A1C;font-family:'IBM Plex Mono',monospace">24 px grid · 2 px padding<br>1.5 px stroke · round caps &amp; joins<br>One colour + optional gold accent</div>
+      </div>
+    </div>
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Services — 14</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:2px;background:rgba(31,42,28,.1);border-radius:12px;overflow:hidden;margin-bottom:48px">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="14">
+        <div style="background:#FAF8F2;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+          <dc-import name="Gheras Icon" glyph="{{ s.k }}" size="40" hint-size="40px,40px"></dc-import>
+          <span style="font-size:13px;font-weight:600">{{ s.en }}</span>
+          <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;color:#6B675C">{{ s.ar }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Values — 5</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:2px;background:rgba(201,154,59,.35);border-radius:12px;overflow:hidden">
+      <sc-for list="{{ values }}" as="v" hint-placeholder-count="5">
+        <div style="background:#1F2A1C;color:#FAF8F2;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+          <dc-import name="Gheras Icon" glyph="{{ v.k }}" color="#E8D3A0" size="40" hint-size="40px,40px"></dc-import>
+          <span style="font-size:13px;font-weight:600">{{ v.en }}</span>
+          <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;color:#E8D3A0">{{ v.ar }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="photo" data-screen-label="15 Photography" style="background:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">15</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Photography</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">التصوير</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px 64px;margin-bottom:48px">
+      <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0">Low sun, real work, hands in the soil.</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 24px;font-size:14px;line-height:1.55">
+        <div><div style="font-weight:700;margin-bottom:4px">Light</div><div style="color:#6B675C">Golden hour, long shadows. No harsh midday sun.</div></div>
+        <div><div style="font-weight:700;margin-bottom:4px">Grade</div><div style="color:#6B675C">Warm, slightly muted, shadows leaning olive. Never neon green.</div></div>
+        <div><div style="font-weight:700;margin-bottom:4px">People</div><div style="color:#6B675C">Real Libyan engineers and workers doing real work, with dignity. Hands recur.</div></div>
+        <div><div style="font-weight:700;margin-bottom:4px;color:#8E3B24">Avoid</div><div style="color:#6B675C">Smiling stock models, European barns, rice terraces, tulip fields, sci-fi drone graphics.</div></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:140px;gap:12px;margin-bottom:56px">
+      <div style="grid-column:span 7;grid-row:span 3;border-radius:24px;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:flex;align-items:flex-end;padding:20px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">PHOTO 01 — aerial, centre-pivot fields at sunset</span></div>
+      <div style="grid-column:span 5;grid-row:span 2;border-radius:24px;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:flex;align-items:flex-end;padding:20px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">PHOTO 04 — soil held in hands</span></div>
+      <div style="grid-column:span 5;grid-row:span 1;border-radius:24px;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:flex;align-items:flex-end;padding:20px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">PHOTO 05 — drip lines in rows</span></div>
+      <div style="grid-column:span 4;grid-row:span 2;border-radius:24px;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:flex;align-items:flex-end;padding:20px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">PHOTO 02 — olive grove, low sun</span></div>
+      <div style="grid-column:span 4;grid-row:span 2;border-radius:50%;aspect-ratio:1;justify-self:center;height:100%;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:grid;place-items:center;padding:20px;text-align:center"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">PHOTO 03 — wheat close-up<br>(pivot crop)</span></div>
+      <div style="grid-column:span 4;grid-row:span 2;border-radius:24px;background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:flex;align-items:flex-end;padding:20px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">PHOTO 07 — engineer with tablet in the field</span></div>
+    </div>
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 8px">Shot list — for a commissioned shoot</h3>
+    <div style="border-top:1px solid #1F2A1C;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));column-gap:48px">
+      <sc-for list="{{ shots }}" as="s" hint-placeholder-count="10">
+        <div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(31,42,28,.15);align-items:baseline"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#86621E">{{ s.n }}</span><span style="flex:1;font-size:15px">{{ s.s }}</span><span style="font-size:12px;color:#6B675C;text-align:right">{{ s.u }}</span></div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="apps" data-screen-label="16 Applications" style="background:#EFE7D6;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">16</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Applications</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">التطبيقات</span></div>
+    <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0 0 56px;max-width:22ch">The identity at work.</h2>
+
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Corporate stationery</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin-bottom:72px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="width:340px;max-width:100%;aspect-ratio:85/55;background:#FAF8F2;border-radius:6px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 12px 32px rgba(31,42,28,.12);padding:22px;display:flex;flex-direction:column;justify-content:space-between">
+          <dc-import name="Gheras Logo" variant="horizontal" style="width:170px" hint-size="170px,41px"></dc-import>
+          <div><div style="font-weight:700;font-size:13px">[Full name]</div><div style="font-size:10px;color:#6B675C;margin-bottom:10px">[Job title]</div><div style="height:1px;background:#C99A3B;margin-bottom:8px"></div><div style="display:flex;justify-content:space-between;font-size:9px;color:#6B675C;gap:8px"><span>[+218 00 000 0000]</span><span>[name@gheras.ly]</span></div></div>
+        </div>
+        <div dir="rtl" style="width:340px;max-width:100%;aspect-ratio:85/55;background:#1F2A1C;color:#FAF8F2;border-radius:6px;box-shadow:0 12px 32px rgba(31,42,28,.18);padding:22px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+          <div style="position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(201,154,59,.3);left:-120px;bottom:-170px"></div>
+          <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" rtl="{{ true }}" style="width:170px" hint-size="170px,41px"></dc-import>
+          <div style="position:relative"><div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px">[الاسم الكامل]</div><div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:11px;color:#E8D3A0;margin-bottom:8px">[المسمى الوظيفي]</div><div style="height:1px;background:#C99A3B;margin-bottom:8px"></div><div style="font-size:9px;color:#E8D3A0">[+218 00 000 0000]</div></div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">Business card — English and Arabic sides</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="width:300px;aspect-ratio:210/297;background:#FFFFFF;box-shadow:0 12px 32px rgba(31,42,28,.12);padding:26px 24px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><dc-import name="Gheras Logo" variant="horizontal" style="width:150px" hint-size="150px,36px"></dc-import><span style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:#6B675C">[Date]</span></div>
+          <div style="height:1px;background:#C99A3B;margin:6px 0 14px"></div>
+          <div style="height:5px;background:#E4DDCC;width:40%"></div><div style="height:5px;background:#EEE8DA;width:100%"></div><div style="height:5px;background:#EEE8DA;width:96%"></div><div style="height:5px;background:#EEE8DA;width:100%"></div><div style="height:5px;background:#EEE8DA;width:70%"></div><div style="height:5px;background:#EEE8DA;width:100%;margin-top:8px"></div><div style="height:5px;background:#EEE8DA;width:88%"></div>
+          <div style="flex:1"></div>
+          <div style="display:flex;justify-content:space-between;font-size:6.5px;color:#6B675C;border-top:1px solid rgba(31,42,28,.12);padding-top:8px"><span>[Address · Tripoli, Libya]</span><span style="font-family:'IBM Plex Sans Arabic',sans-serif">[العنوان · طرابلس، ليبيا]</span></div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">A4 letterhead</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="width:300px;aspect-ratio:210/297;background:#1F2A1C;color:#FAF8F2;box-shadow:0 12px 32px rgba(31,42,28,.18);padding:26px 24px;display:flex;flex-direction:column;position:relative;overflow:hidden">
+          <div style="position:absolute;width:300px;height:300px;border-radius:50%;right:-90px;top:70px;background:repeating-linear-gradient(135deg,#2C3828 0 8px,#33402E 8px 16px);display:grid;place-items:center"><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#E8D3A0">PHOTO — aerial pivot</span></div>
+          <div style="position:absolute;width:330px;height:330px;border-radius:50%;right:-105px;top:55px;border:1px solid #C99A3B"></div>
+          <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:140px" hint-size="140px,34px"></dc-import>
+          <div style="flex:1"></div>
+          <div style="position:relative;font-weight:700;font-size:7px;letter-spacing:.2em;color:#C99A3B;margin-bottom:8px">REPORT · 2026</div>
+          <div style="position:relative;font-family:Fraunces,serif;font-weight:300;font-size:24px;line-height:1.1">[Report title]</div>
+          <div dir="rtl" style="position:relative;font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:22px;margin-top:6px">[عنوان التقرير]</div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">Report cover</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="width:340px;max-width:100%;aspect-ratio:220/110;background:#FAF8F2;box-shadow:0 12px 32px rgba(31,42,28,.12);padding:18px;display:flex;flex-direction:column;justify-content:space-between">
+          <dc-import name="Gheras Logo" variant="horizontal" style="width:130px" hint-size="130px,31px"></dc-import>
+          <div style="align-self:flex-end;width:45%;display:flex;flex-direction:column;gap:5px"><div style="height:4px;background:#E4DDCC"></div><div style="height:4px;background:#E4DDCC;width:80%"></div><div style="height:4px;background:#E4DDCC;width:60%"></div></div>
+          <div style="height:1px;background:#C99A3B"></div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">DL envelope</span>
+        <div style="width:340px;max-width:100%;background:#FFFFFF;border-radius:8px;padding:18px;display:flex;gap:16px;align-items:center;box-shadow:0 1px 2px rgba(31,42,28,.08)">
+          <dc-import name="Gheras Logo" variant="emblem" style="width:52px" hint-size="52px,52px"></dc-import>
+          <div style="border-left:1px solid #C99A3B;padding-left:16px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:13px">[Full name]</span><span style="font-size:11px;color:#6B675C">[Job title] · GHERAS Agricultural Investment</span><span style="font-size:11px;color:#3F5A2A">[name@gheras.ly] · [+218 00 000 0000]</span></div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">Email signature</span>
+      </div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Presentations</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:72px">
+      <div style="aspect-ratio:16/9;background:#1F2A1C;color:#FAF8F2;border-radius:8px;padding:6%;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+        <div style="position:absolute;width:70%;right:-22%;top:-30%;opacity:.7"><dc-import name="Gheras Logo" variant="lineart" scheme="gold" stroke="0.5" style="width:100%" hint-size="100%,100%"></dc-import></div>
+        <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:38%" hint-size="38%,30px"></dc-import>
+        <div style="position:relative"><div style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(18px,2.2vw,30px);line-height:1.1">Planting Today.<br>Building Tomorrow.</div><div style="height:1px;background:#C99A3B;width:30%;margin-top:12px"></div></div>
+      </div>
+      <div style="aspect-ratio:16/9;background:#EFE7D6;border-radius:8px;padding:6%;display:flex;flex-direction:column;justify-content:center;gap:10px;position:relative;overflow:hidden">
+        <div style="position:absolute;width:90%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(63,90,42,.25);right:-40%;top:-30%"></div>
+        <div style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(36px,4vw,60px);color:#86621E;line-height:1">02</div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="font-weight:700;font-size:9px;letter-spacing:.2em;color:#3F5A2A">SECTION</span><span style="flex:1;max-width:120px;height:1px;background:#C99A3B"></span></div>
+        <div style="font-family:Fraunces,serif;font-size:clamp(18px,2vw,28px)">What we do</div>
+      </div>
+      <div style="aspect-ratio:16/9;background:#FAF8F2;border:1px solid rgba(31,42,28,.12);border-radius:8px;padding:6%;display:flex;flex-direction:column;gap:6%">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:Fraunces,serif;font-size:clamp(14px,1.4vw,20px)">Portfolio at a glance</span><dc-import name="Gheras Logo" variant="emblem" style="width:24px" hint-size="24px,24px"></dc-import></div>
+        <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <div style="background:#1F2A1C;border-radius:6px;padding:10px;display:flex;flex-direction:column;justify-content:flex-end"><span style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(18px,2vw,30px);color:#C99A3B">[000]</span><span style="font-size:8px;color:#E8D3A0">hectares</span></div>
+          <div style="background:#1F2A1C;border-radius:6px;padding:10px;display:flex;flex-direction:column;justify-content:flex-end"><span style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(18px,2vw,30px);color:#C99A3B">[000]</span><span style="font-size:8px;color:#E8D3A0">tonnes / season</span></div>
+          <div style="background:#1F2A1C;border-radius:6px;padding:10px;display:flex;flex-direction:column;justify-content:flex-end"><span style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(18px,2vw,30px);color:#C99A3B">[00]</span><span style="font-size:8px;color:#E8D3A0">sites</span></div>
+        </div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#6B675C">Figures — client to supply</span>
+      </div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Social media</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:72px">
+      <div style="width:240px;aspect-ratio:1;background:#EFE7D6;border-radius:8px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;opacity:.35">{{ patternLight }}</div>
+        <span style="position:relative;font-weight:700;font-size:9px;letter-spacing:.2em;color:#3F5A2A">ANNOUNCEMENT</span>
+        <div style="position:relative;font-family:Fraunces,serif;font-size:24px;line-height:1.15">[Announcement headline]</div>
+        <dc-import name="Gheras Logo" variant="horizontal" style="width:120px;position:relative" hint-size="120px,29px"></dc-import>
+      </div>
+      <div style="width:240px;aspect-ratio:1;background:#1F2A1C;border-radius:8px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+        <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:2px solid transparent;border-top-color:#C99A3B;border-right-color:#C99A3B;right:-60px;top:-60px"></div>
+        <span style="font-weight:700;font-size:9px;letter-spacing:.2em;color:#E8D3A0">FIGURE</span>
+        <div><div style="font-family:Fraunces,serif;font-weight:300;font-size:64px;line-height:1;color:#C99A3B">[000]</div><div style="font-size:12px;color:#E8D3A0;margin-top:6px">[label — client to supply]</div></div>
+        <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:120px" hint-size="120px,29px"></dc-import>
+      </div>
+      <div style="width:240px;aspect-ratio:1;background:#3F5A2A;color:#FAF8F2;border-radius:8px;padding:20px;display:flex;flex-direction:column;justify-content:space-between">
+        <span style="font-family:Fraunces,serif;font-size:48px;line-height:.6;color:#C99A3B">“</span>
+        <div style="font-family:Fraunces,serif;font-size:22px;line-height:1.2">Agriculture is a trust and a responsibility.</div>
+        <div dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:20px">الزراعة أمانةٌ ومسؤولية</div>
+      </div>
+      <div style="width:140px;aspect-ratio:9/16;background:#1F2A1C;border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;position:relative;overflow:hidden">
+        <div style="position:absolute;width:180px;height:180px;border-radius:50%;background:repeating-linear-gradient(135deg,#2C3828 0 6px,#33402E 6px 12px);top:30px"></div>
+        <dc-import name="Gheras Logo" variant="emblem" scheme="reversed" style="width:36px;position:relative" hint-size="36px,36px"></dc-import>
+        <div style="position:relative;font-family:Fraunces,serif;font-weight:300;font-size:17px;color:#FAF8F2;line-height:1.15">Planting Today. Building Tomorrow.</div>
+        <span style="position:relative;font-size:8px;color:#1F2A1C;background:#C99A3B;border-radius:999px;padding:6px 12px;font-weight:700">Partner with us</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;flex:1;min-width:300px">
+        <div style="aspect-ratio:4/1;background:#1F2A1C;border-radius:8px;position:relative;overflow:hidden;display:flex;align-items:center;padding:0 5%">
+          <div style="position:absolute;inset:0;opacity:.9">{{ patternDark }}</div>
+          <div style="position:absolute;inset:0;background:linear-gradient(90deg,#1F2A1C 45%,rgba(31,42,28,0))"></div>
+          <div style="position:relative;font-family:Fraunces,serif;font-weight:300;font-size:clamp(16px,1.8vw,24px);color:#FAF8F2">One season, many generations.</div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">LinkedIn banner · square posts (announcement, figure, quote) · story</span>
+      </div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Field &amp; site</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:72px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+        <div style="width:100%;background:#1F2A1C;border-radius:4px;padding:28px;display:flex;flex-direction:column;gap:16px;border-bottom:6px solid #C99A3B">
+          <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:80%" hint-size="80%,60px"></dc-import>
+          <div style="height:1px;background:rgba(201,154,59,.5)"></div>
+          <div style="display:flex;justify-content:space-between;gap:12px;color:#FAF8F2"><span style="font-family:Fraunces,serif;font-size:18px">[Project name]</span><span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:18px">[اسم المشروع]</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;width:70%"><div style="width:10px;height:70px;background:#6B675C"></div><div style="width:10px;height:70px;background:#6B675C"></div></div>
+        <span style="font-size:13px;color:#6B675C;align-self:flex-start;margin-top:8px">Farm entrance signboard</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="aspect-ratio:3/1;display:grid;grid-template-columns:1.4fr 1fr;border-radius:4px;overflow:hidden">
+          <div style="background:repeating-linear-gradient(135deg,#E3D8BF 0 10px,#EAE0CA 10px 20px);display:flex;align-items:flex-end;padding:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#6B675C">PHOTO — olive grove</span></div>
+          <div style="background:#3F5A2A;color:#FAF8F2;padding:14px;display:flex;flex-direction:column;justify-content:space-between"><span style="font-family:Fraunces,serif;font-size:16px;line-height:1.15">Planting Today... Building Tomorrow</span><span dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:15px">نغرس اليوم... لنبني الغد</span></div>
+        </div>
+        <div style="height:6px;background:repeating-linear-gradient(90deg,#C99A3B 0 20px,transparent 20px 28px)"></div>
+        <span style="font-size:13px;color:#6B675C">Project site hoarding</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="aspect-ratio:2.2/1;background:#FAF8F2;border-radius:28px 60px 12px 12px;border:2px solid #CFC6AF;position:relative;overflow:hidden;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:10px">
+          <div style="position:absolute;left:0;right:0;bottom:22%;height:3px;background:#C99A3B"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:22%;background:#3F5A2A"></div>
+          <dc-import name="Gheras Logo" variant="horizontal" style="width:70%;position:relative" hint-size="70%,50px"></dc-import>
+        </div>
+        <span style="font-size:13px;color:#6B675C">Pickup truck door livery — Linen body, Grove Green sill, Gold Rule</span>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+          <div style="width:150px;height:90px;background:#1F2A1C;border-radius:80px 80px 6px 6px;display:grid;place-items:center;position:relative"><dc-import name="Gheras Logo" variant="emblem" scheme="gold" style="width:52px" hint-size="52px,52px"></dc-import><div style="position:absolute;bottom:-10px;left:-14px;right:-14px;height:14px;background:#1F2A1C;border-radius:0 0 60px 60px"></div></div>
+          <span style="font-size:13px;color:#6B675C;margin-top:10px">Cap — gold embroidery</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+          <div style="width:150px;height:170px;background:#D8C54A;border-radius:10px 10px 4px 4px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:18px;gap:6px">
+            <dc-import name="Gheras Logo" variant="wordmark-bi" scheme="olive" style="width:80px" hint-size="80px,43px"></dc-import>
+            <div style="position:absolute;left:0;right:0;top:96px;height:12px;background:repeating-linear-gradient(90deg,#E6E6E0 0 4px,#C8C8C0 4px 8px)"></div>
+            <div style="position:absolute;left:0;right:0;top:130px;height:12px;background:repeating-linear-gradient(90deg,#E6E6E0 0 4px,#C8C8C0 4px 8px)"></div>
+          </div>
+          <span style="font-size:13px;color:#6B675C">Safety vest — one-colour olive on hi-vis</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Produce</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;margin-bottom:72px">
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div style="width:150px;height:330px;background:#2A3324;border-radius:30px 30px 14px 14px;position:relative;display:flex;justify-content:center">
+          <div style="position:absolute;top:-40px;width:44px;height:50px;background:#1F2A1C;border-radius:6px 6px 0 0"></div>
+          <div style="position:absolute;top:120px;width:126px;height:170px;background:#1F2A1C;border:1px solid #C99A3B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px;text-align:center">
+            <dc-import name="Gheras Logo" variant="emblem" scheme="gold" style="width:56px" hint-size="56px,56px"></dc-import>
+            <span style="font-family:Fraunces,serif;font-size:12px;color:#FAF8F2;letter-spacing:.06em">GHERAS</span>
+            <span style="height:1px;width:40px;background:#C99A3B"></span>
+            <span style="font-size:8px;color:#E8D3A0;letter-spacing:.12em">EXTRA VIRGIN OLIVE OIL</span>
+            <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:10px;color:#E8D3A0">زيت زيتون بكر ممتاز</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:#E8D3A0">[volume]</span>
+          </div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">Premium olive oil — gold foil</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="width:320px;max-width:100%;background:#FAF8F2;border:1px solid rgba(31,42,28,.2);display:grid;grid-template-columns:90px 1fr">
+          <div style="background:#3F5A2A;display:grid;place-items:center;padding:12px"><dc-import name="Gheras Logo" variant="emblem" scheme="white" style="width:60px" hint-size="60px,60px"></dc-import></div>
+          <div style="padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;font-size:9px">
+            <div><div style="font-family:'IBM Plex Mono',monospace;color:#6B675C;font-size:7px">PRODUCT</div><div style="font-weight:700">[Crop]</div></div>
+            <div><div style="font-family:'IBM Plex Mono',monospace;color:#6B675C;font-size:7px">ORIGIN</div><div style="font-weight:700">[Farm / site]</div></div>
+            <div><div style="font-family:'IBM Plex Mono',monospace;color:#6B675C;font-size:7px">BATCH</div><div style="font-weight:700">[000-000]</div></div>
+            <div><div style="font-family:'IBM Plex Mono',monospace;color:#6B675C;font-size:7px">HARVEST</div><div style="font-weight:700">[DD.MM.YYYY]</div></div>
+          </div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">Produce crate label</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div style="width:200px;height:280px;background:repeating-linear-gradient(0deg,#EFE7D6 0 3px,#E8DFCB 3px 4px);border-radius:16px 16px 22px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;box-shadow:inset 0 -10px 20px rgba(31,42,28,.08)">
+          <dc-import name="Gheras Logo" variant="vertical" scheme="olive" style="width:120px" hint-size="120px,143px"></dc-import>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#1F2A1C">[Wheat · 00 kg]</span>
+        </div>
+        <span style="font-size:13px;color:#6B675C">Grain sack — one-colour olive</span>
+      </div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Digital</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      <div style="grid-column:1/-1;border-radius:12px;overflow:hidden;box-shadow:0 12px 32px rgba(31,42,28,.14);background:#FAF8F2">
+        <div style="background:#E4DDCC;padding:10px 14px 0;display:flex;align-items:flex-end;gap:10px">
+          <div style="display:flex;gap:6px;padding-bottom:12px"><span style="width:10px;height:10px;border-radius:50%;background:#CFC6AF"></span><span style="width:10px;height:10px;border-radius:50%;background:#CFC6AF"></span><span style="width:10px;height:10px;border-radius:50%;background:#CFC6AF"></span></div>
+          <div style="background:#FAF8F2;border-radius:8px 8px 0 0;padding:8px 14px;display:flex;align-items:center;gap:8px;font-size:12px;min-width:220px"><div style="width:16px;height:16px;background:#1F2A1C;border-radius:3px;padding:1px"><dc-import name="Gheras Logo" variant="small" scheme="reversed" style="width:14px" hint-size="14px,14px"></dc-import></div><span>GHERAS — Agricultural Investment</span></div>
+        </div>
+        <div style="position:relative;min-height:440px;background:#1F2A1C;overflow:hidden">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#2A3526 0 12px,#303C2C 12px 24px)"></div>
+          <span style="position:absolute;right:20px;bottom:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#E8D3A0">PHOTO — aerial, pivot fields at golden hour + Deep Olive overlay</span>
+          <div style="position:absolute;width:560px;right:-120px;bottom:-200px;opacity:.6"><dc-import name="Gheras Logo" variant="lineart" scheme="gold" stroke="0.5" style="width:560px" hint-size="560px,560px"></dc-import></div>
+          <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0 clamp(16px,4vw,56px);display:grid;grid-template-columns:repeat(12,1fr);gap:24px;pointer-events:none"><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div><div style="background:rgba(154,91,58,.18)"></div></div></sc-if>
+          <sc-if value="{{ heroEn }}" hint-placeholder-val="{{ true }}">
+            <div style="position:relative;padding:20px clamp(16px,4vw,56px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+              <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:200px" hint-size="200px,48px"></dc-import>
+              <div style="display:flex;gap:22px;align-items:center;font-size:13px;color:#FAF8F2;flex-wrap:wrap"><span>About</span><span>What we do</span><span>Values</span><span>Why GHERAS</span><span>Contact</span><span style="font-family:'IBM Plex Sans Arabic',sans-serif;border:1px solid rgba(250,248,242,.4);border-radius:999px;padding:4px 12px">عربي</span><span style="background:#C99A3B;color:#1F2A1C;border-radius:4px;padding:10px 16px;font-weight:700">Partner with us</span></div>
+            </div>
+            <div style="position:relative;padding:56px clamp(16px,4vw,56px) 64px;max-width:720px;color:#FAF8F2">
+              <div style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E8D3A0;margin-bottom:18px">Agricultural Investment · Libya</div>
+              <div style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.05;margin-bottom:20px">Planting Today. Building Tomorrow.</div>
+              <div style="font-size:18px;line-height:1.6;color:#E8D3A0;margin-bottom:28px;max-width:50ch">Agricultural investment that joins natural authenticity, sustainability and modern technology — for economic growth and food security.</div>
+              <div style="display:flex;gap:12px;flex-wrap:wrap"><span style="background:#C99A3B;color:#1F2A1C;border-radius:4px;padding:14px 22px;font-weight:700;font-size:14px">Partner with us</span><span style="border:1px solid rgba(250,248,242,.5);border-radius:4px;padding:14px 22px;font-weight:600;font-size:14px">See what we do</span></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ heroAr }}" hint-placeholder-val="{{ false }}">
+            <div dir="rtl" style="position:relative;padding:20px clamp(16px,4vw,56px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+              <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" rtl="{{ true }}" style="width:200px" hint-size="200px,48px"></dc-import>
+              <div style="display:flex;gap:22px;align-items:center;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;color:#FAF8F2;flex-wrap:wrap"><span>من نحن</span><span>ماذا نفعل</span><span>قيمنا</span><span>لماذا غراس</span><span>تواصل</span><span style="font-family:Manrope,sans-serif;font-size:12px;border:1px solid rgba(250,248,242,.4);border-radius:999px;padding:4px 12px">EN</span><span style="background:#C99A3B;color:#1F2A1C;border-radius:4px;padding:9px 16px;font-weight:700">كن شريكنا</span></div>
+            </div>
+            <div dir="rtl" style="position:relative;padding:56px clamp(16px,4vw,56px) 64px;max-width:760px;color:#FAF8F2">
+              <div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#C99A3B;margin-bottom:14px">الاستثمار الزراعي · ليبيا</div>
+              <div style="font-family:'Noto Naskh Arabic',serif;font-weight:600;font-size:clamp(44px,5.5vw,80px);line-height:1.3;margin-bottom:16px">نغرس اليوم... لنبني الغد</div>
+              <div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:20px;line-height:1.8;color:#E8D3A0;margin-bottom:28px;max-width:46ch">استثمار زراعي يجمع أصالة الأرض والاستدامة والتقنية الحديثة، من أجل النمو الاقتصادي والأمن الغذائي.</div>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;font-family:'IBM Plex Sans Arabic',sans-serif"><span style="background:#C99A3B;color:#1F2A1C;border-radius:4px;padding:12px 22px;font-weight:700;font-size:15px">كن شريكنا</span><span style="border:1px solid rgba(250,248,242,.5);border-radius:4px;padding:12px 22px;font-weight:600;font-size:15px">اكتشف ما نفعله</span></div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:12px;padding:24px;display:flex;align-items:center;gap:20px">
+        <div style="width:96px;height:96px;border-radius:50%;background:#1F2A1C;display:grid;place-items:center;flex-shrink:0"><dc-import name="Gheras Logo" variant="emblem" scheme="reversed" style="width:64px" hint-size="64px,64px"></dc-import></div>
+        <div><div style="font-weight:700;font-size:15px">GHERAS</div><div style="font-size:13px;color:#6B675C">Social avatar — emblem, reversed, inside the circle crop</div></div>
+      </div>
+      <div style="background:#FAF8F2;border-radius:12px;padding:24px;display:flex;align-items:center;gap:20px">
+        <div style="width:96px;height:96px;border-radius:50%;background:#EFE7D6;display:grid;place-items:center;flex-shrink:0"><dc-import name="Gheras Logo" variant="emblem" style="width:64px" hint-size="64px,64px"></dc-import></div>
+        <div><div style="font-weight:700;font-size:15px">Light variant</div><div style="font-size:13px;color:#6B675C">For platforms with dark UI</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="digital" data-screen-label="17 Digital foundations" style="background:#FAF8F2;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:48px;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">17</span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Digital foundations</span><span style="flex:1;min-width:40px;height:1px;background:#C99A3B"></span><span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:14px;color:#86621E">الأسس الرقمية</span></div>
+    <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.12;margin:0 0 56px;max-width:22ch">Building blocks for the website.</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:64px">
+      <div style="background:#EFE7D6;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between"><span style="font-weight:600">Layout grid</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">12 col · 1280 max · 24 gutter</span></div>
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;height:90px"><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:8px"><span style="font-weight:600">Mobile</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">4 col · 16 margins</span></div>
+        <div style="width:120px;padding:0 6px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;height:90px;border:1px solid rgba(31,42,28,.2);border-radius:10px"><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div><div style="background:rgba(154,91,58,.2)"></div></div>
+      </div>
+      <div style="background:#EFE7D6;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between"><span style="font-weight:600">Spacing scale</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">px</span></div>
+        <sc-for list="{{ spacing }}" as="s" hint-placeholder-count="10"><div style="display:flex;align-items:center;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;width:28px;color:#6B675C">{{ s.v }}</span><span style="height:10px;background:#3F5A2A;width:{{ s.w }};border-radius:2px"></span></div></sc-for>
+      </div>
+      <div style="background:#EFE7D6;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:20px">
+        <span style="font-weight:600">Radius &amp; shadow</span>
+        <div style="display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:56px;height:56px;background:#FAF8F2;border:1px solid #3F5A2A;border-radius:4px"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px">4</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:56px;height:56px;background:#FAF8F2;border:1px solid #3F5A2A;border-radius:12px"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px">12</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:56px;height:56px;background:#FAF8F2;border:1px solid #3F5A2A;border-radius:24px"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px">24</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:56px;height:56px;background:#FAF8F2;border:1px solid #3F5A2A;border-radius:50%"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px">full</span></div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <div style="flex:1;min-width:100px;height:64px;background:#FAF8F2;border-radius:12px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px">shadow-sm</div>
+          <div style="flex:1;min-width:100px;height:64px;background:#FAF8F2;border-radius:12px;box-shadow:0 2px 4px rgba(31,42,28,.06),0 12px 32px rgba(31,42,28,.12);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px">shadow-md</div>
+        </div>
+        <span style="font-size:12px;color:#6B675C">Soft, never bubbly. Shadows tinted Deep Olive, never grey.</span>
+      </div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Components</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:64px">
+      <div style="border:1px solid rgba(31,42,28,.12);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:20px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">BUTTONS &amp; LINKS</span>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <button style="background:#3F5A2A;color:#FAF8F2;border:0;border-radius:4px;padding:0 22px;height:48px;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#1F2A1C">Partner with us<dc-import name="Gheras Icon" glyph="arrow" color="#FAF8F2" size="18" hint-size="18px,18px"></dc-import></button>
+          <button style="background:transparent;color:#3F5A2A;border:1.5px solid #3F5A2A;border-radius:4px;padding:0 22px;height:48px;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer" style-hover="background:#E6EBDA">See what we do</button>
+          <button style="background:transparent;color:#3F5A2A;border:0;padding:0 4px;height:48px;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer;text-decoration:underline;text-underline-offset:4px">Read more</button>
+        </div>
+        <div dir="rtl" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <button style="background:#3F5A2A;color:#FAF8F2;border:0;border-radius:4px;padding:0 22px;height:48px;font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:16px;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#1F2A1C">كن شريكنا<dc-import name="Gheras Icon" glyph="arrow" color="#FAF8F2" size="18" rtl="{{ true }}" hint-size="18px,18px"></dc-import></button>
+          <button style="background:transparent;color:#3F5A2A;border:1.5px solid #3F5A2A;border-radius:4px;padding:0 22px;height:48px;font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;font-size:16px;cursor:pointer">اكتشف ما نفعله</button>
+        </div>
+        <span style="font-size:12px;color:#6B675C">48 px height (44 px min tap target). Focus: 2 px Harvest Gold ring, 2 px offset.</span>
+      </div>
+      <div style="border:1px solid rgba(31,42,28,.12);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">FORM FIELDS</span>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Organization<input placeholder="Your organization" style="height:48px;border:1px solid #CFC6AF;border-radius:4px;background:#FFFFFF;padding:0 14px;font-family:Manrope,sans-serif;font-size:15px;color:#1F2A1C;outline:none" style-focus="border-color:#3F5A2A;box-shadow:0 0 0 3px rgba(201,154,59,.35)"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Inquiry type<select style="height:48px;border:1px solid #CFC6AF;border-radius:4px;background:#FFFFFF;padding:0 14px;font-family:Manrope,sans-serif;font-size:15px;color:#1F2A1C"><option>Investment</option><option>Partnership</option><option>Supply</option><option>Careers</option><option>Other</option></select></label>
+        <label dir="rtl" style="display:flex;flex-direction:column;gap:6px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;font-weight:600">البريد الإلكتروني<input placeholder="name@example.com" style="height:48px;border:1px solid #8E3B24;border-radius:4px;background:#FFFFFF;padding:0 14px;font-family:Manrope,sans-serif;font-size:15px;direction:ltr;text-align:right"><span style="font-weight:400;font-size:13px;color:#8E3B24">يرجى إدخال بريد إلكتروني صحيح</span></label>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:#FFFFFF;border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06);display:flex;flex-direction:column;gap:12px">
+          <dc-import name="Gheras Icon" glyph="drip" size="36" hint-size="36px,36px"></dc-import>
+          <span style="font-weight:600;font-size:20px">Modern irrigation &amp; smart farming</span>
+          <span style="font-size:14px;line-height:1.55;color:#6B675C">Implementation of modern irrigation technologies and smart farming systems.</span>
+        </div>
+        <div style="background:#1F2A1C;border-radius:12px;padding:24px;display:flex;gap:20px;align-items:flex-end">
+          <span style="font-family:Fraunces,serif;font-weight:300;font-size:56px;line-height:1;color:#C99A3B">[000]</span>
+          <span style="font-size:13px;color:#E8D3A0;padding-bottom:6px">Figure block — gold number + label</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A;margin:0 0 16px">Navigation &amp; right-to-left</h3>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:64px">
+      <div style="background:#FFFFFF;border-radius:12px;box-shadow:0 1px 2px rgba(31,42,28,.08);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+        <dc-import name="Gheras Logo" variant="horizontal" style="width:190px" hint-size="190px,46px"></dc-import>
+        <div style="display:flex;gap:24px;align-items:center;font-size:14px;font-weight:500;flex-wrap:wrap"><span>About</span><span>What we do</span><span>Values</span><span>Why GHERAS</span><span>Contact</span><span style="display:flex;gap:6px;align-items:center;color:#3F5A2A"><dc-import name="Gheras Icon" glyph="globe" size="18" hint-size="18px,18px"></dc-import><span style="font-family:'IBM Plex Sans Arabic',sans-serif">عربي</span></span><span style="background:#3F5A2A;color:#FAF8F2;border-radius:4px;padding:12px 16px;font-weight:700">Partner with us</span></div>
+      </div>
+      <div dir="rtl" style="background:#FFFFFF;border-radius:12px;box-shadow:0 1px 2px rgba(31,42,28,.08);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+        <dc-import name="Gheras Logo" variant="horizontal" rtl="{{ true }}" style="width:190px" hint-size="190px,46px"></dc-import>
+        <div style="display:flex;gap:24px;align-items:center;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:15px;font-weight:500;flex-wrap:wrap"><span>من نحن</span><span>ماذا نفعل</span><span>قيمنا</span><span>لماذا غراس</span><span>تواصل</span><span style="display:flex;gap:6px;align-items:center;color:#3F5A2A"><dc-import name="Gheras Icon" glyph="globe" size="18" hint-size="18px,18px"></dc-import><span style="font-family:Manrope,sans-serif;font-size:13px">EN</span></span><span style="background:#3F5A2A;color:#FAF8F2;border-radius:4px;padding:10px 16px;font-weight:700">كن شريكنا</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:12px">
+        <div style="font-size:14px;line-height:1.55"><strong>Mirror the layout.</strong> Logo, nav order, columns and alignment all flip. Set <span style="font-family:'IBM Plex Mono',monospace;font-size:12px">lang="ar" dir="rtl"</span> on the page.</div>
+        <div style="font-size:14px;line-height:1.55"><strong>Flip directional icons.</strong> Arrows and chevrons mirror. Clocks, checkmarks, the globe and the logo’s plants do not.</div>
+        <div style="font-size:14px;line-height:1.55"><strong>Test long Arabic words</strong> in buttons and navigation. Buttons grow; they never truncate.</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:64px">
+      <div style="background:#EFE7D6;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px">
+        <span style="font-family:Fraunces,serif;font-size:26px">Motion — grow, don’t bounce.</span>
+        <span style="font-size:14px;line-height:1.55">Elements rise gently into place, like growth. Botanical line art draws itself in. No bouncing, spinning or flashy effects.</span>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-family:'IBM Plex Mono',monospace;font-size:12px;border-top:1px solid rgba(31,42,28,.15);padding-top:14px">
+          <span style="color:#6B675C">duration</span><span>300–600 ms</span>
+          <span style="color:#6B675C">easing</span><span>cubic-bezier(.22, .61, .36, 1)</span>
+          <span style="color:#6B675C">reveal</span><span>opacity 0→1, translateY 16→0</span>
+          <span style="color:#6B675C">line art</span><span>stroke draw, 1200 ms</span>
+          <span style="color:#6B675C">reduced</span><span>prefers-reduced-motion → no movement</span>
+        </div>
+      </div>
+      <div style="background:#1F2A1C;color:#FAF8F2;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:20px">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#E8D3A0">FOOTER</span>
+        <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-start">
+          <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:180px" hint-size="180px,44px"></dc-import>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;color:#E8D3A0"><span>About</span><span>Values</span><span>What we do</span><span>Contact</span></div>
+        </div>
+        <div style="height:1px;background:rgba(201,154,59,.5)"></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:#E8D3A0"><span>© 2026 GHERAS · An IPH Company</span><span style="font-family:'IBM Plex Sans Arabic',sans-serif">عربي · English</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#1F2A1C;color:#E8D3A0;padding:56px clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center">
+    <dc-import name="Gheras Logo" variant="emblem" scheme="gold" style="width:56px" hint-size="56px,56px"></dc-import>
+    <span style="font-size:13px">GHERAS Brand Identity System · v1.0 · Draft for client review</span>
+    <span dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px">نغرس اليوم... لنبني الغد</span>
+  </div>
+</footer>
+</doc-page></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;previewLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;English&quot;,&quot;Arabic&quot;],&quot;default&quot;:&quot;English&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Website preview&quot;},&quot;showGrid&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Website preview&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    if (!this._c) this._c = this.build(React.createElement);
+    const ar = (this.props.previewLang ?? 'English') === 'Arabic';
+    return { ...this._c, heroAr: ar, heroEn: !ar, showGrid: !!this.props.showGrid };
+  }
+  build(h) {
+    const toc = [['01','Brand story','قصة العلامة','story'],['02','Positioning','التموضع','positioning'],['03','Voice & tone','الصوت والنبرة','voice'],['04','ICARE values','القيم','values'],['05','Logo','الشعار','logo'],['06','Lockups','صيغ الشعار','lockups'],['07','Colour versions','نسخ الألوان','versions'],['08','Clear space & size','المساحة والحجم','clearspace'],['09','Misuse','الاستخدام الخاطئ','misuse'],['10','Colour palette','الألوان','palette'],['11','Typography','الخطوط','type'],['12','Graphic language','اللغة البصرية','graphics'],['13','Pattern','النقش','pattern'],['14','Iconography','الأيقونات','icons'],['15','Photography','التصوير','photo'],['16','Applications','التطبيقات','apps'],['17','Digital foundations','الأسس الرقمية','digital']].map(([n,en,ar,id]) => ({n,en,ar,href:'#'+id}));
+    const personality = [['Rooted and authentic','متجذّرة وأصيلة','Rustic or handmade','ريفية أو يدوية'],['Precise and technical','دقيقة وتقنية','Cold or corporate-blue','باردة أو مؤسسية زرقاء'],['Proud and confident','فخورة وواثقة','Loud or boastful','صاخبة أو متفاخرة'],['Warm and human','دافئة وإنسانية','Sentimental','عاطفية مبالغة'],['Premium and calm','راقية وهادئة','Luxurious or flashy','مترفة أو لامعة']].map(([is,isAr,not,notAr]) => ({is,isAr,not,notAr}));
+    const principles = [['Register','Plain international business English.','عربية فصحى معاصرة وواضحة، أقرب إلى مؤسسة محترمة منها إلى الإعلان أو الشعر.'],['Sentences','Short, active voice, one idea each.','جمل قصيرة تبدأ بفعل: نغرس، نستصلح، نروي، نبني.'],['Confidence','Prove with facts, not adjectives.','لا تكديس للصفات، ولا سجع ثقيل.'],['Warmth','Human, never sentimental.','دفء نابع من احترام الأرض، بلا زخرفة.'],['Dialect','None.','لا لهجة على الموقع؛ لهجة ليبية خفيفة فقط في منشورات المجتمع المحلي.']].map(([k,en,ar]) => ({k,en,ar}));
+    const useEn = ['land','soil','water','seed','season','harvest','legacy','trust','precision'];
+    const useAr = ['الأرض','التربة','المياه','البذرة','الموسم','الحصاد','الإرث','الأمانة','الدقة'];
+    const avoidEn = ['world-class','cutting-edge','revolutionary','synergy','unparalleled'];
+    const avoidAr = ['الرائدة عالمياً','الأفضل على الإطلاق','غير مسبوق','ثورة','نقلة نوعية'];
+    const lines = [['Descriptor','Agricultural Investment','للاستثمار الزراعي'],['Slogan','Planting Today... Building Tomorrow','نغرس اليوم... لنبني الغد'],['Big idea','One season, many generations','حصادُ موسم... وإرثُ أجيال'],['Core belief','Agriculture is a trust and a responsibility','الزراعة أمانةٌ ومسؤولية'],['Call to action','Partner with us','كن شريكنا']].map(([k,en,ar]) => ({k,en,ar}));
+    const rewrites = [
+      {be:'We do not merely cultivate the soil; we build a sustainable agricultural future that harmonizes natural authenticity with cutting-edge technology.',ba:'نحن لا نزرع التربة فحسب، بل نبني مستقبلاً زراعياً مستداماً يجمع بين الأصالة الطبيعية وأحدث التقنيات.',ae:'We build farms that last — where the knowledge of the land meets the precision of modern technology.',aa:'نبني مزارع تدوم، حيث تلتقي خبرة الأرض بدقة التقنية الحديثة.'},
+      {be:'GHERAS sets a new benchmark in operational professionalism and responsible investment across the region.',ba:'تضع غراس معياراً جديداً في الاحترافية التشغيلية والاستثمار المسؤول في المنطقة.',ae:'From large projects to modern irrigation, we hold ourselves to one standard: precision.',aa:'من المشاريع الكبرى إلى أنظمة الري الحديثة، نلتزم بمعيار واحد: الدقة.'}];
+    const audiences = [['Investors','المستثمرون','Figures first. Calm and exact.'],['Institutions','المؤسسات','National purpose and reliability.'],['Industry partners','الشركاء','Technical and direct.'],['Talent','الكفاءات','Pride and growth.'],['Community','المجتمع','Warm and close to the land.']].map(([en,ar,tone]) => ({en,ar,tone}));
+    const values = [['I','integrity','Integrity','النزاهة','We act with honesty and transparency toward the land, our partners, and the community.'],['C','commitment','Commitment','الالتزام','We dedicate our utmost effort every day to nurture our projects and guarantee top-quality yield.'],['A','accountability','Accountability','المسؤولية','We take ownership of our environmental and investment decisions, safeguarding natural resources.'],['R','respect','Respect','الاحترام','We honor nature, local communities, and the workforce across all operational sites.'],['E','excellence','Excellence','التميّز','We strive for mastery and precision through state-of-the-art agricultural practices and quality control.']].map(([l,k,en,ar,d]) => ({l,k,en,ar,d}));
+    const services = [['land','Land reclamation','استصلاح الأراضي'],['crop','Crop production','الإنتاج الزراعي'],['drip','Drip irrigation','الري بالتنقيط'],['pivot','Centre pivot','الري المحوري'],['sensor','Smart sensors','المستشعرات الذكية'],['soil','Soil health','صحة التربة'],['water','Water management','إدارة المياه'],['cold','Cold storage','التخزين المبرّد'],['distribution','Distribution','التوزيع'],['supply','Supply chain','سلاسل الإمداد'],['partner','Partnerships','الشراكات'],['training','Training','التدريب'],['food','Food security','الأمن الغذائي'],['quality','Quality control','ضبط الجودة']].map(([k,en,ar]) => ({k,en,ar}));
+    const rgb = x => [1,3,5].map(i => parseInt(x.slice(i,i+2),16));
+    const lum = x => { const c = rgb(x).map(v => { v/=255; return v<=.03928 ? v/12.92 : Math.pow((v+.055)/1.055,2.4); }); return .2126*c[0]+.7152*c[1]+.0722*c[2]; };
+    const cr = (a,b) => { const x=lum(a), y=lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); };
+    const cmyk = x => { const [r,g,b] = rgb(x).map(v => v/255), k = 1-Math.max(r,g,b); return [r,g,b].map(v => Math.round((1-v-k)/(1-k)*100)).concat(Math.round(k*100)).join(' · '); };
+    const pal = [
+      ['Deep Olive','زيتوني داكن','#1F2A1C','Primary dark — headings, text, dark sections, footer','5605 C'],
+      ['Grove Green','أخضر البستان','#3F5A2A','Primary brand green — buttons, links, key shapes','371 C'],
+      ['Olive Leaf','ورق الزيتون','#8A9A4B','Supporting green — illustration, icons, highlights','7495 C'],
+      ['Harvest Gold','ذهبي الحصاد','#C99A3B','Signature accent — rules, numbers, icons on dark','7563 C'],
+      ['Wheat','قمحي','#E8D3A0','Soft fill — cards, tags, quiet highlights','7501 C'],
+      ['Libyan Soil','تربة ليبية','#9A5B3A','Small warm accent — land reclamation, rare emphasis',''],
+      ['Aquifer','مياه جوفية','#2F6F73','Water & technology — irrigation, data',''],
+      ['Sand','رملي','#EFE7D6','Secondary background — alternating sections',''],
+      ['Linen','كتّاني','#FAF8F2','Main background — instead of pure white',''],
+      ['Stone','حجري','#6B675C','Secondary text, captions, borders','']];
+    const palette = pal.map(([name,ar,hex,role,pms]) => ({name,ar,hex,role,pms:pms ? 'PMS '+pms+' (nearest — verify on swatch)' : '—',rgb:rgb(hex).join(' · '),cmyk:cmyk(hex),ink:lum(hex)>.35?'#1F2A1C':'#FAF8F2'}));
+    const P = Object.fromEntries(pal.map(p => [p[0],p[2]])); P['Gold Ink']='#86621E';
+    const prs = [['Deep Olive','Linen','Body & headings'],['Deep Olive','Sand','Body on alternating sections'],['Deep Olive','Wheat','Text on cards & tags'],['Grove Green','Linen','Links, buttons as text'],['Stone','Linen','Captions, secondary text'],['Stone','Sand','Captions on Sand'],['Gold Ink','Linen','Arabic eyebrows on light'],['Linen','Deep Olive','Reversed text'],['Harvest Gold','Deep Olive','Figures, eyebrows on dark'],['Wheat','Deep Olive','Secondary text on dark'],['Linen','Grove Green','Primary button label'],['Linen','Aquifer','Data labels'],['Linen','Libyan Soil','Rare emphasis'],['Harvest Gold','Linen','Never as text'],['Olive Leaf','Linen','Never as text']];
+    const pairings = prs.map(([f,b,use]) => { const r = cr(P[f],P[b]); return {fg:P[f],bg:P[b],label:f+' on '+b,use,ratio:r.toFixed(1)+':1',verdict:r>=4.5?'AA':r>=3?'AA large only':'Decoration only',vc:r>=4.5?'#3F5A2A':r>=3?'#86621E':'#8E3B24'}; });
+    const lens = (L,w) => `M0 0Q${L/2} ${-w} ${L} 0Q${L/2} ${w} 0 0Z`;
+    const pattern = (a,b,ring,key) => { const W=1200,H=640,cx=600,cy=320,els=[]; let i=0;
+      for (let m=0;m<17;m++){ const r=34+m*40; if(m%2===0) els.push(h('circle',{key:i++,cx,cy,r,fill:'none',stroke:ring,strokeWidth:.6}));
+        const n=Math.max(6,Math.round(2*Math.PI*r/46));
+        for (let k=0;k<n;k++){ const th=(k+(m%2)*.5)/n*2*Math.PI, x=cx+r*Math.cos(th), y=cy+r*Math.sin(th); if(x<-30||x>W+30||y<-30||y>H+30) continue; const g=(k+m)%2===0, L=g?15:24, w=g?4.6:3.4, rot=th*180/Math.PI+90+(g?0:22);
+          els.push(h('path',{key:i++,d:lens(L,w),fill:g?a:b,transform:`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)}) translate(${-L/2} 0)`})); } }
+      return h('svg',{key,viewBox:`0 0 ${W} ${H}`,width:'100%',height:'100%',preserveAspectRatio:'xMidYMid slice',style:{display:'block'}},els); };
+    const contour = (col,key) => { const ps=[]; for (let k=0;k<12;k++){ let d=''; for (let j=0;j<=120;j++){ const t=j/120*2*Math.PI, rr=26+k*24+9*Math.sin(3*t+k*.35)+6*Math.sin(5*t-k*.2)+4*Math.cos(2*t+1), x=300+rr*1.4*Math.cos(t), y=200+rr*Math.sin(t); d+=(j?'L':'M')+x.toFixed(1)+' '+y.toFixed(1); } ps.push(h('path',{key:k,d:d+'Z',fill:'none',stroke:col,strokeWidth:k%4===0?1.2:.6})); } return h('svg',{key,viewBox:'0 0 600 400',width:'100%',height:'100%',preserveAspectRatio:'xMidYMid slice',style:{display:'block'}},ps); };
+    const ruler = (col,acc,key) => { const e=[]; let i=0; for (let t=0;t<=60;t++){ const x=12+t*9.6, L=t%10===0?16:t%5===0?10:5; e.push(h('line',{key:i++,x1:x,y1:52,x2:x,y2:52-L,stroke:col,strokeWidth:1})); } e.push(h('line',{key:i++,x1:12,y1:52,x2:588,y2:52,stroke:col,strokeWidth:1}));
+      for (let r=0;r<2;r++) for (let c=0;c<7;c++){ const x=40+c*86, y=100+r*44; e.push(h('path',{key:i++,d:`M${x-5} ${y}H${x+5}M${x} ${y-5}V${y+5}`,stroke:c===3&&r===0?acc:col,strokeWidth:1})); }
+      e.push(h('path',{key:i++,d:'M126 176H470M126 170V182M470 170V182',stroke:acc,strokeWidth:1})); e.push(h('text',{key:i++,x:298,y:194,fill:col,fontSize:10,fontFamily:"'IBM Plex Mono',monospace",textAnchor:'middle'},'measure'));
+      return h('svg',{key,viewBox:'0 0 600 200',width:'100%',style:{display:'block'}},e); };
+    const spacing = [4,8,12,16,24,32,48,64,96,128].map(v => ({v,w:v+'px'}));
+    const shots = [['Aerial — centre-pivot fields at sunset','Hero, report covers'],['Olive grove, low warm sun, long shadows','Two horizons, legacy'],['Wheat in close-up, golden hour','Two horizons, today'],['Soil held in hands','Values, community'],['Drip lines in rows','Services, irrigation'],['Green hills of Al Jabal Al Akhdar','About, landscape'],['Engineer with tablet in the field','Talent, smart farming'],['Clean cold-storage interior','Supply chain'],['Hands sorting harvest at a crate','Produce, quality'],['Pivot arm detail against sky','Technology, detail']].map(([s,u],i) => ({n:String(i+1).padStart(2,'0'),s,u}));
+    return { toc, personality, principles, useEn, useAr, avoidEn, avoidAr, lines, rewrites, audiences, values, services, palette, pairings, spacing, shots,
+      patternLight: pattern('#C99A3B','#8A9A4B','rgba(63,90,42,.25)','pl'), patternDark: pattern('#C99A3B','#8A9A4B','rgba(201,154,59,.3)','pd'), patternMono: pattern('#D8CBAA','#D8CBAA','#E0D5BA','pm'),
+      contour: contour('#9A5B3A','c1'), contourDark: contour('rgba(232,211,160,.45)','c2'), ruler: ruler('#1F2A1C','#C99A3B','r1') };
+  }
+}
+</script>
+</body>
+</html>

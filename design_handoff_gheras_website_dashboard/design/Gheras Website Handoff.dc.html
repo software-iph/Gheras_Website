@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>GHERAS website — handoff</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;background:#FAF8F2;color:#1F2A1C;font-family:Manrope,sans-serif;-webkit-font-smoothing:antialiased}a{color:#3F5A2A;text-underline-offset:4px}a:hover{color:#1F2A1C}p,li,td{text-wrap:pretty}</style>
+</helmet>
+
+<header style="background:#1F2A1C;color:#FAF8F2;padding:56px clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:220px" hint-size="220px,62px"></dc-import>
+      <h1 style="font-family:Fraunces,serif;font-weight:300;font-size:clamp(36px,4vw,56px);line-height:1.1;margin:0">Website handoff</h1>
+      <p style="margin:0;color:#E8D3A0;font-size:16px;max-width:60ch;line-height:1.6">Breakpoints, states, motion, placeholders and design notes for the bilingual GHERAS single-page site.</p>
+    </div>
+    <nav style="display:flex;gap:20px;flex-wrap:wrap;font-size:14px;font-weight:600">
+      <a href="#breakpoints" style="color:#E8D3A0">Breakpoints</a><a href="#states" style="color:#E8D3A0">States</a><a href="#motion" style="color:#E8D3A0">Motion</a><a href="#placeholders" style="color:#E8D3A0">Placeholders</a><a href="#notes" style="color:#E8D3A0">Notes</a><a href="#build" style="color:#E8D3A0">Build</a>
+    </nav>
+  </div>
+</header>
+
+<section id="breakpoints" data-screen-label="Breakpoints" style="padding:80px clamp(20px,5vw,80px);background:#EFE7D6">
+  <div style="max-width:1600px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px"><span style="width:48px;height:1px;background:#C99A3B"></span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Breakpoints — live pages</span></div>
+    <p style="font-size:15px;line-height:1.6;margin:0 0 40px;max-width:70ch">Each frame is the real page loaded at that width. Scroll inside a frame to check every section. Open full pages: <a href="Gheras%20Website.dc.html">English</a> · <a href="Gheras%20Website%20AR.dc.html">العربية</a></p>
+    <sc-for list="{{ langs }}" as="lg" hint-placeholder-count="2">
+      <h2 style="font-family:Fraunces,serif;font-weight:400;font-size:28px;margin:0 0 20px">{{ lg.name }}</h2>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end;margin-bottom:56px">
+        <sc-for list="{{ lg.frames }}" as="fr" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="width:{{ fr.dw }};height:{{ fr.dh }};overflow:hidden;border-radius:12px;background:#FAF8F2;box-shadow:0 2px 4px rgba(31,42,28,.06),0 12px 32px rgba(31,42,28,.12)">
+              <iframe src="{{ fr.src }}" title="{{ fr.title }}" loading="lazy" style="width:{{ fr.w }};height:{{ fr.h }};border:0;transform:scale({{ fr.s }});transform-origin:0 0;display:block"></iframe>
+            </div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B675C">{{ fr.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="states" data-screen-label="States" style="padding:80px clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:40px"><span style="width:48px;height:1px;background:#C99A3B"></span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">States sheet</span></div>
+
+    <h3 style="font-weight:700;font-size:15px;margin:0 0 16px">Buttons &amp; links</h3>
+    <div style="overflow-x:auto;margin-bottom:56px"><div style="display:grid;grid-template-columns:140px repeat(5,minmax(210px,1fr));gap:16px 20px;align-items:center;min-width:1230px;padding:4px">
+      <span></span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">DEFAULT</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">HOVER</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">PRESSED</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">FOCUS</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">DISABLED</span>
+      <span style="font-size:13px;font-weight:600">Primary</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:4px;background:#3F5A2A;color:#FAF8F2;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap">Partner with us →</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:4px;background:#1F2A1C;color:#FAF8F2;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap">Partner with us <span style="transform:translateX(4px)">→</span></span>
+      <span style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:4px;background:#1F2A1C;color:#FAF8F2;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap;transform:translateY(1px);box-shadow:inset 0 2px 4px rgba(0,0,0,.25)">Partner with us →</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:4px;background:#3F5A2A;color:#FAF8F2;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap;outline:2px solid #3F5A2A;outline-offset:2px">Partner with us →</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:4px;background:#CFC6AF;color:#6B675C;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap">Partner with us →</span>
+      <span style="font-size:13px;font-weight:600">Secondary</span>
+      <span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;border:1.5px solid #3F5A2A;color:#3F5A2A;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap">See what we do</span>
+      <span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;border:1.5px solid #3F5A2A;background:#E6EBDA;color:#1F2A1C;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap">See what we do</span>
+      <span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;border:1.5px solid #1F2A1C;background:#D6DEC4;color:#1F2A1C;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap">See what we do</span>
+      <span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;border:1.5px solid #3F5A2A;color:#3F5A2A;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap;outline:2px solid #3F5A2A;outline-offset:2px">See what we do</span>
+      <span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;border:1.5px solid #CFC6AF;color:#6B675C;font-weight:700;font-size:15px;justify-self:start;white-space:nowrap">See what we do</span>
+      <span style="font-size:13px;font-weight:600">On dark (hero)</span>
+      <span style="background:#1F2A1C;padding:10px;border-radius:8px;justify-self:start"><span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;background:#C99A3B;color:#1F2A1C;font-weight:700;font-size:15px;white-space:nowrap">Partner with us →</span></span>
+      <span style="background:#1F2A1C;padding:10px;border-radius:8px;justify-self:start"><span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;background:#E8D3A0;color:#1F2A1C;font-weight:700;font-size:15px;white-space:nowrap">Partner with us →</span></span>
+      <span style="background:#1F2A1C;padding:10px;border-radius:8px;justify-self:start"><span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;background:#E8D3A0;color:#1F2A1C;font-weight:700;font-size:15px;white-space:nowrap;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)">Partner with us →</span></span>
+      <span style="background:#1F2A1C;padding:10px;border-radius:8px;justify-self:start"><span style="display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:4px;background:#C99A3B;color:#1F2A1C;font-weight:700;font-size:15px;white-space:nowrap;outline:2px solid #E8D3A0;outline-offset:2px">Partner with us →</span></span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">n/a</span>
+      <span style="font-size:13px;font-weight:600">Text link</span>
+      <span style="font-weight:700;font-size:15px;color:#3F5A2A">Read more →</span>
+      <span style="font-weight:700;font-size:15px;color:#1F2A1C;text-decoration:underline;text-decoration-color:#C99A3B;text-decoration-thickness:2px;text-underline-offset:6px">Read more →</span>
+      <span style="font-weight:700;font-size:15px;color:#1F2A1C">Read more →</span>
+      <span style="font-weight:700;font-size:15px;color:#3F5A2A;outline:2px solid #3F5A2A;outline-offset:2px;justify-self:start">Read more →</span>
+      <span style="font-weight:700;font-size:15px;color:#6B675C">Read more →</span>
+    </div></div>
+
+    <h3 style="font-weight:700;font-size:15px;margin:0 0 16px">Form fields</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:56px">
+      <sc-for list="{{ fields }}" as="fd" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B675C">{{ fd.state }}</span>
+          <span style="font-size:14px;font-weight:600;color:{{ fd.lab }}">Email</span>
+          <span style="height:48px;border:1px solid {{ fd.border }};border-radius:4px;background:{{ fd.bg }};padding:0 14px;display:flex;align-items:center;font-size:16px;color:{{ fd.ink }};box-shadow:{{ fd.ring }}">{{ fd.val }}</span>
+          <span style="font-size:13px;font-weight:500;color:{{ fd.msgc }}">{{ fd.msg }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <h3 style="font-weight:700;font-size:15px;margin:0 0 16px">Navigation, cards &amp; mobile menu</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="background:repeating-linear-gradient(135deg,#2A3526 0 10px,#303C2C 10px 20px);border-radius:8px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px"><dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:140px" hint-size="140px,39px"></dc-import><span style="display:flex;gap:14px;font-size:12px;color:#FAF8F2;font-weight:600"><span>About</span><span style="border-bottom:2px solid #C99A3B">What we do</span><span>Values</span></span></div>
+        <span style="font-size:13px;color:#6B675C">Header over hero — transparent, reversed logo, Linen links, gold underline on the active section</span>
+        <div style="background:#FAF8F2;border-radius:8px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06)"><dc-import name="Gheras Logo" variant="horizontal" style="width:140px" hint-size="140px,39px"></dc-import><span style="display:flex;gap:14px;font-size:12px;font-weight:600"><span>About</span><span>What we do</span><span style="border-bottom:2px solid #C99A3B">Values</span></span></div>
+        <span style="font-size:13px;color:#6B675C">After 80 px of scroll — solid Linen, soft olive-tinted shadow, full-colour logo</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:16px">
+          <div style="flex:1;background:#FFFFFF;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06)"><dc-import name="Gheras Icon" glyph="drip" size="32" hint-size="32px,32px"></dc-import><span style="font-weight:600;font-size:15px">Modern irrigation</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B675C">DEFAULT</span></div>
+          <div style="flex:1;background:#FFFFFF;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px;transform:translateY(-4px);box-shadow:0 2px 4px rgba(31,42,28,.06),0 12px 32px rgba(31,42,28,.12)"><dc-import name="Gheras Icon" glyph="drip" size="32" hint-size="32px,32px"></dc-import><span style="font-weight:600;font-size:15px">Modern irrigation</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B675C">HOVER — lift 4 px, deeper shadow</span></div>
+        </div>
+        <span style="font-size:13px;color:#6B675C">Service card</span>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div style="width:180px;height:360px;background:#1F2A1C;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px;color:#FAF8F2;flex-shrink:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><dc-import name="Gheras Logo" variant="horizontal" scheme="reversed" style="width:80px" hint-size="80px,22px"></dc-import><span style="width:22px;height:22px;border:1px solid rgba(250,248,242,.45);border-radius:3px;display:grid;place-items:center;font-size:12px">✕</span></div>
+          <span style="font-family:Fraunces,serif;font-size:17px;padding:8px 0;border-bottom:1px solid rgba(201,154,59,.35)">About</span><span style="font-family:Fraunces,serif;font-size:17px;padding:8px 0;border-bottom:1px solid rgba(201,154,59,.35)">What we do</span><span style="font-family:Fraunces,serif;font-size:17px;padding:8px 0;border-bottom:1px solid rgba(201,154,59,.35)">Values</span><span style="font-family:Fraunces,serif;font-size:17px;padding:8px 0;border-bottom:1px solid rgba(201,154,59,.35)">Why GHERAS</span><span style="font-family:Fraunces,serif;font-size:17px;padding:8px 0;border-bottom:1px solid rgba(201,154,59,.35)">Contact</span>
+          <span style="flex:1"></span>
+          <span style="border:1px solid rgba(250,248,242,.45);border-radius:3px;text-align:center;padding:7px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:11px">العربية</span>
+          <span style="background:#C99A3B;color:#1F2A1C;border-radius:3px;text-align:center;padding:8px;font-weight:700;font-size:11px">Partner with us →</span>
+        </div>
+        <span style="font-size:13px;line-height:1.6;color:#6B675C">Mobile menu (below 1180 px). Full screen, 64 px link rows, language switch and the primary action at the bottom within thumb reach. Locks page scroll while open.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="motion" data-screen-label="Motion" style="padding:80px clamp(20px,5vw,80px);background:#EFE7D6">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px"><span style="width:48px;height:1px;background:#C99A3B"></span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Motion sheet</span></div>
+    <p style="font-size:15px;line-height:1.6;margin:0 0 32px;max-width:75ch">Easing everywhere: <span style="font-family:'IBM Plex Mono',monospace;font-size:13px">cubic-bezier(.22, .61, .36, 1)</span>. Every reveal plays once on first entry and never hides content if scripts fail. With <span style="font-family:'IBM Plex Mono',monospace;font-size:13px">prefers-reduced-motion: reduce</span> nothing moves: content is simply present; the stem and progress bar still track position without easing.</p>
+    <div style="overflow-x:auto;background:#FAF8F2;border-radius:12px">
+      <div style="min-width:860px;font-size:14px">
+        <div style="display:grid;grid-template-columns:minmax(160px,1fr) minmax(110px,.8fr) minmax(240px,2fr) minmax(150px,1fr) minmax(160px,1fr);border-bottom:1px solid #1F2A1C;font-weight:700"><span style="padding:14px 16px">Element</span><span style="padding:14px 16px">Trigger</span><span style="padding:14px 16px">Animation</span><span style="padding:14px 16px">Duration · delay</span><span style="padding:14px 16px">Mobile</span></div>
+        <sc-for list="{{ motion }}" as="m" hint-placeholder-count="14">
+          <div style="display:grid;grid-template-columns:minmax(160px,1fr) minmax(110px,.8fr) minmax(240px,2fr) minmax(150px,1fr) minmax(160px,1fr);border-bottom:1px solid rgba(31,42,28,.12);line-height:1.5"><span style="padding:12px 16px;font-weight:600">{{ m.e }}</span><span style="padding:12px 16px">{{ m.t }}</span><span style="padding:12px 16px">{{ m.a }}</span><span style="padding:12px 16px;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ m.d }}</span><span style="padding:12px 16px;color:#6B675C">{{ m.m }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="placeholders" data-screen-label="Placeholders" style="padding:80px clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px"><span style="width:48px;height:1px;background:#C99A3B"></span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Placeholders — client to supply</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:32px 48px">
+      <sc-for list="{{ ph }}" as="g" hint-placeholder-count="4">
+        <div>
+          <h3 style="font-family:Fraunces,serif;font-weight:400;font-size:24px;margin:0 0 12px">{{ g.t }}</h3>
+          <ul style="margin:0;padding:0;list-style:none;border-top:1px solid #1F2A1C">
+            <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4"><li style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(31,42,28,.12);font-size:14px"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px dashed #6B675C;border-radius:4px;padding:2px 8px;align-self:flex-start">{{ it.k }}</span><span style="color:#6B675C;text-align:right">{{ it.w }}</span></li></sc-for>
+          </ul>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="notes" data-screen-label="Design notes" style="padding:80px clamp(20px,5vw,80px);background:#1F2A1C;color:#FAF8F2">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px"><span style="width:48px;height:1px;background:#C99A3B"></span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E8D3A0">Design notes — judgment calls</span></div>
+    <ol style="margin:0;padding:0 0 0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));gap:20px 56px">
+      <sc-for list="{{ notes }}" as="n" hint-placeholder-count="8"><li style="font-size:15px;line-height:1.6;color:#E8D3A0"><strong style="color:#FAF8F2">{{ n.t }}</strong> {{ n.d }}</li></sc-for>
+    </ol>
+  </div>
+</section>
+
+<section id="build" data-screen-label="Build" style="padding:80px clamp(20px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px"><span style="width:48px;height:1px;background:#C99A3B"></span><span style="font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#3F5A2A">Build-ready export</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px">
+      <sc-for list="{{ files }}" as="fl" hint-placeholder-count="5">
+        <a href="{{ fl.href }}" style="display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border-radius:12px;padding:24px;text-decoration:none;color:#1F2A1C;box-shadow:0 1px 2px rgba(31,42,28,.08),0 2px 8px rgba(31,42,28,.06)" style-hover="box-shadow:0 2px 4px rgba(31,42,28,.06),0 12px 32px rgba(31,42,28,.12)"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#3F5A2A">{{ fl.n }}</span><span style="font-size:14px;line-height:1.5;color:#6B675C">{{ fl.d }}</span></a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    if (this._c) return this._c;
+    const sizes = [[1440,900,'Desktop 1440'],[1024,768,'Laptop 1024'],[768,1024,'Tablet 768'],[390,844,'Mobile 390']];
+    const frames = file => sizes.map(([w,h,label]) => { const s = 520 / Math.max(h, 844); return { w: w+'px', h: h+'px', s, dw: Math.round(w*s)+'px', dh: Math.round(h*s)+'px', label: label + ' × ' + h, src: file, title: label }; });
+    const langs = [{ name: 'English', frames: frames('Gheras%20Website.dc.html') }, { name: 'العربية', frames: frames('Gheras%20Website%20AR.dc.html') }];
+    const fields = [
+      ['DEFAULT','#CFC6AF','#FFFFFF','#6B675C','none','name@example.com','',  '#1F2A1C','#6B675C'],
+      ['FOCUS','#3F5A2A','#FFFFFF','#1F2A1C','0 0 0 3px rgba(201,154,59,.35)','name@','', '#1F2A1C','#6B675C'],
+      ['FILLED','#CFC6AF','#FFFFFF','#1F2A1C','none','layla@fund.ly','', '#1F2A1C','#6B675C'],
+      ['ERROR','#8E3B24','#FFFFFF','#1F2A1C','none','layla@','✕ Please enter a valid email address.','#1F2A1C','#8E3B24'],
+      ['SUCCESS','#3F5A2A','#FFFFFF','#1F2A1C','none','layla@fund.ly','✓ Looks good.','#1F2A1C','#3F5A2A'],
+      ['DISABLED','#E4DDCC','#F3EFE6','#6B675C','none','—','', '#6B675C','#6B675C']
+    ].map(([state,border,bg,ink,ring,val,msg,lab,msgc]) => ({ state, border, bg, ink, ring, val, msg, lab, msgc }));
+    const motion = [
+      ['Growing stem','Scroll','Gold line scales from top with reading progress; a grain/leaf node appears at each section','scroll-linked · nodes 500 ms','Replaced by 2 px gold progress bar under header (<1024)'],
+      ['Header','Scroll > 80 px','Transparent → solid Linen + shadow; logo swaps to full colour; active link underline scales in','400 ms','Same'],
+      ['Hero photo','Load','Scale 1.06 → 1','1600 ms','Same'],
+      ['Hero headline','Load','Words rise 16 px → 0, fade in','600 ms · 220 ms + 80 ms/word','Same'],
+      ['Hero eyebrow, text, buttons','Load','Rise 12 px, fade; buttons last','600 ms · 80 / 640 / 860 ms','Same'],
+      ['Botanical line art','Load','Strokes draw in','1200 ms · 400 ms','Same'],
+      ['Hero depth','Scroll','Photo moves at 0.25× scroll; overlay deepens to +55% olive','scroll-linked','Depth off; overlay only'],
+      ['Belief statement','Scroll through line','Words go 18% → 100% opacity at reading pace','350 ms per word','Same'],
+      ['Gold Rule','Enters view','Scales from 0 toward its label','600 ms · 80 ms','Same'],
+      ['Figure rings','Enters view','Gold arc draws around each figure (no count-up until figures are real)','1200 ms · 200 ms + 80 ms','Same'],
+      ['Headings, text, cards, panels, fields','Enters view','Rise 16 px → 0, fade; stagger within a group','560 ms · 70 ms steps (max 6)','Same'],
+      ['Service card hover','Hover','Lift 4 px, shadow deepens','300 ms','n/a (touch)'],
+      ['Two horizons','Enters view','Wheat and olive columns slide out from the central circle; objectives rise one by one; circle scales .92 → 1','800 ms · items 320 ms + 90 ms','Stacked; same reveal'],
+      ['Mission pattern','Scroll','Pattern arcs drift ±20 px','scroll-linked','Same'],
+      ['ICARE','Enters view','Value columns rise in I → E order','560 ms · 70 ms steps','Stacked'],
+      ['Why GHERAS photos','Enters view','Circle mask grows from centre','900 ms','Same'],
+      ['Arrows in buttons/links','Hover','Arrow nudges 4 px forward (mirrored in Arabic)','300 ms','n/a'],
+      ['Contact success','Submit','Message rises; check mark draws','500 ms · check 600 ms after 300 ms','Same']
+    ].map(([e,t,a,d,m]) => ({ e, t, a, d, m }));
+    const ph = [
+      { t: 'Photography', items: [['PHOTO 01','Hero — aerial, centre-pivot fields at sunset'],['PHOTO 02','Why 01 — olive grove, low warm sun'],['PHOTO 05','Why 02 — drip lines in rows'],['PHOTO 07','Why 03 — engineer with tablet in the field'],['PHOTO 09','Why 04 — hands sorting harvest at a crate'],['PHOTO 04','Why 05 — soil held in hands']] },
+      { t: 'Figures', items: [['[000] hectares','under management'],['[000] projects','active'],['[000] tonnes','annual production'],['[000] people','agricultural engineers and specialists']] },
+      { t: 'Contact & company', items: [['[email]','Contact section'],['[phone]','Contact section'],['[address]','Contact section'],['[X] working days','Reply time on the thank-you message'],['[social links]','Footer'],['An IPH Company','Endorsement line — pending approval, plus Arabic wording from IPH']] },
+      { t: 'Copy approval', items: [['All Arabic copy','Native Arabic copy editor review before launch'],['Mission & vision (AR)','Translation of the profile wording — approve'],['Service one-liners','Tightened from the profile — approve']] }
+    ].map(g => ({ t: g.t, items: g.items.map(([k,w]) => ({ k, w })) }));
+    const notes = [
+      ['Mission, vision and ICARE share one Deep Olive chapter.','The brief asks for very large Harvest Gold letters; the book forbids gold text on light, so ICARE sits on dark directly after mission and vision, split by a gold line.'],
+      ['Two horizons is not pinned.','A pinned version made scrolling feel stuck, so the unfold now plays once when the section enters view. No section on the site takes over scrolling.'],
+      ['Header primary + hero primary.','The brief places "Partner with us" in both, so the first screen shows two. The hero version is gold on dark to read as the same action, not a second one.'],
+      ['Service one-liners.','The profile lists services as titles only; short lines under each card are tightened from the profile’s own wording, nothing new.'],
+      ['Strategic objectives split.','Today: delivery, quality (regional benchmark), productivity, supply-chain innovation. Tomorrow: sustainability, local talent, partnerships, long-term resilience.'],
+      ['Logo.','Enhanced master used throughout; the vector refinement is not used. Horizontal lockup shows the emblem with the descriptor beside it, since the emblem already carries both names.'],
+      ['Arabic ICARE.','Leads with the value names in Naskh; I·C·A·R·E stays as small Latin letters.'],
+      ['Mobile menu breakpoint.','Anchor links collapse into the full-screen menu below 1180 px; the header keeps the primary button down to 768 px.'],
+      ['Not in the book.','Disabled and pressed states, focus ring on gold buttons (Wheat ring on dark), and back-to-top were built from existing tokens.'],
+      ['Photo labels stay in English','on both pages — they are production notes for the photographer, not visitor copy.']
+    ].map(([t,d]) => ({ t, d }));
+    const files = [
+      ['Gheras Website.dc.html','English page — 1440 → 390, motion, form, menu', 'Gheras%20Website.dc.html'],
+      ['Gheras Website AR.dc.html','Arabic page — full right-to-left mirror', 'Gheras%20Website%20AR.dc.html'],
+      ['handoff/README.md','Build notes: structure, components, breakpoints, accessibility, performance', 'handoff/README.md'],
+      ['handoff/tokens.css','Colour, type, spacing, radius, shadow and motion tokens as CSS variables', 'handoff/tokens.css'],
+      ['handoff/tokens.json','Same tokens as JSON for design-token tooling', 'handoff/tokens.json']
+    ].map(([n,d,href]) => ({ n, d, href }));
+    this._c = { langs, fields, motion, ph, notes, files };
+    return this._c;
+  }
+}
+</script>
+</body>
+</html>

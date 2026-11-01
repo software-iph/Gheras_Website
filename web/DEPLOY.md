@@ -13,10 +13,10 @@ cd /opt/gheras/web
 cp .env.production.example .env.production
 nano .env.production      # fill POSTGRES_PASSWORD, SITE_URL=http://SERVER_IP:3001, ADMIN_*, SESSION_SECRET
 openssl rand -hex 32      # handy for SESSION_SECRET and POSTGRES_PASSWORD (hex: no characters that break the database URL)
-ln -s .env.production .env   # lets plain `docker compose ...` read the settings without --env-file
+ln -s .env.production .env   # required: every `docker compose ...` command reads the settings from .env
 
 # 3. Build and start (migrations run automatically when the app starts)
-docker compose --env-file .env.production up -d --build
+docker compose up -d --build
 ```
 
 Port 3001 must also be open in the VPS provider's firewall panel, if it has one. (Ports published by Docker bypass `ufw`.)
@@ -29,7 +29,7 @@ Logs: `docker compose logs -f gheras-web`
 
 ```bash
 cd /opt/gheras && git pull
-cd web && docker compose --env-file .env.production up -d --build
+cd web && docker compose up -d --build
 ```
 
 The public pages are pre-rendered during the build and re-read the published content from the database every 5 minutes (publishing from the dashboard updates them immediately).
@@ -38,8 +38,8 @@ The public pages are pre-rendered during the build and re-read the published con
 
 1. Point the domain's DNS (A record) at the server.
 2. In Nginx Proxy Manager → **Add Proxy Host**: domain name(s); scheme `http`; forward hostname = the server's IP (or `gheras-web` if NPM shares a Docker network with it); forward port `3001` (or `3000` when using `gheras-web`). SSL tab: request a Let's Encrypt certificate, force SSL.
-3. In `.env.production`: set `SITE_URL=https://your-domain` and **remove `SESSION_COOKIE_SECURE=false`** (admin cookies must be HTTPS-only once the domain works). Then `docker compose --env-file .env.production up -d`.
-4. Stop exposing port 3001 publicly: change the port mapping to `"127.0.0.1:3001:3000"` in `docker-compose.yml` (Docker ports bypass `ufw`), then `docker compose --env-file .env.production up -d`. If NPM runs in Docker and forwards to the server IP, instead connect NPM and `gheras-web` to one Docker network and forward to `gheras-web:3000`.
+3. In `.env.production`: set `SITE_URL=https://your-domain` and **remove `SESSION_COOKIE_SECURE=false`** (admin cookies must be HTTPS-only once the domain works). Then `docker compose up -d`.
+4. Stop exposing port 3001 publicly: change the port mapping to `"127.0.0.1:3001:3000"` in `docker-compose.yml` (Docker ports bypass `ufw`), then `docker compose up -d`. If NPM runs in Docker and forwards to the server IP, instead connect NPM and `gheras-web` to one Docker network and forward to `gheras-web:3000`.
 
 ## Admin recovery
 

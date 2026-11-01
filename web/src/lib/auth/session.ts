@@ -6,9 +6,8 @@ import { findUser, publicUser, type PublicUser } from './users';
 
 const COOKIE = 'gheras_admin';
 const FULL_TTL = 12 * 60 * 60 * 1000; // 12 h
-const MFA_TTL = 10 * 60 * 1000; // 10 min to finish two-step verification
 
-type Stage = 'mfa' | 'full';
+type Stage = 'full';
 type Payload = { uid: string; stage: Stage; exp: number; v: number };
 
 /** SESSION_SECRET (≥ 32 random characters) signs the session cookie. */
@@ -18,9 +17,9 @@ async function secret(): Promise<string> {
   return env;
 }
 
-export async function startSession(uid: string, stage: Stage, version: number) {
-  const exp = Date.now() + (stage === 'full' ? FULL_TTL : MFA_TTL);
-  (await cookies()).set(COOKIE, sign({ uid, stage, exp, v: version } satisfies Payload, await secret()), {
+export async function startSession(uid: string, version: number) {
+  const exp = Date.now() + FULL_TTL;
+  (await cookies()).set(COOKIE, sign({ uid, stage: 'full', exp, v: version } satisfies Payload, await secret()), {
     httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', path: '/', expires: new Date(exp),
   });
 }
@@ -37,7 +36,7 @@ async function read(): Promise<{ payload: Payload; user: NonNullable<Awaited<Ret
   return { payload, user };
 }
 
-/** The signed-in admin (two-step verification complete), or null. */
+/** The signed-in admin, or null. */
 export async function getAdmin(): Promise<PublicUser | null> {
   const s = await read();
   return s && s.payload.stage === 'full' ? publicUser(s.user) : null;
@@ -48,10 +47,4 @@ export async function requireAdmin(): Promise<PublicUser> {
   const admin = await getAdmin();
   if (!admin) redirect('/admin/login');
   return admin;
-}
-
-/** A user who passed the password step and still owes a 2FA code. */
-export async function getPendingMfaUser() {
-  const s = await read();
-  return s && s.payload.stage === 'mfa' ? s.user : null;
 }

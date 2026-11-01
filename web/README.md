@@ -13,7 +13,7 @@ npm run typecheck
 npm run admin:reset -- [--password <new>] [--reset-2fa]   # recover the admin account
 ```
 
-Copy `.env.example` to `.env.local` and fill it in. `DATABASE_URL` points at the local PostgreSQL database (create an empty database first, e.g. `gheras`). The first administrator is created from `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME` on first use. On their first sign-in they set up two-step verification with an authenticator app.
+Copy `.env.example` to `.env.local` and fill it in. `DATABASE_URL` points at the local PostgreSQL database (create an empty database first, e.g. `gheras`). The first administrator is created from `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME` on first use.
 
 ## Layout
 
@@ -24,7 +24,7 @@ Copy `.env.example` to `.env.local` and fill it in. `DATABASE_URL` points at the
 | `src/app/image-uploads/[name]` | Serves uploaded images from the `image-uploads` folder |
 | `src/admin/` | Dashboard UI components and its EN/AR strings (`i18n.ts`) |
 | `src/lib/cms/` | Content model logic: editor schema and limits (`schema.ts`), diffs and the publish merge (`diff.ts`), guardrails and health (`checks.ts`), draft/revision store (`store.ts`), server actions (`actions.ts`) |
-| `src/lib/auth/` | scrypt passwords, TOTP two-step verification, signed session cookies, login actions |
+| `src/lib/auth/` | scrypt passwords, signed session cookies, login actions |
 | `src/lib/inquiries/` | Contact form: validation, honeypot, rate limit, storage, team email |
 | `src/lib/db/sql.ts` | PostgreSQL connection pool (`DATABASE_URL`) |
 | `db/migrations/` | SQL schema, applied in order by `npm run db:migrate` |

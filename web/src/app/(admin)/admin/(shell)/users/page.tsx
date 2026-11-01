@@ -19,7 +19,6 @@ export default async function UsersPage() {
           <div className="muted" dir="ltr" style={{ fontSize: 14, textAlign: 'start' }}>{admin.email}</div>
         </div>
         <span className="pill" style={{ padding: '6px 12px', background: '#1F2A1C', color: '#C99A3B' }}>{t.admin}</span>
-        {admin.twoFactor && <span className="pill" style={{ padding: '6px 12px', background: '#E6EBDA', color: '#3F5A2A' }}>✓ {t.twoFactorOn}</span>}
         <span className="muted" style={{ fontSize: 13 }}>{t.allPerms}</span>
       </section>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>

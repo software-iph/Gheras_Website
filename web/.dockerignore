@@ -1,0 +1,10 @@
+node_modules
+.next
+.env
+.env*.local
+.env.production
+image-uploads
+.data
+*.tsbuildinfo
+Dockerfile
+docker-compose.yml

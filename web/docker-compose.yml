@@ -1,0 +1,37 @@
+# GHERAS web + its PostgreSQL database. Settings come from .env.production (copy .env.production.example).
+# Public on port 3001 for now; later Nginx Proxy Manager can point the domain at it.
+services:
+  gheras-web:
+    build: .
+    container_name: gheras-web
+    restart: unless-stopped
+    env_file: .env.production
+    environment:
+      DATABASE_URL: postgres://gheras:${POSTGRES_PASSWORD}@gheras-db:5432/gheras
+    ports:
+      - "3001:3000"
+    volumes:
+      - gheras-uploads:/app/image-uploads
+    depends_on:
+      gheras-db:
+        condition: service_healthy
+
+  gheras-db:
+    image: postgres:17-alpine
+    container_name: gheras-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gheras
+      POSTGRES_USER: gheras
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - gheras-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gheras -d gheras"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  gheras-db:
+  gheras-uploads:

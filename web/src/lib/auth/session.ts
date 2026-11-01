@@ -17,10 +17,15 @@ async function secret(): Promise<string> {
   return env;
 }
 
+/** HTTPS-only cookie in production. SESSION_COOKIE_SECURE=false allows sign-in over plain HTTP (testing by IP only). */
+const secureCookie = () => process.env.SESSION_COOKIE_SECURE
+  ? process.env.SESSION_COOKIE_SECURE !== 'false'
+  : process.env.NODE_ENV === 'production';
+
 export async function startSession(uid: string, version: number) {
   const exp = Date.now() + FULL_TTL;
   (await cookies()).set(COOKIE, sign({ uid, stage: 'full', exp, v: version } satisfies Payload, await secret()), {
-    httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', path: '/', expires: new Date(exp),
+    httpOnly: true, sameSite: 'lax', secure: secureCookie(), path: '/', expires: new Date(exp),
   });
 }
 

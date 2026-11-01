@@ -6,7 +6,7 @@ import path from 'node:path';
  * Files are served at /image-uploads/<name>; that URL is what the database stores.
  */
 export const UPLOADS_DIR = process.env.UPLOADS_DIR
-  ?? path.join(/*turbopackIgnore: true*/ process.cwd(), 'image-uploads');
+  || path.join(/*turbopackIgnore: true*/ process.cwd(), 'image-uploads');
 
 export const UPLOADS_URL = '/image-uploads';
 

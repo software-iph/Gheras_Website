@@ -12,11 +12,11 @@ cd /opt/gheras/web
 # 2. Settings
 cp .env.production.example .env.production
 nano .env.production      # fill POSTGRES_PASSWORD, SITE_URL=http://SERVER_IP:3001, ADMIN_*, SESSION_SECRET
-openssl rand -base64 48   # handy for SESSION_SECRET and POSTGRES_PASSWORD
+openssl rand -hex 32      # handy for SESSION_SECRET and POSTGRES_PASSWORD (hex: no characters that break the database URL)
+ln -s .env.production .env   # lets plain `docker compose ...` read the settings without --env-file
 
 # 3. Build and start (migrations run automatically when the app starts)
 docker compose --env-file .env.production up -d --build
-
 ```
 
 Port 3001 must also be open in the VPS provider's firewall panel, if it has one. (Ports published by Docker bypass `ufw`.)

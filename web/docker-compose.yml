@@ -1,6 +1,6 @@
 # GHERAS web + its PostgreSQL database. Settings come from .env.production (copy .env.production.example);
 # link it as .env (`ln -s .env.production .env`) so every `docker compose` command reads it.
-# Public on port 3001 for now; later Nginx Proxy Manager can point the domain at it.
+# Public traffic goes through Nginx Proxy Manager (https://gheras-ly.com -> gheras-web:3000 on the web_default network).
 services:
   gheras-web:
     build: .
@@ -10,7 +10,8 @@ services:
     environment:
       DATABASE_URL: postgres://gheras:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is not set - run ln -s .env.production .env in this folder}@gheras-db:5432/gheras
     ports:
-      - "3001:3000"
+      # Only reachable from the server itself (e.g. curl http://127.0.0.1:3001/en); not exposed to the internet.
+      - "127.0.0.1:3001:3000"
     volumes:
       - gheras-uploads:/app/image-uploads
     depends_on:

@@ -291,7 +291,7 @@ function ImageField({ lang, def, media, library, alt, readOnly, onPick, onAlt, o
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(false);
   const issues = media ? imageIssues(media, def.preset) : ['missing'];
-  const status = issues.includes('missing') ? t.imgMissing : issues.includes('small') ? t.imgSmall(media?.width ?? 0, rule.minWidth) : issues.includes('ratio') ? t.imgRatio : t.imgOk;
+  const status = issues.includes('missing') ? t.imgMissing : issues.includes('small') ? t.imgSmall(media?.width ?? 0, rule.minWidth) : t.imgOk;
   const ok = issues.length === 0;
 
   const onFile = async (file?: File) => {

@@ -3,7 +3,7 @@ import { getPath } from './diff';
 import { IMAGE_RULES, SETTINGS_LIMITS, allTextFields, sectionDef, type L2 } from './schema';
 
 export type Usage = { mediaId: string; where: L2; preset: 'hero' | 'circle' | 'share'; sectionId?: string };
-const SHARE = { ratio: 1200 / 630, ratioLabel: '1200 × 630', minWidth: 1200 };
+const SHARE = { ratio: 1200 / 630, ratioLabel: '1200 × 630', minWidth: 600 };
 
 /** Where each media item is used (hero, Why circles, share image). */
 export function mediaUsage(c: SiteContent): Usage[] {
@@ -21,14 +21,14 @@ export function mediaUsage(c: SiteContent): Usage[] {
   return out;
 }
 
-export type ImageIssue = 'missing' | 'small' | 'ratio';
+export type ImageIssue = 'missing' | 'small';
 
+/** Any aspect ratio is fine (the site crops around the focal point); only very small photos get a hint. */
 export function imageIssues(m: Media, preset: Usage['preset']): ImageIssue[] {
   if (!m.url) return ['missing'];
   const rule = preset === 'share' ? SHARE : IMAGE_RULES[preset];
   const out: ImageIssue[] = [];
   if (m.width && m.width < rule.minWidth) out.push('small');
-  if (m.width && m.height && Math.abs(m.width / m.height - rule.ratio) / rule.ratio > 0.02) out.push('ratio');
   return out;
 }
 

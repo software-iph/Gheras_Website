@@ -28,8 +28,10 @@ const n2 = (i: number) => String(i + 1).padStart(2, '0');
 const items = (s: Section, key = 'items') => ((s as unknown as Record<string, unknown[]>)[key] ?? []);
 
 export const IMAGE_RULES = {
-  hero: { ratio: 16 / 9, ratioLabel: '16:9', minWidth: 2400 },
-  circle: { ratio: 1, ratioLabel: '1:1', minWidth: 1200 },
+  // Any size/shape is accepted: the site crops to `ratio` around the focal point.
+  // `minWidth` only triggers a soft "low resolution" hint for very small photos.
+  hero: { ratio: 16 / 9, ratioLabel: '16:9', minWidth: 1000 },
+  circle: { ratio: 1, ratioLabel: '1:1', minWidth: 300 },
 } as const;
 
 export const SECTION_DEFS: SectionDef[] = [

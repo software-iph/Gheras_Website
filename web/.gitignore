@@ -8,5 +8,6 @@ next-env.d.ts
 # Local inquiry store used until the database is connected
 .data/
 # Uploaded images (their URLs are in the database; back this folder up with it)
-image-uploads/
+/image-uploads/*
+!/image-uploads/.gitkeep
 .env.production

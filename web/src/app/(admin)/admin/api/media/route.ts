@@ -10,11 +10,16 @@ import { db } from '@/lib/db/sql';
 import { UPLOADS_DIR, UPLOADS_URL } from '@/lib/db/uploads';
 
 const MAX_BYTES = 40 * 1024 * 1024;
+/** Longest side kept on disk; bigger photos are scaled down (smaller ones are left as they are). */
+const MAX_SIDE = 3200;
+/** Formats people commonly upload. Everything is converted to JPG (or WebP when it has transparency). */
+const INPUT_FORMATS = new Set(['jpeg', 'png', 'webp', 'avif', 'gif', 'tiff', 'heif']);
 
 /**
- * Upload a JPG/WebP. With `slotId` the file replaces that media item's image (keeping its
- * alt text and usage); without it a new, unused library item is created.
- * The file is saved in the `image-uploads` folder; its URL and details go into `media_files`.
+ * Upload an image (JPG, PNG, WebP, AVIF, GIF, TIFF, HEIF). With `slotId` the file replaces that
+ * media item's image (keeping its alt text and usage); without it a new, unused library item is created.
+ * The image is auto-rotated, scaled down if huge, and saved as JPG/WebP in the `image-uploads`
+ * folder; its URL and details go into `media_files`.
  */
 export async function POST(req: Request) {
   const admin = await getAdmin();
@@ -26,17 +31,26 @@ export async function POST(req: Request) {
   if (!(file instanceof File)) return Response.json({ error: 'no-file' }, { status: 400 });
   if (file.size > MAX_BYTES) return Response.json({ error: 'too-large' }, { status: 413 });
 
-  const buf = Buffer.from(await file.arrayBuffer());
+  const input = Buffer.from(await file.arrayBuffer());
   let meta: Metadata;
-  try { meta = await sharp(buf).metadata(); } catch { return Response.json({ error: 'type' }, { status: 415 }); }
-  if (meta.format !== 'jpeg' && meta.format !== 'webp') return Response.json({ error: 'type' }, { status: 415 });
+  try { meta = await sharp(input).metadata(); } catch { return Response.json({ error: 'type' }, { status: 415 }); }
+  if (!meta.format || !INPUT_FORMATS.has(meta.format)) return Response.json({ error: 'type' }, { status: 415 });
 
-  // Respect EXIF orientation for the stored dimensions.
-  const rotated = (meta.orientation ?? 1) >= 5;
-  const width = (rotated ? meta.height : meta.width) ?? null;
-  const height = (rotated ? meta.width : meta.height) ?? null;
-  const name = `${randomUUID()}.${meta.format === 'jpeg' ? 'jpg' : 'webp'}`;
-  const contentType = meta.format === 'jpeg' ? 'image/jpeg' : 'image/webp';
+  // Normalise: apply EXIF rotation, cap the size, and store as JPG (WebP if transparent).
+  const webp = !!meta.hasAlpha;
+  let buf: Buffer, width: number, height: number;
+  try {
+    const pipeline = sharp(input, { failOn: 'none' })
+      .rotate()
+      .resize({ width: MAX_SIDE, height: MAX_SIDE, fit: 'inside', withoutEnlargement: true });
+    const out = await (webp ? pipeline.webp({ quality: 88 }) : pipeline.flatten({ background: '#ffffff' }).jpeg({ quality: 86, mozjpeg: true }))
+      .toBuffer({ resolveWithObject: true });
+    buf = out.data; width = out.info.width; height = out.info.height;
+  } catch {
+    return Response.json({ error: 'type' }, { status: 415 });
+  }
+  const name = `${randomUUID()}.${webp ? 'webp' : 'jpg'}`;
+  const contentType = webp ? 'image/webp' : 'image/jpeg';
   const original = file.name.replace(/[^\w.\- ]+/g, '').slice(0, 80) || name;
   const url = `${UPLOADS_URL}/${name}`;
 

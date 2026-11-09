@@ -74,7 +74,7 @@ export function MediaLibrary({ lang, items, initialFilter, initialId }: { lang: 
           {shown.map((it) => {
             const m = it.media;
             const ok = m.url && !it.issues.length;
-            const status = !m.url ? t.placeholderSlot : it.issues.includes('small') ? t.imgSmall(m.width ?? 0, 0).split(':')[0] : it.issues.includes('ratio') ? t.imgRatio : `${m.width}×${m.height} ✓`;
+            const status = !m.url ? t.placeholderSlot : it.issues.includes('small') ? t.imgSmall(m.width ?? 0, 0).split(':')[0] : `${m.width}×${m.height} ✓`;
             return (
               <button key={m.id} type="button" className="tile" aria-pressed={current?.media.id === m.id} onClick={() => setSel(m.id)}>
                 <div className={m.url ? 'slot slot--photo' : 'slot'} style={{ aspectRatio: '4 / 3', border: m.url ? undefined : 0 }}>

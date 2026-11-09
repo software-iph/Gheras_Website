@@ -6,6 +6,8 @@ import { requireAdmin } from '@/lib/auth/session';
 import { getDraft } from '@/lib/cms/store';
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
+// Draft content for admins only: always rendered per request, never cached.
+export const dynamic = 'force-dynamic';
 
 /** The working draft, rendered exactly like the live page. Admin only; used by the editor's live preview. */
 export default async function PreviewPage({ params, searchParams }: PageProps<'/[lang]/preview'>) {

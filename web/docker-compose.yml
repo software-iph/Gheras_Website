@@ -14,6 +14,8 @@ services:
       - "127.0.0.1:3001:3000"
     volumes:
       - gheras-uploads:/app/image-uploads
+      # Resized copies made by the image optimizer; kept so photos aren't resized again after each deploy.
+      - gheras-image-cache:/app/.next/cache/images
     depends_on:
       gheras-db:
         condition: service_healthy
@@ -37,3 +39,4 @@ services:
 volumes:
   gheras-db:
   gheras-uploads:
+  gheras-image-cache:

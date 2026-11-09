@@ -2,14 +2,18 @@ import type { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
 import { fontVariables } from '../../fonts';
 import { getPublishedContent, pick } from '@/content';
-import { LANGS, isLang } from '@/content/types';
+import { isLang } from '@/content/types';
 import '@/styles/tokens.css';
 import '@/styles/site.css';
 
-export const dynamicParams = false;
-
+/**
+ * No pages are built ahead of time: the build has no database, so a build-time page would show the
+ * bundled seed (and a localhost SITE_URL) after every deploy. /en and /ar are rendered from the
+ * published content on their first visit, then cached (see `revalidate` in page.tsx).
+ * Other values are rejected by `isLang` below.
+ */
 export function generateStaticParams() {
-  return LANGS.map((lang) => ({ lang }));
+  return [];
 }
 
 export const viewport: Viewport = { themeColor: '#1F2A1C' };

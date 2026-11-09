@@ -11,7 +11,8 @@ export type AuthState = { error?: 'credentials' | 'rate'; email?: string };
 
 const clientKey = async () => {
   const h = await headers();
-  return h.get('x-forwarded-for')?.split(',')[0]?.trim() || h.get('x-real-ip') || 'local';
+  // X-Real-IP is set by the proxy; the first X-Forwarded-For entry can be forged by the client.
+  return h.get('x-real-ip') || h.get('x-forwarded-for')?.split(',').pop()?.trim() || 'local';
 };
 
 export async function signIn(_: AuthState, form: FormData): Promise<AuthState> {

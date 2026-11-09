@@ -110,7 +110,7 @@ function PublishDialog({ lang, summary: s, onClose }: { lang: UILang; summary: P
   const [pending, start] = useTransition();
   const [result, setResult] = useState<'published' | 'blocked' | 'nothing' | null>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const blocked = s.overLimit + s.emptyEn + s.badUrls > 0;
+  const blocked = s.emptyEn + s.badUrls > 0;
 
   useEffect(() => {
     const prev = document.activeElement as HTMLElement | null;
@@ -128,7 +128,7 @@ function PublishDialog({ lang, summary: s, onClose }: { lang: UILang; summary: P
   }, [onClose]);
 
   const checks: { ok: boolean; warn?: boolean; text: string }[] = [
-    s.overLimit ? { ok: false, text: t.c1bad(s.overLimit) } : { ok: true, text: t.c1ok },
+    s.overLimit ? { ok: false, warn: true, text: t.c1bad(s.overLimit) } : { ok: true, text: t.c1ok },
     ...(s.emptyEn ? [{ ok: false, text: t.cEnBad(s.emptyEn) }] : []),
     ...(s.badUrls ? [{ ok: false, text: t.cUrlBad(s.badUrls) }] : []),
     s.imageProblems ? { ok: false, warn: true, text: t.c2bad(s.imageProblems) } : { ok: true, text: t.c2ok },
@@ -173,7 +173,7 @@ function PublishDialog({ lang, summary: s, onClose }: { lang: UILang; summary: P
                 ))}
               </ul>
             )}
-            {result === 'blocked' && <p role="alert" className="err" style={{ margin: 0 }}>{t.c1bad(s.overLimit)}</p>}
+            {result === 'blocked' && <p role="alert" className="err" style={{ margin: 0 }}>{t.pubBlocked}</p>}
             {result === 'nothing' && <p role="alert" className="err" style={{ margin: 0 }}>{t.nothingToPublish}</p>}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
               <button type="button" className="b b--secondary" onClick={onClose}>{t.cancel}</button>

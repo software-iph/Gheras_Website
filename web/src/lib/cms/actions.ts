@@ -1,10 +1,14 @@
 'use server';
 
+import { unlink } from 'node:fs/promises';
+import path from 'node:path';
 import { revalidatePath } from 'next/cache';
 import type { Localized, Section, SiteContent, SocialKey } from '@/content/types';
 import { requireAdmin } from '@/lib/auth/session';
+import { db } from '@/lib/db/sql';
+import { UPLOADS_DIR, isUploadName } from '@/lib/db/uploads';
 import { inquiryStore } from '@/lib/inquiries/store';
-import { blocking, checkContent } from './checks';
+import { blocking, checkContent, mediaUsage } from './checks';
 import { getPath, setPath } from './diff';
 import { FIXED_POSITION, LOCKED, sectionDef } from './schema';
 import { getDraft, pendingChanges, publishDraft, restoreRevision, saveDraft, updateDraft } from './store';
@@ -105,6 +109,35 @@ export async function saveMediaDetails(id: string, patch: { alt?: Localized; foc
       ...(patch.focal ? { focal: { x: Math.round(clamp(patch.focal.x) * 1000) / 1000, y: Math.round(clamp(patch.focal.y) * 1000) / 1000 } } : {}),
     })),
   }));
+  refresh();
+  return { ok: true };
+}
+
+/**
+ * Remove a photo from the library. Refused while the draft still uses it. The file itself is
+ * deleted only when no published version (the live site, or one that could be restored) shows it.
+ */
+export async function deleteMedia(id: string): Promise<ActionResult> {
+  const admin = await requireAdmin();
+  let removed: SiteContent['media'][number] | undefined;
+  let inUse = false;
+  await updateDraft(admin.name, (d) => {
+    const m = d.media.find((x) => x.id === id);
+    if (!m) return d;
+    if (mediaUsage(d).some((u) => u.mediaId === id)) { inUse = true; return d; }
+    removed = m;
+    return { ...d, media: d.media.filter((x) => x.id !== id) };
+  }, { en: 'Image deleted', ar: 'حذف صورة' });
+  if (inUse) return { ok: false, error: 'in-use' };
+  if (!removed) return { ok: false, error: 'not-found' };
+  const name = removed.url?.split('/').pop() ?? '';
+  if (isUploadName(name)) {
+    const [shown] = await db()`select 1 from cms_revisions where status = 'published' and snapshot::text like ${'%' + name + '%'} limit 1`;
+    if (!shown) {
+      await db()`delete from media_files where name = ${name}`;
+      await unlink(path.join(/*turbopackIgnore: true*/ UPLOADS_DIR, name)).catch(() => undefined);
+    }
+  }
   refresh();
   return { ok: true };
 }

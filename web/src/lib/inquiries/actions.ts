@@ -17,7 +17,8 @@ export async function submitInquiry(input: InquiryInput): Promise<SubmitResult> 
   if (d.website) return { ok: true };
 
   const h = await headers();
-  const ip = h.get('x-forwarded-for')?.split(',')[0]?.trim() || h.get('x-real-ip') || 'unknown';
+  // X-Real-IP is set by the proxy; the first X-Forwarded-For entry can be forged by the client.
+  const ip = h.get('x-real-ip') || h.get('x-forwarded-for')?.split(',').pop()?.trim() || 'unknown';
   if (!allow(ip)) return { ok: false, error: 'rate' };
 
   const inquiry: Inquiry = {

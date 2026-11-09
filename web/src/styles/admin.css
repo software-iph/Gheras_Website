@@ -58,6 +58,8 @@ textarea.in { height: auto; padding: 10px 12px; line-height: 1.5; resize: vertic
 .in[readonly] { background: #FAF8F2; }
 .in--ph { border-style: dashed; border-color: var(--color-gold-ink); }
 .in--bad { border-color: var(--color-error); }
+/* Longer than the recommended length: allowed, but flagged. */
+.in--long { border-color: #C99A3B; }
 .in--en { font-family: var(--font-body-en); font-size: 15px; }
 .in--ar { font-family: var(--font-body-ar); font-size: 16px; line-height: 1.7; }
 input.in--ar { font-size: 15px; }

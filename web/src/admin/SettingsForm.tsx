@@ -46,7 +46,7 @@ export function SettingsForm({ lang, site: initial, host, images }: {
         const Tag = o.area ? 'textarea' : 'input';
         return (
           <div key={l} style={{ display: 'flex', flexDirection: 'column', gap: 4 }} dir={l === 'ar' ? 'rtl' : 'ltr'} lang={l}>
-            <Tag className={`in ${l === 'ar' ? 'in--ar' : 'in--en'}${o.placeholder ? ph(val) : ''}${over ? ' in--bad' : ''}`} value={val}
+            <Tag className={`in ${l === 'ar' ? 'in--ar' : 'in--en'}${o.placeholder ? ph(val) : ''}${over ? ' in--long' : ''}`} value={val}
               placeholder={l === 'ar' ? o.phAr : o.phEn} aria-label={`${label} — ${l.toUpperCase()}`} rows={o.area ? 3 : undefined}
               style={o.area ? undefined : { fontSize: l === 'ar' ? 15 : 14 }}
               onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => on({ ...v, [l]: e.target.value })} />

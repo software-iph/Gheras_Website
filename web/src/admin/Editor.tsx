@@ -9,7 +9,7 @@ import { imageIssues } from '@/lib/cms/checks';
 import { setPath } from '@/lib/cms/diff';
 import { IMAGE_RULES, type FieldDef, type L2 } from '@/lib/cms/schema';
 import { dict, type UILang } from './i18n';
-import { ACCEPT, uploadImage } from './upload';
+import { ACCEPT, preview, uploadImage } from './upload';
 
 export type SectionMeta = { id: string; name: L2; visible: boolean; locked: boolean; warn: boolean; fixed: boolean };
 export type EditorField = FieldDef & { value: unknown };
@@ -24,6 +24,11 @@ export function Editor({ lang, stamp, sections, current, fields, media }: {
   const [pvLang, setPvLang] = useState<'en' | 'ar'>(lang);
   const [pvDev, setPvDev] = useState<'desktop' | 'mobile'>('desktop');
 
+  // Fields reload from the saved draft when it changes, but not while there are unsaved edits
+  // (e.g. a photo replaced or a section hidden mid-edit), so typing is never thrown away.
+  const [fieldsStamp, setFieldsStamp] = useState(stamp);
+  useEffect(() => { if (!dirty) setFieldsStamp(stamp); }, [stamp, dirty]);
+
   useEffect(() => {
     if (!dirty) return;
     const warn = (e: BeforeUnloadEvent) => { e.preventDefault(); };
@@ -35,7 +40,7 @@ export function Editor({ lang, stamp, sections, current, fields, media }: {
     <div className="ed">
       <SectionList lang={lang} sections={sections} currentId={current.id} dirty={dirty} />
       <Fields
-        key={`${current.id}:${stamp}`}
+        key={`${current.id}:${fieldsStamp}`}
         lang={lang} current={current} fields={fields} media={media}
         unlocked={!current.locked || !!unlocked[current.id]}
         onUnlock={() => setUnlocked((u) => ({ ...u, [current.id]: true }))}
@@ -230,20 +235,20 @@ function TextField({ lang, def, value, readOnly, onChange }: {
       </div>
       <div className="bi">
         <div dir="ltr" lang="en">
-          <textarea className={`in in--en${overEn ? ' in--bad' : ''}`} rows={rows} value={en} readOnly={readOnly}
-            aria-labelledby={`${id}-l`} aria-describedby={`${id}-en-m`} aria-invalid={overEn}
+          <textarea className={`in in--en${overEn ? ' in--long' : ''}`} rows={rows} value={en} readOnly={readOnly}
+            aria-labelledby={`${id}-l`} aria-describedby={`${id}-en-m`}
             onChange={(e) => onChange({ ...value, en: e.target.value })} />
           <span className="count-row en-text" id={`${id}-en-m`}>
-            <span className="err" role={overEn ? 'alert' : undefined}>{overEn ? t.tooLong : ''}</span>
+            <span style={{ color: '#86621E' }}>{overEn ? t.tooLong : ''}</span>
             {lim ? <span className="count" style={{ color: counterColor(en.length, lim) }}>{en.length} / {lim}</span> : <span />}
           </span>
         </div>
         <div dir="rtl" lang="ar">
-          <textarea className={`in in--ar${emptyAr ? ' ar-missing' : overAr ? ' in--bad' : ''}`} rows={rows} value={ar} readOnly={readOnly}
-            placeholder="أضف النص العربي" aria-labelledby={`${id}-l`} aria-describedby={`${id}-ar-m`} aria-invalid={overAr}
+          <textarea className={`in in--ar${emptyAr ? ' ar-missing' : overAr ? ' in--long' : ''}`} rows={rows} value={ar} readOnly={readOnly}
+            placeholder="أضف النص العربي" aria-labelledby={`${id}-l`} aria-describedby={`${id}-ar-m`}
             onChange={(e) => onChange({ ...value, ar: e.target.value })} />
           <span className="count-row ar-text" id={`${id}-ar-m`}>
-            <span style={{ color: emptyAr ? '#86621E' : '#8E3B24' }}>{emptyAr ? t.arMissing : overAr ? t.arTooLong : ''}</span>
+            <span style={{ color: '#86621E' }}>{emptyAr ? t.arMissing : overAr ? t.arTooLong : ''}</span>
             {lim ? <span className="count" style={{ color: counterColor(ar.length, lim) }}>{ar.length} / {lim}</span> : <span />}
           </span>
         </div>
@@ -312,7 +317,7 @@ function ImageField({ lang, def, media, library, alt, readOnly, onPick, onAlt, o
         <div className={media?.url ? 'slot slot--photo' : 'slot'} style={{ aspectRatio: def.preset === 'hero' ? '16 / 9' : '1', borderRadius: def.preset === 'circle' ? '50%' : 8 }}>
           {media?.url
             // eslint-disable-next-line @next/next/no-img-element
-            ? <img src={media.url} alt="" style={{ objectPosition: `${media.focal.x * 100}% ${media.focal.y * 100}%` }} />
+            ? <img src={preview(media.url, 828)} alt="" style={{ objectPosition: `${media.focal.x * 100}% ${media.focal.y * 100}%` }} />
             : <span lang="en">{media?.brief}</span>}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minWidth: 0 }}>

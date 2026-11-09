@@ -71,6 +71,12 @@ export async function listRevisions(): Promise<Revision[]> {
   return rows.map(fromRow);
 }
 
+/** Number of change-log entries; the editor uses it to notice that the draft changed. */
+export async function revisionCount(): Promise<number> {
+  const [{ n }] = await db()<{ n: number }[]>`select count(*)::int as n from cms_revisions`;
+  return n;
+}
+
 export async function getPublished(): Promise<{ content: SiteContent; version: number } | null> {
   const [row] = await db()<{ snapshot: SiteContent; version: number }[]>`
     select snapshot, version from cms_revisions where status = 'published' order by version desc limit 1`;
@@ -144,6 +150,10 @@ export async function restoreRevision(id: string, author: string): Promise<boole
   const [row] = await db()<{ snapshot: SiteContent | null; version: number | null }[]>`
     select snapshot, version from cms_revisions where id = ${id}`;
   if (!row?.snapshot) return false;
-  await saveDraft(row.snapshot, author, { en: `Restored v${row.version}`, ar: `استعادة الإصدار ${row.version}` });
+  // Keep library photos added after that version (the snapshot doesn't know them).
+  const current = await getDraft();
+  const known = new Set(row.snapshot.media.map((m) => m.id));
+  const media = [...row.snapshot.media, ...current.media.filter((m) => !known.has(m.id))];
+  await saveDraft({ ...row.snapshot, media }, author, { en: `Restored v${row.version}`, ar: `استعادة الإصدار ${row.version}` });
   return true;
 }

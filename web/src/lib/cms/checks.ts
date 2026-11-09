@@ -107,5 +107,8 @@ export function checkContent(c: SiteContent): Report {
   return r;
 }
 
-/** Problems that block publishing. Empty Arabic fields only warn: they keep the published text. */
-export const blocking = (r: Report) => [...r.overLimit, ...r.emptyEn, ...r.badUrls];
+/**
+ * Problems that block publishing. Character limits are recommendations (they only warn), and
+ * empty Arabic fields only warn too: they keep the published text.
+ */
+export const blocking = (r: Report) => [...r.emptyEn, ...r.badUrls];

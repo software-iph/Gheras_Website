@@ -3,11 +3,11 @@
 import { useRouter } from 'next/navigation';
 import { useRef, useState, useTransition } from 'react';
 import type { Localized, Media } from '@/content/types';
-import { saveMediaDetails } from '@/lib/cms/actions';
+import { deleteMedia, saveMediaDetails } from '@/lib/cms/actions';
 import type { ImageIssue, Usage } from '@/lib/cms/checks';
 import type { L2 } from '@/lib/cms/schema';
 import { dict, type UILang } from './i18n';
-import { ACCEPT, uploadImage } from './upload';
+import { ACCEPT, preview, uploadImage } from './upload';
 
 export type MediaItem = { media: Media; used: L2[]; issues: ImageIssue[]; preset: Usage['preset'] | null };
 type Filter = 'all' | 'alt' | 'unused';
@@ -40,11 +40,12 @@ export function MediaLibrary({ lang, items, initialFilter, initialId }: { lang: 
     let lastId: string | undefined;
     for (const f of [...files]) {
       const r = await uploadImage(f);
-      if (r) lastId = r.id; else setErr(true);
+      // Show each photo as soon as it is in, instead of after the whole batch.
+      if (r) { lastId = r.id; setSel(r.id); setFilter('all'); router.refresh(); }
+      else setErr(true);
     }
     setBusy(false);
-    if (lastId) { setSel(lastId); setFilter('all'); }
-    router.refresh();
+    if (lastId) router.refresh();
   };
 
   return (
@@ -79,7 +80,7 @@ export function MediaLibrary({ lang, items, initialFilter, initialId }: { lang: 
               <button key={m.id} type="button" className="tile" aria-pressed={current?.media.id === m.id} onClick={() => setSel(m.id)}>
                 <div className={m.url ? 'slot slot--photo' : 'slot'} style={{ aspectRatio: '4 / 3', border: m.url ? undefined : 0 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  {m.url ? <img src={m.url} alt="" loading="lazy" /> : <span lang="en">{m.brief}</span>}
+                  {m.url ? <img src={preview(m.url, 384)} alt="" loading="lazy" decoding="async" /> : <span lang="en">{m.brief}</span>}
                 </div>
                 <span className="ellipsis" style={{ fontSize: 13, fontWeight: 600, maxWidth: '100%' }}>{m.file ?? m.brief.split(' — ')[0]}</span>
                 <span style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -107,6 +108,9 @@ function Detail({ lang, item, onUploaded }: { lang: UILang; item: MediaItem; onU
   const [saving, start] = useTransition();
   const [saved, setSaved] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [upErr, setUpErr] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [delErr, setDelErr] = useState<string | null>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const dirty = focal.x !== m.focal.x || focal.y !== m.focal.y || alt.en !== m.alt.en || alt.ar !== m.alt.ar;
@@ -134,10 +138,19 @@ function Detail({ lang, item, onUploaded }: { lang: UILang; item: MediaItem; onU
   const save = () => start(async () => { await saveMediaDetails(m.id, { alt, focal }); setSaved(true); router.refresh(); });
   const replace = async (file?: File) => {
     if (!file) return;
-    setBusy(true);
-    await uploadImage(file, m.id);
+    setBusy(true); setUpErr(false);
+    const r = await uploadImage(file, m.id);
     setBusy(false);
-    onUploaded();
+    if (r) onUploaded(); else setUpErr(true);
+  };
+
+  const remove = async () => {
+    if (!window.confirm(t.deleteConfirm(m.file ?? m.brief))) return;
+    setDeleting(true); setDelErr(null);
+    const r = await deleteMedia(m.id);
+    setDeleting(false);
+    if (r.ok) router.refresh();
+    else setDelErr(r.error === 'in-use' ? t.deleteInUse : t.deleteFailed);
   };
 
   return (
@@ -149,7 +162,7 @@ function Detail({ lang, item, onUploaded }: { lang: UILang; item: MediaItem; onU
         onPointerMove={(e) => { if (e.buttons) setFromPointer(e); }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        {m.url && <img src={m.url} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }} />}
+        {m.url && <img src={preview(m.url, 828)} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }} />}
         <div className="crop__mask" style={{
           left: `${fx - frame.w / 2}%`, top: `${fy - frame.h / 2}%`, width: `${frame.w}%`, height: `${frame.h}%`,
           borderRadius: crop === 'circle' ? '50%' : 4,
@@ -179,7 +192,14 @@ function Detail({ lang, item, onUploaded }: { lang: UILang; item: MediaItem; onU
         <button type="button" className="b b--secondary b--md" onClick={() => fileRef.current?.click()} disabled={busy}>{busy ? t.uploading : t.replace}</button>
         <input ref={fileRef} type="file" accept={ACCEPT} hidden onChange={(e) => replace(e.target.files?.[0])} />
         {saved && !dirty && <span role="status" style={{ fontSize: 13, color: '#3F5A2A', fontWeight: 600 }}>✓ {t.saved}</span>}
+        <button type="button" className="b b--secondary b--md" onClick={remove} disabled={deleting || item.used.length > 0}
+          title={item.used.length ? t.deleteInUse : undefined} style={{ marginInlineStart: 'auto', color: '#8E3B24' }}>
+          {deleting ? t.deleting : t.deleteImage}
+        </button>
       </div>
+      {item.used.length > 0 && <span className="muted" style={{ fontSize: 12, lineHeight: 1.5 }}>{t.deleteInUse}</span>}
+      {upErr && <p className="err" role="alert" style={{ margin: 0, fontSize: 13 }}>{t.uploadFailed}</p>}
+      {delErr && <p className="err" role="alert" style={{ margin: 0, fontSize: 13 }}>{delErr}</p>}
       <div className="rules">{t.imgRules}</div>
     </aside>
   );

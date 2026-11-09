@@ -32,7 +32,8 @@ export function MediaLibrary({ lang, items, initialFilter, initialId }: { lang: 
     const hay = `${it.media.brief} ${it.media.file ?? ''} ${it.media.alt.en ?? ''} ${it.media.alt.ar ?? ''}`.toLowerCase();
     return hay.includes(q.trim().toLowerCase());
   });
-  const current = items.find((it) => it.media.id === sel) ?? shown[0];
+  // The detail panel follows the filter: never show a photo the list is hiding.
+  const current = shown.find((it) => it.media.id === sel) ?? shown[0];
 
   const upload = async (files: FileList | null | undefined) => {
     if (!files?.length) return;
@@ -192,15 +193,18 @@ function Detail({ lang, item, onUploaded }: { lang: UILang; item: MediaItem; onU
         <button type="button" className="b b--secondary b--md" onClick={() => fileRef.current?.click()} disabled={busy}>{busy ? t.uploading : t.replace}</button>
         <input ref={fileRef} type="file" accept={ACCEPT} hidden onChange={(e) => replace(e.target.files?.[0])} />
         {saved && !dirty && <span role="status" style={{ fontSize: 13, color: '#3F5A2A', fontWeight: 600 }}>✓ {t.saved}</span>}
-        <button type="button" className="b b--secondary b--md" onClick={remove} disabled={deleting || item.used.length > 0}
-          title={item.used.length ? t.deleteInUse : undefined} style={{ marginInlineStart: 'auto', color: '#8E3B24' }}>
-          {deleting ? t.deleting : t.deleteImage}
-        </button>
       </div>
-      {item.used.length > 0 && <span className="muted" style={{ fontSize: 12, lineHeight: 1.5 }}>{t.deleteInUse}</span>}
       {upErr && <p className="err" role="alert" style={{ margin: 0, fontSize: 13 }}>{t.uploadFailed}</p>}
-      {delErr && <p className="err" role="alert" style={{ margin: 0, fontSize: 13 }}>{delErr}</p>}
       <div className="rules">{t.imgRules}</div>
+      <div className="danger-row">
+        {item.used.length > 0
+          ? <span className="muted" style={{ fontSize: 12, lineHeight: 1.5 }}>{t.deleteInUse}</span>
+          : <>
+              <span className="muted" style={{ fontSize: 12 }}>{t.notUsed}</span>
+              <button type="button" className="b b--danger b--md" onClick={remove} disabled={deleting}>{deleting ? t.deleting : t.deleteImage}</button>
+            </>}
+      </div>
+      {delErr && <p className="err" role="alert" style={{ margin: 0, fontSize: 13 }}>{delErr}</p>}
     </aside>
   );
 }

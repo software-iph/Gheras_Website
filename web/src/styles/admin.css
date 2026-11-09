@@ -2,21 +2,23 @@
 :root {
   --font-display-en: var(--font-fraunces), 'Fraunces', serif;
   --font-body-en: var(--font-manrope), 'Manrope', sans-serif;
-  --font-display-ar: var(--font-naskh), 'Noto Naskh Arabic', serif;
-  --font-body-ar: var(--font-plex-arabic), 'IBM Plex Sans Arabic', sans-serif;
+  --font-display-ar: var(--font-almarai), 'Almarai', sans-serif;
+  --font-body-ar: var(--font-almarai), 'Almarai', sans-serif;
   --font-mono: var(--font-plex-mono), 'IBM Plex Mono', monospace;
   --line: rgba(31,42,28,.08);
 }
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; background: var(--color-linen); color: var(--color-deep-olive); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+/* Arabic body text is Almarai Light. */
+body:lang(ar) { font-weight: 300; }
 a { color: var(--color-grove-green); text-underline-offset: 3px; }
 a:hover { color: var(--color-deep-olive); }
 input, textarea, select, button { font: inherit; color: inherit; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Headings: Fraunces 400 in EN, Naskh 600 in AR */
+/* Headings: Fraunces 400 in EN, Almarai 400 in AR */
 .d-h { font-family: var(--font-display); font-weight: 400; line-height: 1.3; margin: 0; }
-.d-h:lang(ar) { font-weight: 600; }
+.d-h:lang(ar) { font-weight: 400; }
 .d-eyebrow { font-weight: 700; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
 .d-eyebrow:lang(ar) { letter-spacing: 0; text-transform: none; }
 .muted { color: var(--color-stone); }
@@ -37,6 +39,10 @@ input, textarea, select, button { font: inherit; color: inherit; }
 .b--primary:hover:not(:disabled) { background: var(--color-deep-olive); }
 .b--secondary { border: 1.5px solid var(--color-grove-green); background: transparent; color: var(--color-grove-green); }
 .b--secondary:hover:not(:disabled) { background: var(--color-success-bg); color: var(--color-grove-green); }
+/* Destructive action (delete): rust outline, filled on hover. */
+.b--danger { border: 1.5px solid #8E3B24; background: transparent; color: #8E3B24; }
+.b--danger:hover:not(:disabled) { background: #8E3B24; color: #FAF8F2; }
+.danger-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
 .b--gold, .b--gold:hover { color: var(--color-deep-olive); }
 .b--gold { background: var(--color-harvest-gold); }
 .b--gold:hover { background: var(--color-wheat); }
@@ -61,7 +67,7 @@ textarea.in { height: auto; padding: 10px 12px; line-height: 1.5; resize: vertic
 /* Longer than the recommended length: allowed, but flagged. */
 .in--long { border-color: #C99A3B; }
 .in--en { font-family: var(--font-body-en); font-size: 15px; }
-.in--ar { font-family: var(--font-body-ar); font-size: 16px; line-height: 1.7; }
+.in--ar { font-family: var(--font-body-ar); font-weight: 300; font-size: 16px; line-height: 1.7; }
 input.in--ar { font-size: 15px; }
 .field-label { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; }
 .err { color: var(--color-error); font-size: 12px; font-weight: 500; }

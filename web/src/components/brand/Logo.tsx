@@ -60,7 +60,7 @@ export function LogoHorizontal({ scheme = 'full', rtl = false, width, alt = '' }
       </span>
       <svg viewBox="0 0 260 150" style={{ display: 'block', flex: 1, minWidth: 0, overflow: 'visible' }} aria-hidden="true">
         <text x={ax} y={62} fontSize={30} textAnchor={anchor} fill={c.word}
-          style={{ fontFamily: 'var(--font-plex-arabic), sans-serif', fontWeight: 600 }}>للاستثمار الزراعي</text>
+          style={{ fontFamily: 'var(--font-almarai), sans-serif', fontWeight: 700 }}>للاستثمار الزراعي</text>
         <path d={rtl ? 'M150 82H260' : 'M0 82H110'} stroke={c.rule} strokeWidth={1.6} />
         <text x={ax} y={118} fontSize={22} textAnchor={anchor} fill={c.desc}
           style={{ fontFamily: 'var(--font-manrope), sans-serif', fontWeight: 600 }}>Agricultural Investment</text>

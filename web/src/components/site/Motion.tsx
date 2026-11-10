@@ -21,40 +21,57 @@ export function Motion({ rtl }: { rtl: boolean }) {
     const qa = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => [...r.querySelectorAll<T>(s)];
     const cleanups: (() => void)[] = [];
     let heroDone = false;
+    // Fail-safe: some PCs throttle or never advance animations, which would leave content in its
+    // hidden start state. Force every animation to its end shortly after it should have finished.
+    const timers: number[] = [];
+    // Every animation started here; all are cancelled on cleanup so none is left stuck mid-way.
+    const running: Animation[] = [];
+    const settle = (a: Animation, ms: number) => {
+      running.push(a);
+      timers.push(window.setTimeout(() => {
+        if (a.playState !== 'finished' && a.playState !== 'idle') { try { a.finish(); } catch { a.cancel(); } }
+      }, ms + 400));
+    };
+    cleanups.push(() => { timers.forEach((t) => clearTimeout(t)); running.forEach((a) => a.cancel()); });
 
     /* Load sequence */
     const photo = q('[data-m=hero-photo]');
     if (photo) {
       const a = photo.animate([{ transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 1600, easing: E });
       a.onfinish = () => { heroDone = true; onScroll(); };
+      settle(a, 1600);
     }
-    qa('[data-m=word]').forEach((w, i) => w.animate(RISE, { duration: 600, delay: 220 + i * 80, easing: E, fill: 'backwards' }));
-    qa('[data-m=hero-in]').forEach((el, i) => el.animate(
-      [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }],
-      { duration: 600, delay: [80, 640, 860][i] ?? 860, easing: E, fill: 'backwards' },
-    ));
+    qa('[data-m=word]').forEach((w, i) => settle(w.animate(RISE, { duration: 600, delay: 220 + i * 80, easing: E, fill: 'backwards' }), 820 + i * 80));
+    qa('[data-m=hero-in]').forEach((el, i) => {
+      const delay = [80, 640, 860][i] ?? 860;
+      settle(el.animate(
+        [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }],
+        { duration: 600, delay, easing: E, fill: 'backwards' },
+      ), delay + 600);
+    });
     const art = q('[data-m=draw]');
     if (art) {
       qa<SVGGeometryElement>('path, ellipse', art).forEach((p) => {
         let L = 300;
         try { L = Math.ceil(p.getTotalLength()) || 300; } catch { /* keep default */ }
-        p.animate(
+        settle(p.animate(
           [{ strokeDasharray: `${L} ${L}`, strokeDashoffset: L }, { strokeDasharray: `${L} ${L}`, strokeDashoffset: 0 }],
           { duration: 1200, delay: 400, easing: E, fill: 'backwards' },
-        );
+        ), 1600);
       });
     }
-    // Animations now hold the hidden start state; release the pre-hydration CSS guard.
+    // The hero animations now hold their start state; release the pre-hydration CSS guard.
     root.classList.add('motion-done');
 
-    /* Reveal on enter */
-    const jobs = new Map<Element, Animation[]>();
+    /* Reveal on enter.
+     * Nothing is hidden in advance: an element keeps its normal, visible look until its reveal
+     * actually starts, and only then takes the animation's start state (fill: 'backwards').
+     * If a reveal never starts on some PC (no frames, observer never fires), the content simply
+     * stays visible, and `settle` guarantees every started reveal ends in its visible state. */
+    type Job = { kf: Keyframe[]; o: KeyframeAnimationOptions };
+    const jobs = new Map<Element, Job[]>();
     const add = (el: Element, kf: Keyframe[], o: KeyframeAnimationOptions) => {
-      const a = el.animate(kf, { easing: E, fill: 'both', ...o });
-      a.pause();
-      a.currentTime = 0;
-      a.onfinish = () => a.cancel();
-      jobs.set(el, [...(jobs.get(el) ?? []), a]);
+      jobs.set(el, [...(jobs.get(el) ?? []), { kf, o }]);
     };
     const sections = qa('main > section[data-section]').slice(1);
     for (const sec of sections) {
@@ -88,12 +105,23 @@ export function Motion({ rtl }: { rtl: boolean }) {
       qa('[data-m=iris]', sec).forEach((el) =>
         add(el, [{ clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(50% at 50% 50%)' }], { duration: 900 }));
     }
-    const play = (el: Element) => { jobs.get(el)?.forEach((a) => a.play()); jobs.delete(el); };
+    const play = (el: Element) => {
+      jobs.get(el)?.forEach(({ kf, o }) => {
+        const a = el.animate(kf, { easing: E, fill: 'backwards', ...o });
+        settle(a, Number(o.delay ?? 0) + Number(o.duration ?? 0));
+      });
+      jobs.delete(el);
+    };
+    // Second trigger besides the IntersectionObserver: on scroll, reveal anything already on screen.
+    const revealVisible = () => {
+      const h = innerHeight;
+      jobs.forEach((_, el) => { const r = el.getBoundingClientRect(); if (r.top < h * 1.1 && r.bottom > 0) play(el); });
+    };
     const io = new IntersectionObserver((entries) => entries.forEach((en) => {
       if (en.isIntersecting) { play(en.target); io.unobserve(en.target); }
-    }), { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+    }), { rootMargin: '0px 0px 10% 0px', threshold: 0 });
     const vh = innerHeight;
-    jobs.forEach((_, el) => { if (el.getBoundingClientRect().top < vh * 0.94) play(el); else io.observe(el); });
+    jobs.forEach((_, el) => { if (el.getBoundingClientRect().top < vh * 1.1) play(el); else io.observe(el); });
     cleanups.push(() => io.disconnect());
 
     /* Scroll-linked: hero depth, belief words, mission pattern drift */
@@ -104,6 +132,7 @@ export function Motion({ rtl }: { rtl: boolean }) {
     const drift = q('[data-m=drift]');
     const clamp = (v: number) => Math.max(0, Math.min(1, v));
     function onScroll() {
+      revealVisible();
       const y = scrollY, h = innerHeight;
       if (photo && heroDone && innerWidth >= 1024) photo.style.transform = `translateY(${(y * 0.25).toFixed(1)}px)`;
       if (dim) dim.style.opacity = (clamp(y / (h * 0.9)) * 0.55).toFixed(3);
@@ -122,8 +151,9 @@ export function Motion({ rtl }: { rtl: boolean }) {
     let raf = 0;
     const onScrollRaf = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; onScroll(); }); };
     addEventListener('scroll', onScrollRaf, { passive: true });
+    addEventListener('resize', onScrollRaf, { passive: true });
     onScroll();
-    cleanups.push(() => { removeEventListener('scroll', onScrollRaf); if (raf) cancelAnimationFrame(raf); });
+    cleanups.push(() => { removeEventListener('scroll', onScrollRaf); removeEventListener('resize', onScrollRaf); if (raf) cancelAnimationFrame(raf); });
 
     return () => cleanups.forEach((fn) => fn());
   }, [rtl]);

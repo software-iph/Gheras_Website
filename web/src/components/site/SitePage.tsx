@@ -6,7 +6,7 @@ import {
 import { Chrome } from './Chrome';
 import { Footer } from './Footer';
 import { Motion } from './Motion';
-import { motionGuardScript } from './motion-guard';
+import { imageRetryScript, motionGuardScript } from './motion-guard';
 
 function renderSection(s: Section, ctx: Ctx) {
   switch (s.id) {
@@ -35,6 +35,7 @@ export function SitePage({ lang, content, preview = false, embed = false }: { la
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: motionGuardScript }} />
+      <script dangerouslySetInnerHTML={{ __html: imageRetryScript }} />
       <Chrome lang={lang} ctaLabel={pick(hero?.fields.primaryCta, lang) ?? ''} />
       <main id="top">{sections.map((s) => renderSection(s, ctx))}</main>
       {footer?.visible !== false && <Footer lang={lang} content={content} section={footer} />}

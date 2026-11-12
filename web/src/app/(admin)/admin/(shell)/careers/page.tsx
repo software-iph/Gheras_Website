@@ -35,7 +35,7 @@ export default async function CareersAdminPage({ searchParams }: PageProps<'/adm
       </div>
       {settings.enabled
         ? <a href={`/${lang}/careers`} target="_blank" rel="noopener" className="b b--md b--secondary" style={{ marginInlineStart: 'auto' }}>{t.viewOnSite}</a>
-        : <span className="pill" style={{ marginInlineStart: 'auto', background: '#F6EBD2', color: '#86621E', padding: '8px 12px' }}>{t.siteOff}</span>}
+        : <Link href="/admin/careers?tab=settings" className="pill" style={{ marginInlineStart: 'auto', background: '#F6EBD2', color: '#86621E', padding: '8px 12px', textDecoration: 'underline', textUnderlineOffset: 3 }}>{t.siteOff} →</Link>}
     </div>
   );
 

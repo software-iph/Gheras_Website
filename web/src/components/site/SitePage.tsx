@@ -6,6 +6,7 @@ import {
 import { Chrome } from './Chrome';
 import { Footer } from './Footer';
 import { Motion } from './Motion';
+import { Track } from './Track';
 import { imageRetryScript, motionGuardScript } from './motion-guard';
 
 function renderSection(s: Section, ctx: Ctx) {
@@ -25,7 +26,11 @@ function renderSection(s: Section, ctx: Ctx) {
 }
 
 /** The one-page site, rendered from a content snapshot (published, or the draft in preview). */
-export function SitePage({ lang, content, preview = false, embed = false }: { lang: Lang; content: SiteContent; preview?: boolean; embed?: boolean }) {
+export function SitePage({ lang, content, preview = false, embed = false, careers = false }: {
+  lang: Lang; content: SiteContent; preview?: boolean; embed?: boolean;
+  /** Show the Careers link in the header and footer. */
+  careers?: boolean;
+}) {
   const ctx: Ctx = { lang, content };
   const sections = content.sections
     .filter((s) => s.visible || s.id === 'figures')
@@ -36,10 +41,11 @@ export function SitePage({ lang, content, preview = false, embed = false }: { la
     <>
       <script dangerouslySetInnerHTML={{ __html: motionGuardScript }} />
       <script dangerouslySetInnerHTML={{ __html: imageRetryScript }} />
-      <Chrome lang={lang} ctaLabel={pick(hero?.fields.primaryCta, lang) ?? ''} />
+      <Chrome lang={lang} ctaLabel={pick(hero?.fields.primaryCta, lang) ?? ''} careers={careers} />
       <main id="top">{sections.map((s) => renderSection(s, ctx))}</main>
-      {footer?.visible !== false && <Footer lang={lang} content={content} section={footer} />}
+      {footer?.visible !== false && <Footer lang={lang} content={content} section={footer} careers={careers} />}
       <Motion rtl={lang === 'ar'} />
+      {!preview && <Track />}
       {preview && !embed && <div className="preview-badge" lang="en">DRAFT PREVIEW</div>}
       {/* In the editor's scaled iframe (2300 px tall) the hero keeps a normal screen height. */}
       {embed && <style>{'.hero{min-height:max(640px,min(100vh,900px))}'}</style>}

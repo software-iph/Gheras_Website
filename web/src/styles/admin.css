@@ -268,3 +268,19 @@ input.in--ar { font-size: 15px; }
 .lang-toggle:lang(ar) { font-family: var(--font-body-ar); }
 .lang-toggle:lang(en) { font-family: var(--font-body-en); }
 .qr { width: 200px; height: 200px; background: #FFF; border-radius: 8px; padding: 8px; }
+
+/* ---------- Statistics ---------- */
+.stats-filters { padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 14px 16px; align-items: flex-end; }
+.stats-filters .in { height: 40px; }
+.stats-kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; }
+.stats-kpi { padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+.stats-kpi__n { font-family: var(--font-display-en); font-weight: 400; font-size: 34px; line-height: 1; color: var(--color-deep-olive); }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
+.stats-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.stats-table th { text-align: end; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-stone); padding: 0 0 8px; }
+.stats-table th:first-child, .stats-table td:first-child { text-align: start; }
+.stats-table td { padding: 6px 0; border-top: 1px solid var(--line); text-align: end; font-variant-numeric: tabular-nums; }
+.stats-table td + td, .stats-table th + th { padding-inline-start: 16px; width: 80px; }
+.stats-table--bars td:first-child { position: relative; padding: 0; }
+.stats-bar { position: absolute; inset-block: 3px; inset-inline-start: 0; background: var(--color-sand); border-radius: 3px; }
+.stats-bar__label { position: relative; display: block; padding: 8px 10px; }

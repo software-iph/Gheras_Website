@@ -1,12 +1,16 @@
 import { pick } from '@/content';
 import type { FooterSection, Lang, SiteContent, SocialKey } from '@/content/types';
+import { careersUi } from '@/i18n/careers';
 import { ui, type NavId } from '@/i18n/ui';
 import { LogoHorizontal } from '@/components/brand/Logo';
 
 const NAV: NavId[] = ['about', 'what-we-do', 'values', 'why', 'contact'];
 const SOCIAL: SocialKey[] = ['linkedin', 'instagram', 'x', 'facebook', 'youtube'];
 
-export function Footer({ lang, content, section }: { lang: Lang; content: SiteContent; section?: FooterSection }) {
+export function Footer({ lang, content, section, page = 'home', careers = false }: {
+  lang: Lang; content: SiteContent; section?: FooterSection; page?: 'home' | 'careers'; careers?: boolean;
+}) {
+  const base = page === 'home' ? '' : `/${lang}`;
   const t = ui[lang];
   const { endorsement, social } = content.site;
   const endorse = endorsement.visible ? pick(endorsement.text, lang) : null;
@@ -21,7 +25,8 @@ export function Footer({ lang, content, section }: { lang: Lang; content: SiteCo
             {endorse && <span className="ftr__endorse">{endorse}</span>}
           </div>
           <nav aria-label={t.footerNavLabel} className="ftr__nav">
-            {NAV.map((id) => <a key={id} href={`#${id}`}>{t.nav[id]}</a>)}
+            {NAV.map((id) => <a key={id} href={`${base}#${id}`}>{t.nav[id]}</a>)}
+            {careers && <a href={`/${lang}/careers`}>{careersUi[lang].nav}</a>}
           </nav>
           <div className="ftr__social">
             <span className="ftr__social-label">{t.follow}</span>
@@ -36,7 +41,7 @@ export function Footer({ lang, content, section }: { lang: Lang; content: SiteCo
           <div className="ftr__langs">
             <span className="ftr__current">{t.thisLang}</span>
             <span aria-hidden="true">·</span>
-            <a href={`/${t.otherLang.lang}`} lang={t.otherLang.lang} hrefLang={t.otherLang.lang} className="ftr__other">{t.otherLang.label}</a>
+            <a href={page === 'careers' ? `/${t.otherLang.lang}/careers` : `/${t.otherLang.lang}`} lang={t.otherLang.lang} hrefLang={t.otherLang.lang} className="ftr__other">{t.otherLang.label}</a>
           </div>
         </div>
       </div>

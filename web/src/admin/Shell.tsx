@@ -26,15 +26,19 @@ const NAV = [
   { href: '/admin/editor', key: 'editor', icon: 'crop' },
   { href: '/admin/media', key: 'media', icon: 'land' },
   { href: '/admin/inquiries', key: 'inbox', icon: 'mail' },
+  { href: '/admin/careers', key: 'careers', icon: 'training' },
+  { href: '/admin/stats', key: 'stats', icon: 'sensor' },
   { href: '/admin/history', key: 'history', icon: 'commitment' },
   { href: '/admin/settings', key: 'settings', icon: 'excellence' },
   { href: '/admin/users', key: 'users', icon: 'partner' },
 ] as const;
 
-export function Shell({ lang, user, unread, summary, children }: {
+export function Shell({ lang, user, unread, newApps = 0, summary, children }: {
   lang: UILang;
   user: { name: string };
   unread: number;
+  /** Unread job applications (badge on Careers). */
+  newApps?: number;
   summary: PublishSummary;
   children: React.ReactNode;
 }) {
@@ -69,6 +73,7 @@ export function Shell({ lang, user, unread, summary, children }: {
                 <Icon glyph={n.icon} size={20} color={on ? '#FAF8F2' : '#E8D3A0'} accent="#C99A3B" />
                 <span>{label}</span>
                 {n.key === 'inbox' && unread > 0 && <span className="badge" aria-label={`${unread} ${t.hInq}`}>{unread}</span>}
+                {n.key === 'careers' && newApps > 0 && <span className="badge" aria-label={t.cr.newBadge(newApps)}>{newApps}</span>}
               </Link>
             );
           })}

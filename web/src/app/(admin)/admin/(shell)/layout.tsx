@@ -7,7 +7,7 @@ export default async function ShellLayout({ children }: { children: React.ReactN
   const admin = await requireAdmin();
   const [lang, state] = await Promise.all([getAdminLang(), dashboardState()]);
   return (
-    <Shell lang={lang} user={{ name: admin.name }} unread={state.unread.length} summary={state.summary}>
+    <Shell lang={lang} user={{ name: admin.name }} unread={state.unread.length} newApps={state.newApps} summary={state.summary}>
       {children}
     </Shell>
   );

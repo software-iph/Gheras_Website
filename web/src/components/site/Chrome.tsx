@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/content/types';
+import { careersUi } from '@/i18n/careers';
 import { ui, type NavId } from '@/i18n/ui';
 import { Arrow, Icon } from '@/components/brand/Icon';
 import { LogoHorizontal } from '@/components/brand/Logo';
@@ -12,8 +13,16 @@ const NAV: NavId[] = ['about', 'what-we-do', 'values', 'why', 'contact'];
  * Fixed header (+ mobile menu), progress bar, growing stem and back-to-top.
  * They share one rAF-throttled scroll listener. Stem and bar track position even with reduced motion.
  */
-export function Chrome({ lang, ctaLabel }: { lang: Lang; ctaLabel: string }) {
+export function Chrome({ lang, ctaLabel, page = 'home', careers = false }: {
+  lang: Lang; ctaLabel: string;
+  /** Which page this is: on the careers page, section links point back to the home page. */
+  page?: 'home' | 'careers';
+  /** Show the Careers link (when careers is switched on in the dashboard). */
+  careers?: boolean;
+}) {
   const t = ui[lang];
+  const base = page === 'home' ? '' : `/${lang}`;
+  const careersHref = `/${lang}/careers`;
   const rtl = lang === 'ar';
   const other = t.otherLang;
   const [solid, setSolid] = useState(false);
@@ -71,26 +80,29 @@ export function Chrome({ lang, ctaLabel }: { lang: Lang; ctaLabel: string }) {
   }, [layout, onScroll]);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
-  const langHref = `/${other.lang}${active ? `#${active}` : ''}`;
+  const langHref = page === 'careers' ? `/${other.lang}/careers` : `/${other.lang}${active ? `#${active}` : ''}`;
 
   return (
     <>
       <header className={solid ? 'hdr is-solid' : 'hdr'}>
         <div className="hdr__in">
-          <a href="#top" aria-label={t.backToTopLogo} className="hdr__logo">
+          <a href={`${base}#top`} aria-label={t.backToTopLogo} className="hdr__logo">
             <span className="hdr__logo-rev"><LogoHorizontal scheme="reversed" rtl={rtl} width={200} /></span>
             <span className="hdr__logo-full"><LogoHorizontal scheme="full" rtl={rtl} width={200} /></span>
           </a>
           <nav aria-label={t.navLabel} className="hdr__nav">
             <div className="hdr__links">
               {NAV.map((id) => (
-                <a key={id} href={`#${id}`} className="hdr__link" aria-current={active === id ? 'true' : undefined}>{t.nav[id]}</a>
+                <a key={id} href={`${base}#${id}`} className="hdr__link" aria-current={active === id ? 'true' : undefined}>{t.nav[id]}</a>
               ))}
+              {careers && (
+                <a href={careersHref} className="hdr__link" aria-current={page === 'careers' ? 'page' : undefined}>{careersUi[lang].nav}</a>
+              )}
             </div>
             <a href={langHref} lang={other.lang} hrefLang={other.lang} className="lang-pill hdr__desk">
               <Icon glyph="globe" size={16} color="currentColor" accent="currentColor" />{other.label}
             </a>
-            <a href="#contact" className="btn btn--primary hdr__desk">{ctaLabel}<Arrow color="#FAF8F2" /></a>
+            <a href={`${base}#contact`} className="btn btn--primary hdr__desk">{ctaLabel}<Arrow color="#FAF8F2" /></a>
             <button type="button" className="menu-btn" aria-label={t.openMenu} aria-expanded={menuOpen}
               aria-controls="site-menu" onClick={() => setMenuOpen(true)}>
               <span /><span /><span />
@@ -100,7 +112,7 @@ export function Chrome({ lang, ctaLabel }: { lang: Lang; ctaLabel: string }) {
         <div className="hdr__bar" ref={barRef} aria-hidden="true" />
       </header>
 
-      {menuOpen && <Menu lang={lang} ctaLabel={ctaLabel} langHref={langHref} onClose={closeMenu} />}
+      {menuOpen && <Menu lang={lang} ctaLabel={ctaLabel} langHref={langHref} base={base} careersHref={careers ? careersHref : null} onClose={closeMenu} />}
 
       <a href="#top" aria-label={t.backToTop} className={showTop ? 'to-top is-visible' : 'to-top'}>
         <span><Icon glyph="arrow" size={20} color="#FAF8F2" accent="#FAF8F2" /></span>
@@ -124,7 +136,9 @@ export function Chrome({ lang, ctaLabel }: { lang: Lang; ctaLabel: string }) {
 }
 
 /** Full-screen mobile menu: traps focus, locks scroll, closes on Escape and returns focus to the trigger. */
-function Menu({ lang, ctaLabel, langHref, onClose }: { lang: Lang; ctaLabel: string; langHref: string; onClose: () => void }) {
+function Menu({ lang, ctaLabel, langHref, base, careersHref, onClose }: {
+  lang: Lang; ctaLabel: string; langHref: string; base: string; careersHref: string | null; onClose: () => void;
+}) {
   const t = ui[lang];
   const ref = useRef<HTMLDivElement>(null);
 
@@ -158,14 +172,15 @@ function Menu({ lang, ctaLabel, langHref, onClose }: { lang: Lang; ctaLabel: str
         <button type="button" className="menu__close" aria-label={t.closeMenu} onClick={onClose}><span /><span /></button>
       </div>
       <nav aria-label={t.menuLabel} className="menu__nav">
-        {NAV.map((id) => <a key={id} href={`#${id}`} className="menu__link" onClick={onClose}>{t.nav[id]}</a>)}
+        {NAV.map((id) => <a key={id} href={`${base}#${id}`} className="menu__link" onClick={onClose}>{t.nav[id]}</a>)}
+        {careersHref && <a href={careersHref} className="menu__link" onClick={onClose}>{careersUi[lang].nav}</a>}
       </nav>
       <div className="menu__spacer" />
       <div className="menu__actions">
         <a href={langHref} lang={t.otherLang.lang} hrefLang={t.otherLang.lang} className="menu__lang">
           <Icon glyph="globe" size={18} color="#FAF8F2" accent="#FAF8F2" />{t.otherLang.label}
         </a>
-        <a href="#contact" className="btn btn--gold menu__cta" onClick={onClose}>{ctaLabel}<Arrow color="#1F2A1C" /></a>
+        <a href={`${base}#contact`} className="btn btn--gold menu__cta" onClick={onClose}>{ctaLabel}<Arrow color="#1F2A1C" /></a>
       </div>
     </div>
   );

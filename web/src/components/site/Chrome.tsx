@@ -99,6 +99,8 @@ export function Chrome({ lang, ctaLabel, page = 'home', careers = false }: {
                 <a href={careersHref} className="hdr__link" aria-current={page === 'careers' ? 'page' : undefined}>{careersUi[lang].nav}</a>
               )}
             </div>
+          </nav>
+          <div className="hdr__actions">
             <a href={langHref} lang={other.lang} hrefLang={other.lang} className="lang-pill hdr__desk">
               <Icon glyph="globe" size={16} color="currentColor" accent="currentColor" />{other.label}
             </a>
@@ -107,7 +109,7 @@ export function Chrome({ lang, ctaLabel, page = 'home', careers = false }: {
               aria-controls="site-menu" onClick={() => setMenuOpen(true)}>
               <span /><span /><span />
             </button>
-          </nav>
+          </div>
         </div>
         <div className="hdr__bar" ref={barRef} aria-hidden="true" />
       </header>

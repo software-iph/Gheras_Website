@@ -68,7 +68,7 @@ export const SECTION_DEFS: SectionDef[] = [
   {
     id: 'what-we-do', anchor: '#what-we-do',
     name: { en: 'What we do', ar: 'ماذا نفعل' },
-    desc: { en: 'Six service cards. Icons come from the brand set.', ar: 'ست بطاقات خدمات، والأيقونات من مجموعة العلامة.' },
+    desc: { en: 'Seven service cards. Icons come from the brand set.', ar: 'سبع بطاقات خدمات، والأيقونات من مجموعة العلامة.' },
     fields: (s) => [
       t('fields.eyebrow', 'Eyebrow', 'العنوان التمهيدي', 40),
       t('fields.heading', 'Heading', 'العنوان', 70),
@@ -83,7 +83,7 @@ export const SECTION_DEFS: SectionDef[] = [
   {
     id: 'two-horizons', anchor: '#what-we-do',
     name: { en: 'Two horizons', ar: 'أفقان' },
-    desc: { en: 'Eight strategic objectives, four under each side.', ar: 'ثمانية أهداف استراتيجية، أربعة لكل جانب.' },
+    desc: { en: 'Nine strategic objectives: four for today, five for tomorrow.', ar: 'تسعة أهداف استراتيجية: أربعة لليوم وخمسة للغد.' },
     fields: (s) => [
       t('fields.eyebrow', 'Eyebrow', 'العنوان التمهيدي', 40),
       t('fields.heading', 'Heading', 'العنوان', 60),
@@ -96,8 +96,9 @@ export const SECTION_DEFS: SectionDef[] = [
       t('fields.tomorrowTitle', 'Tomorrow — title', 'الغد — العنوان', 40),
       t('fields.tomorrowSub', 'Tomorrow — subline', 'الغد — السطر', 80),
       ...items(s, 'tomorrow').flatMap((_, i) => [
-        t(`tomorrow.${i}.title`, `Tomorrow ${n2(i + 4)} — name`, `الغد ${n2(i + 4)} — الاسم`, 40),
-        a(`tomorrow.${i}.text`, `Tomorrow ${n2(i + 4)} — line`, `الغد ${n2(i + 4)} — السطر`, 110),
+        // Numbered after the Today items, matching the site.
+        t(`tomorrow.${i}.title`, `Tomorrow ${n2(i + items(s, 'today').length)} — name`, `الغد ${n2(i + items(s, 'today').length)} — الاسم`, 40),
+        a(`tomorrow.${i}.text`, `Tomorrow ${n2(i + items(s, 'today').length)} — line`, `الغد ${n2(i + items(s, 'today').length)} — السطر`, 110),
       ]),
       a('fields.caption', 'Centre caption', 'التعليق الأوسط', 100),
     ],

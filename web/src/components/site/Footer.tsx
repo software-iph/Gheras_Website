@@ -22,7 +22,6 @@ export function Footer({ lang, content, section, page = 'home', careers = false 
         <div className="ftr__top">
           <div className="ftr__brand">
             <LogoHorizontal scheme="reversed" rtl={lang === 'ar'} width={240} alt={lang === 'ar' ? 'غراس للاستثمار الزراعي' : 'GHERAS Agricultural Investment'} />
-            {endorse && <span className="ftr__endorse">{endorse}</span>}
           </div>
           <nav aria-label={t.footerNavLabel} className="ftr__nav">
             {NAV.map((id) => <a key={id} href={`${base}#${id}`}>{t.nav[id]}</a>)}
@@ -37,7 +36,10 @@ export function Footer({ lang, content, section, page = 'home', careers = false 
         </div>
         <div className="ftr__rule" />
         <div className="ftr__bottom">
-          <span>{pick(section?.fields.copyright, lang)}</span>
+          <p className="ftr__legal">
+            <span>{pick(section?.fields.copyright, lang)}</span>
+            {endorse && <><span className="ftr__sep" aria-hidden="true">·</span><span className="ftr__endorse">{endorse}</span></>}
+          </p>
           <div className="ftr__langs">
             <span className="ftr__current">{t.thisLang}</span>
             <span aria-hidden="true">·</span>

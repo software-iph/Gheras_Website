@@ -28,10 +28,10 @@
       "youtube": null
     },
     "endorsement": {
-      "visible": false,
+      "visible": true,
       "text": {
-        "en": "An IPH Company",
-        "ar": null
+        "en": "A member of IPH Group",
+        "ar": "عضو في مجموعة IPH"
       }
     }
   },
@@ -217,6 +217,17 @@
             "en": "Operational standards, training and innovation in agricultural science and technology.",
             "ar": "معايير تشغيلية وتدريب وابتكار في العلوم والتقنيات الزراعية."
           }
+        },
+        {
+          "icon": "agrifood",
+          "title": {
+            "en": "Agrifood industries",
+            "ar": "الصناعات الغذائية الزراعية"
+          },
+          "text": {
+            "en": "Establishing agrifood industries based on agricultural products.",
+            "ar": "تأسيس صناعات غذائية قائمة على المنتجات الزراعية."
+          }
         }
       ]
     },
@@ -335,6 +346,16 @@
           "text": {
             "en": "Achieve long-term operational sustainability and environmental resilience.",
             "ar": "تحقيق استدامة تشغيلية ومرونة بيئية على المدى الطويل."
+          }
+        },
+        {
+          "title": {
+            "en": "Agrifood processing",
+            "ar": "التصنيع الغذائي"
+          },
+          "text": {
+            "en": "Establish agrifood processing industries based on agricultural products.",
+            "ar": "تأسيس صناعات تحويلية غذائية قائمة على المنتجات الزراعية."
           }
         }
       ]

@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { LangToggle, SignInForm } from '@/admin/LoginForms';
 import { dict } from '@/admin/i18n';
 import { getAdminLang } from '@/admin/lang';
-import { BotanicalLineArt } from '@/components/brand/Ornaments';
+import { PivotRings } from '@/components/brand/Ornaments';
 import { LogoHorizontal } from '@/components/brand/Logo';
 import { getAdmin } from '@/lib/auth/session';
 import { listUsers } from '@/lib/auth/users';
@@ -19,7 +19,7 @@ export default async function LoginPage() {
   return (
     <div className="login">
       <div className="login__brand">
-        <div className="login__art" aria-hidden="true"><BotanicalLineArt stroke={0.45} /></div>
+        <div className="login__art" aria-hidden="true"><PivotRings /></div>
         <div style={{ position: 'relative' }}><LogoHorizontal scheme="reversed" rtl={lang === 'ar'} width={220} alt={lang === 'ar' ? 'غراس' : 'GHERAS'} /></div>
         <div style={{ position: 'relative', maxWidth: 440 }}>
           <div className="d-h" style={{ fontSize: 44, lineHeight: 1.25, marginBottom: 16 }}>{t.loginTitle}</div>

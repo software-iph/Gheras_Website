@@ -39,12 +39,14 @@ export default async function CareersPage({ params }: PageProps<'/[lang]/careers
       <Chrome lang={lang} ctaLabel={pick(hero?.fields.primaryCta, lang) ?? ''} page="careers" careers />
       <main id="top">
         <section data-section="careers-hero" className="careers-hero" aria-labelledby="careers-h">
+          <div className="careers-hero__fields" aria-hidden="true" />
           <div className="careers-hero__inner">
             <Eyebrow dark>{t.eyebrow}</Eyebrow>
             <h1 id="careers-h" className="careers-hero__title">{t.title}</h1>
             {pick(settings.intro, lang) && <p className="careers-hero__intro">{pick(settings.intro, lang)}</p>}
           </div>
         </section>
+        <div className="band" aria-hidden="true" />
         <section data-section="jobs" className="section careers">
           <div className="wrap">
             <CareersList lang={lang} jobs={jobs} general={settings.general} />

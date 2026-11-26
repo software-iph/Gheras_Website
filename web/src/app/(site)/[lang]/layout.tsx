@@ -38,7 +38,10 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
       description,
       locale: lang === 'ar' ? 'ar_LY' : 'en',
       type: 'website',
-      ...(share?.url ? { images: [{ url: share.url, width: share.width ?? 1200, height: share.height ?? 630 }] } : {}),
+      // The photo chosen in Site settings, or the brand sharing card.
+      images: [share?.url
+        ? { url: share.url, width: share.width ?? 1200, height: share.height ?? 630 }
+        : { url: '/brand/og.jpg', width: 1200, height: 630 }],
     },
   };
 }

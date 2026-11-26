@@ -7,7 +7,7 @@ import type {
 import { ui } from '@/i18n/ui';
 import { Arrow, Icon } from '@/components/brand/Icon';
 import { Emblem } from '@/components/brand/Logo';
-import { BotanicalLineArt, BrandPattern, ContourLines } from '@/components/brand/Ornaments';
+import { BrandPattern, ContourLines, PivotRings } from '@/components/brand/Ornaments';
 import { Eyebrow } from './Eyebrow';
 import { ContactForm } from './ContactForm';
 import { InquiryLink } from './InquiryLink';
@@ -44,7 +44,7 @@ export function Hero({ s, ctx }: { s: HeroSection; ctx: Ctx }) {
       )}
       <div className="hero__overlay" />
       <div className="hero__dim" data-m="hero-dim" />
-      <div className="hero__art" data-m="draw" aria-hidden="true"><BotanicalLineArt stroke={0.45} /></div>
+      <div className="hero__art" data-m="draw" aria-hidden="true"><PivotRings /></div>
       <div className="hero__inner">
         <Eyebrow dark motion="hero-in">{tx(f.eyebrow, lang)}</Eyebrow>
         <h1 className="hero__title">
@@ -59,6 +59,7 @@ export function Hero({ s, ctx }: { s: HeroSection; ctx: Ctx }) {
         </div>
       </div>
       <a href="#belief" className="hero__scroll" aria-label={t.scrollLabel}>{t.scroll}<span /></a>
+      <div className="band hero__band" aria-hidden="true" />
     </section>
   );
 }
@@ -69,9 +70,8 @@ export function Belief({ s, ctx }: { s: AboutSection; ctx: Ctx }) {
   const f = s.fields;
   return (
     <section id="about" aria-labelledby="belief" data-section="about" className="section belief">
-      <div className="belief__ring" aria-hidden="true" />
-      <div className="belief__ring belief__ring--2" aria-hidden="true" />
       <div className="wrap">
+        <img className="belief__fields" src="/brand/fields/cluster.svg" width={600} height={600} alt="" loading="lazy" />
         <Eyebrow>{tx(f.eyebrow, lang)}</Eyebrow>
         <h2 id="belief" className="belief__statement">
           {words(tx(f.statement, lang)).map((w, i, all) => (
@@ -137,6 +137,7 @@ export function WhatWeDo({ s, ctx }: { s: WhatWeDoSection; ctx: Ctx }) {
         <div className="cards">
           {s.items.map((it, i) => (
             <article className="card" key={i}>
+              <span className={`card__tile tile--${(i % 8) + 1}`} aria-hidden="true" />
               <div className="card__top">
                 <Icon glyph={it.icon} size={40} />
                 <span className="card__idx">{pad(i + 1)}</span>
@@ -165,6 +166,7 @@ export function TwoHorizons({ s, ctx }: { s: TwoHorizonsSection; ctx: Ctx }) {
     const offset = kind === 'today' ? 1 : s.today.length + 1;
     return (
       <div className={`hz__col hz__col--${kind}`} data-m={kind === 'today' ? 'hz-l' : 'hz-r'}>
+        <div className={`band band--${kind} hz__band`} aria-hidden="true" />
         <div className="hz__col-head">
           <h3>{tx(kind === 'today' ? f.todayTitle : f.tomorrowTitle, lang)}</h3>
           <span className="hz__tag">{kind === 'today' ? t.wheat : t.olive}</span>
@@ -215,6 +217,7 @@ export function MissionVision({ s, ctx }: { s: MissionVisionSection; ctx: Ctx })
   return (
     <section aria-label={t.missionVisionLabel} data-section="mission-vision" className="mv">
       <div className="mv__pattern" data-m="drift" aria-hidden="true"><BrandPattern rtl={lang === 'ar'} /></div>
+      <img className="mv__sweep" src="/brand/fields/sweep-gold.svg" width={893} height={382} alt="" loading="lazy" />
       <div className="mv__grid">
         <div>
           <Eyebrow dark>{t.mission}</Eyebrow>
@@ -235,6 +238,7 @@ export function Values({ s, ctx }: { s: ValuesSection; ctx: Ctx }) {
   const f = s.fields;
   return (
     <section id="values" aria-labelledby="values-h" data-section="values" className="values" style={{ scrollMarginTop: 80 }}>
+      <div className="band band--night values__band" aria-hidden="true" />
       <div className="values__in">
         <div className="split-head">
           <div>
@@ -323,6 +327,7 @@ export function Who({ s, ctx }: { s: WhoSection; ctx: Ctx }) {
         <div className="panels">
           {s.items.map((p, i) => (
             <div className="panel" data-rv key={i}>
+              <span className={`band panel__field panel__field--${(i % 4) + 1}`} aria-hidden="true" />
               <Icon glyph={p.icon} size={36} />
               <h3>{tx(p.title, lang)}</h3>
               <p>{tx(p.text, lang)}</p>
@@ -359,7 +364,10 @@ export function Contact({ s, ctx }: { s: ContactSection; ctx: Ctx }) {
             <dt><Icon glyph="pin" size={22} /><span className="visually-hidden">{t.contactPlaceholders.address.replace(/[[\]]/g, '')}</span></dt>
             <dd>{address ?? <span className="ph">{t.contactPlaceholders.address}</span>}</dd>
           </dl>
-          <div className="contact__slogan">{tx(f.slogan, lang)}</div>
+          <div className="contact__slogan">
+            <img src="/brand/fields/sweep-gold.svg" width={893} height={382} alt="" loading="lazy" />
+            <span>{tx(f.slogan, lang)}</span>
+          </div>
         </div>
         <div className="form-card">
           <ContactForm lang={lang} replyTimeDays={c.replyTimeDays} />

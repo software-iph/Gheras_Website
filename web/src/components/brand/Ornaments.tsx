@@ -1,60 +1,20 @@
-// Graphic language: botanical line art, brand pattern, contour lines.
-// Geometry ported from design/Gheras Logo.dc.html (lineart) and the website prototypes (build()).
+// Graphic language: pivot rings, brand pattern, contour lines. Field tiles are static files in public/brand/fields.
 
 const f = (n: number) => Math.round(n * 100) / 100;
 const lens = (L: number, w: number) => `M0 0Q${f(L / 2)} ${f(-w)} ${f(L)} 0Q${f(L / 2)} ${f(w)} 0 0Z`;
 
-type Pt = [number, number];
-type Bez = [Pt, Pt, Pt, Pt];
-const WH: Bez = [[152, 216], [18, 222], [-4, 104], [78, 14]];
-const OL: Bez = [[88, 216], [222, 222], [246, 104], [164, 16]];
-const pt = (B: Bez, t: number): Pt => {
-  const u = 1 - t;
-  return [0, 1].map((k) => u * u * u * B[0][k] + 3 * u * u * t * B[1][k] + 3 * u * t * t * B[2][k] + t * t * t * B[3][k]) as Pt;
-};
-const dv = (B: Bez, t: number): Pt => {
-  const u = 1 - t;
-  return [0, 1].map((k) => 3 * u * u * (B[1][k] - B[0][k]) + 6 * u * t * (B[2][k] - B[1][k]) + 3 * t * t * (B[3][k] - B[2][k])) as Pt;
-};
-const ang = (B: Bez, t: number) => { const d = dv(B, t); return (Math.atan2(d[1], d[0]) * 180) / Math.PI; };
-const bez = (B: Bez) => `M${B[0][0]} ${B[0][1]}C${B[1][0]} ${B[1][1]} ${B[2][0]} ${B[2][1]} ${B[3][0]} ${B[3][1]}`;
-
-/** Single-weight gold stroke drawing of the wheat and olive. Paths are drawn in by the motion layer. */
-export function BotanicalLineArt({ stroke = 0.45, color = '#C99A3B' }: { stroke?: number; color?: string }) {
-  const sw = stroke;
-  const els: React.ReactElement[] = [];
-  let key = 0;
-  const shape = (L: number, w: number, p: Pt, a: number) => {
-    const tr = `translate(${f(p[0])} ${f(p[1])}) rotate(${f(a)})`;
-    els.push(<path key={key++} d={lens(L, w)} transform={tr} fill="none" stroke={color} strokeWidth={sw} strokeLinejoin="round" />);
-    els.push(<path key={key++} d={`M${f(L * 0.12)} 0L${f(L * 0.8)} 0`} transform={tr} fill="none" stroke={color} strokeWidth={sw * 0.6} strokeLinecap="round" />);
-  };
-  els.push(<path key={key++} d={bez(WH)} fill="none" stroke={color} strokeWidth={sw * 1.5} strokeLinecap="round" />);
-  els.push(<path key={key++} d={bez(OL)} fill="none" stroke={color} strokeWidth={sw * 1.5} strokeLinecap="round" />);
-  const gn = 9, g0 = 0.48, g1 = 0.92;
-  for (let i = 0; i < gn; i++) {
-    const t = g0 + ((g1 - g0) * i) / (gn - 1), p = pt(WH, t), a = ang(WH, t), k = 1 - (0.25 * i) / (gn - 1);
-    shape(31 * k, 10.5 * k, p, a - 18);
-    shape(31 * k, 10.5 * k, p, a + 18);
-  }
-  shape(23, 7.6, pt(WH, 1), ang(WH, 1));
-  const ln = 11, l0 = 0.3, l1 = 0.94;
-  for (let i = 0; i < ln; i++) {
-    const t = l0 + ((l1 - l0) * i) / (ln - 1), p = pt(OL, t), a = ang(OL, t), sd = i % 2 ? 1 : -1, k = 1 - (0.3 * i) / (ln - 1);
-    shape(40 * k, 8.4 * k, p, a + sd * 40);
-  }
-  shape(28, 6.6, pt(OL, 1), ang(OL, 1));
-  ([[0.8, 14, 9], [0.74, 26, 9]] as const).forEach(([t, off, r]) => {
-    const p = pt(OL, t), d = dv(OL, t), m = Math.hypot(d[0], d[1]);
-    let nx = -d[1] / m, ny = d[0] / m;
-    if ((120 - p[0]) * nx + (120 - p[1]) * ny < 0) { nx = -nx; ny = -ny; }
-    const cx = p[0] + nx * off, cy = p[1] + ny * off;
-    els.push(<path key={key++} d={`M${f(p[0])} ${f(p[1])}L${f(cx)} ${f(cy)}`} stroke={color} strokeWidth={sw} fill="none" />);
-    els.push(<ellipse key={key++} cx={f(cx)} cy={f(cy)} rx={r * 0.8} ry={r} transform={`rotate(${f(ang(OL, t) + 90)} ${f(cx)} ${f(cy)})`} fill="none" stroke={color} strokeWidth={sw} />);
-  });
+/**
+ * Pivot rings: concentric arcs left open at the top, like the logo's ring and the centre-pivot fields.
+ * Paths are drawn in by the motion layer.
+ */
+export function PivotRings({ stroke = 1.2, color = '#C99A3B', count = 7 }: { stroke?: number; color?: string; count?: number }) {
+  const point = (r: number, deg: number) => `${f(500 + r * Math.cos((deg * Math.PI) / 180))} ${f(500 + r * Math.sin((deg * Math.PI) / 180))}`;
   return (
-    <svg viewBox="0 0 240 240" width="100%" style={{ display: 'block', overflow: 'visible' }} aria-hidden="true" focusable="false">
-      {els}
+    <svg viewBox="0 0 1000 1000" width="100%" style={{ display: 'block' }} aria-hidden="true" focusable="false">
+      {Array.from({ length: count }, (_, i) => {
+        const r = 492 - i * 56;
+        return <path key={i} d={`M${point(r, -66)}A${r} ${r} 0 1 1 ${point(r, -114)}`} fill="none" stroke={color} strokeWidth={stroke} strokeLinecap="round" />;
+      })}
     </svg>
   );
 }

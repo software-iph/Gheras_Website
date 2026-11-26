@@ -17,6 +17,7 @@ export function Footer({ lang, content, section, page = 'home', careers = false 
   const links = SOCIAL.filter((k) => social[k]);
   return (
     <footer className="ftr">
+      <div className="band ftr__band" aria-hidden="true" />
       <div className="ftr__furrows" aria-hidden="true" />
       <div className="wrap">
         <div className="ftr__top">

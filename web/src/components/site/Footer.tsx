@@ -6,6 +6,14 @@ import { LogoHorizontal } from '@/components/brand/Logo';
 
 const NAV: NavId[] = ['about', 'what-we-do', 'values', 'why', 'contact'];
 const SOCIAL: SocialKey[] = ['linkedin', 'instagram', 'x', 'facebook', 'youtube'];
+const IPH_URL = 'https://iph-ly.com';
+
+/** The endorsement line comes from the dashboard; every "IPH" in it links to the parent company's site. */
+function linkIph(text: string) {
+  return text.split(/(IPH)/).map((part, i) => (part === 'IPH'
+    ? <a key={i} href={IPH_URL} target="_blank" rel="noopener noreferrer" className="ftr__iph" lang="en" dir="ltr">IPH</a>
+    : part));
+}
 
 export function Footer({ lang, content, section, page = 'home', careers = false }: {
   lang: Lang; content: SiteContent; section?: FooterSection; page?: 'home' | 'careers'; careers?: boolean;
@@ -39,7 +47,7 @@ export function Footer({ lang, content, section, page = 'home', careers = false 
         <div className="ftr__bottom">
           <p className="ftr__legal">
             <span>{pick(section?.fields.copyright, lang)}</span>
-            {endorse && <><span className="ftr__sep" aria-hidden="true">·</span><span className="ftr__endorse">{endorse}</span></>}
+            {endorse && <><span className="ftr__sep" aria-hidden="true">·</span><span className="ftr__endorse">{linkIph(endorse)}</span></>}
           </p>
           <div className="ftr__langs">
             <span className="ftr__current">{t.thisLang}</span>
